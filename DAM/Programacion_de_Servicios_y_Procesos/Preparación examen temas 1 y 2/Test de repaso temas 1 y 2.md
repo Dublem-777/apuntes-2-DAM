@@ -1,0 +1,525 @@
+---
+asignatura: PSyP
+tema: 1-2
+tipo: cuestionario
+estado: completo
+fecha: 2026-10-12
+tags:
+  - DAM/cuestionario
+  - DAM/psyp/sincronizacion
+  - DAM/psyp/subprocesos
+---
+vale,
+# Cuestionario de repaso · Temas 1 y 2
+
+> [!info] Alcance
+> Batería de **55 preguntas tipo test** sobre el Tema 1 (programación concurrente) y el Tema 2 (gestión de procesos desde Java). Cada respuesta correcta está en un desplegable e incluye un enlace al apunte donde se explica.
+
+> [!tip] Cómo usar este cuestionario
+> Lee cada pregunta y elige una opción antes de abrir **Respuesta**. Intenta explicar por qué las otras opciones no son correctas. Los enlaces de cada solución conducen al apartado relacionado para repasar.
+
+> [!tip] Las tres partes del material
+> - [[Guia examen temas 1 y 2|🧠 Teoría y chuleta]]
+> - [[Test de repaso temas 1 y 2|✅ Test de repaso]]
+> - [[Practicos temas 1 y 2|💻 Prácticos resueltos]]
+
+## Preguntas (auto-test)
+
+### Programa, proceso y concurrencia
+
+> [!question] P1 · Servicio o demonio de aplicación
+> ¿Cuál de las siguientes opciones constituye un ejemplo típico de **servicio o demonio de aplicación**?
+> - a. Un archivo de texto con extensión `.txt` almacenado en el escritorio.
+> - b. Un servidor de bases de datos como MySQL o PostgreSQL atendiendo peticiones en segundo plano.
+> - c. El videojuego Pac-Man en ejecución con gráficos a pantalla completa.
+> - d. El menú de inicio de sesión visual del sistema operativo.
+
+> [!success]- Respuesta
+>
+> - b. ✅ Un servidor de bases de datos como MySQL o PostgreSQL atendiendo peticiones en segundo plano.
+>
+> *Por qué:* los servidores de bases de datos o web son **servicios de aplicación** instalados para dar soporte a otras aplicaciones, ejecutándose en segundo plano. [[1.1 - Programa vs. Proceso#4. Demonios y servicios|Ver 1.1 · Demonios y servicios]]
+
+> [!question] P2 · Permiso de ejecución en GNU/Linux
+> En los sistemas basados en GNU/Linux o macOS, un fichero se reconoce como ejecutable si tiene activado en sus metadatos el permiso de ______.
+
+> [!success]- Respuesta
+>
+> - **ejecución** (o `ejecucion`).
+>
+> *Por qué:* a diferencia de Windows, que usa la extensión `.exe`, en los sistemas tipo Unix un fichero es ejecutable por su permiso de ejecución, no por el nombre. [[1.1 - Programa vs. Proceso#2. Ejecutable|Ver 1.1 · Ejecutable]]
+
+> [!question] P3 · Intérprete
+> El programa encargado de tomar el código intermedio (o script) y traducir sus instrucciones al lenguaje máquina durante el tiempo de ejecución se conoce como ______.
+
+> [!success]- Respuesta
+>
+> - **intérprete** (o `interprete`).
+>
+> *Por qué:* los ejecutables interpretados necesitan un intérprete (la JVM para el bytecode de Java, el intérprete de Python…) que traduce en tiempo de ejecución. [[1.1 - Programa vs. Proceso#2.1 Clasificación según el tipo de código|Ver 1.1 · Tipos de código]]
+
+> [!question] P4 · Firmware
+> Dentro de los programas para la gestión del hardware, el software básico grabado en memorias no volátiles que controla directamente los circuitos de un periférico o placa base se conoce como ______.
+
+> [!success]- Respuesta
+>
+> - **firmware**.
+>
+> *Por qué:* el firmware es software de gestión del hardware grabado en memoria no volátil; no es una aplicación de usuario. [[1.1 - Programa vs. Proceso#1.1 Programa|Ver 1.1 · Programa]]
+
+> [!question] P5 · Paralelismo frente a multiprogramación
+> ¿Qué diferencia hay entre **paralelismo** y **multiprogramación**?
+
+> [!success]- Respuesta
+>
+> El **paralelismo** es la ejecución simultánea y **real**, y requiere varios núcleos; la **multiprogramación** **simula** la concurrencia alternando por turnos los procesos mediante cambios de contexto y **no reduce** el tiempo global de ejecución. [[1.2 - Computacion concurrente#2. Paralelismo y multiprogramación|Ver 1.2 · Paralelismo y multiprogramación]]
+
+> [!question] P6 · Impacto del cambio de contexto
+> ¿Qué **impacto** tiene el cambio de contexto sobre el tiempo global de ejecución?
+
+> [!success]- Respuesta
+>
+> Introduce una **sobrecarga** que **no reduce** el tiempo global: el tiempo invertido en guardar y restaurar estados no ejecuta instrucciones de los programas, así que lo **incrementa ligeramente**. [[1.2 - Computacion concurrente#2. Paralelismo y multiprogramación|Ver 1.2 · Cambio de contexto]]
+
+> [!question] P7 · Requisito del paralelismo real
+> ¿Qué requisito hardware es **imprescindible** para que exista paralelismo real?
+
+> [!success]- Respuesta
+>
+> **Al menos dos núcleos** de procesamiento. [[1.2 - Computacion concurrente#2. Paralelismo y multiprogramación|Ver 1.2 · Paralelismo]]
+
+> [!question] P8 · Multiprocesamiento simétrico (SMP)
+> En un sistema de multiprocesamiento simétrico (**SMP**):
+> - a. Cada procesador tiene su propia memoria física aislada y se comunican únicamente mediante WAN.
+> - b. Todos los procesadores funcionan de igual manera, ninguno está diferenciado y cualquiera puede realizar cualquier tarea.
+> - c. Existe un procesador maestro que gestiona el SO y distribuye obligatoriamente tareas a los esclavos.
+> - d. Las tareas del núcleo del sistema operativo no pueden repartirse entre los procesadores.
+
+> [!success]- Respuesta
+>
+> - b. ✅ Todos los procesadores funcionan de igual manera, ninguno está diferenciado y cualquiera puede realizar cualquier tarea.
+>
+> *Por qué:* SMP significa *Symmetric Multiprocessing*: todos los procesadores son iguales y comparten memoria. La opción c describe **AMP** (asimétrico/master-slave). [[1.2 - Computacion concurrente#4.1 Multiprocesamiento|Ver 1.2 · Multiprocesamiento]]
+
+> [!question] P9 · Inexistencia de reloj global
+> ¿Qué consecuencia directa tiene la **inexistencia de un reloj global** en los sistemas distribuidos?
+
+> [!success]- Respuesta
+>
+> Que la sincronización entre procesos debe realizarse mediante el **paso o intercambio de mensajes**. [[1.2 - Computacion concurrente#4.2 Procesamiento distribuido|Ver 1.2 · Procesamiento distribuido]]
+
+> [!question] P10 · Computación concurrente y programación concurrente
+> ¿Qué diferencia hay entre **computación concurrente** y **programación concurrente**?
+
+> [!success]- Respuesta
+>
+> La **computación concurrente** es el **fenómeno** (varios procesos progresan a la vez compartiendo recursos, lo gestiona el SO); la **programación concurrente** es la **disciplina y conjunto de técnicas** para escribir programas que aprovechan esa concurrencia de forma correcta. [[1.4 - Tecnicas de programacion concurrente#1. Técnicas de programación relacionadas con la computación concurrente|Ver 1.4 · Técnicas de programación concurrente]]
+
+> [!question] P11 · Interacción entre procesos
+> ¿En cuáles de los siguientes tipos de procesos concurrentes es **obligatoriamente** necesaria la sincronización: independientes, cooperantes o competidores?
+
+> [!success]- Respuesta
+>
+> En los **cooperantes** y en los **competidores**. Los cooperantes comparten datos y deben coordinarse; los competidores disputan recursos compartidos. Los **independientes** no comparten recursos ni datos, así que no necesitan sincronización entre ellos. [[1.4 - Tecnicas de programacion concurrente#2. Interacción entre procesos concurrentes|Ver 1.4 · Interacción entre procesos]]
+
+### Procesos en el sistema operativo
+
+> [!question] P12 · Segmento de memoria dinámica
+> ¿Qué segmento de la memoria de un proceso se utiliza para almacenar la memoria dinámica asignada durante el tiempo de ejecución?
+> - a. Heap (Montón).
+> - b. Código (Texto).
+> - c. Datos (Data).
+> - d. Pila (Stack).
+
+> [!success]- Respuesta
+>
+> - a. ✅ Heap (Montón).
+>
+> *Por qué:* el heap guarda la memoria asignada dinámicamente en tiempo de ejecución; la pila guarda llamadas y variables locales. [[1.3 - Procesos en el sistema operativo#1.1 El cargador de procesos|Ver 1.3 · Segmentos del proceso]]
+
+> [!question] P13 · Transición por apropiación
+> ¿Qué suceso provoca la transición por **"Apropiación"** o interrupción (*preemption*) de "En ejecución" a "Listo"?
+
+> [!success]- Respuesta
+>
+> La **expiración del quantum** de tiempo asignado o la llegada de un proceso de **mayor prioridad**. [[1.3 - Procesos en el sistema operativo#2.2 Las transiciones|Ver 1.3 · Transiciones]]
+
+> [!question] P14 · Proceso zombi
+> En sistemas Unix/Linux, ¿qué es un proceso en estado **"zombi"** (*zombie*)?
+> - a. Un proceso que ha finalizado su ejecución pero aún mantiene una entrada en la tabla de procesos hasta que el padre recoja su código de retorno.
+> - b. Un proceso que se ha bloqueado de forma irrecuperable por un fallo de hardware.
+> - c. Un proceso en bucle infinito que consume el 100 % de la CPU.
+> - d. Un proceso trasladado a disco durante una sobrecarga de memoria RAM.
+
+> [!success]- Respuesta
+>
+> - a. ✅ Un proceso que ha finalizado su ejecución pero aún mantiene una entrada en la tabla de procesos hasta que el padre recoja su código de retorno.
+>
+> *Por qué:* el zombi ya terminó, pero su información de salida sigue en el PCB hasta que el proceso padre la recoge. La opción d describe un proceso **suspendido** (*swapping*). [[1.3 - Procesos en el sistema operativo#2.1 Los estados|Ver 1.3 · Estados]]
+
+> [!question] P15 · Latencia del cambio de contexto
+> Se define como **"latencia del cambio de contexto"** o *dispatch latency* al tiempo en el que:
+
+> [!success]- Respuesta
+>
+> La **CPU no ejecuta instrucciones útiles** de procesos de usuario, sino labores de gestión del sistema operativo. [[1.3 - Procesos en el sistema operativo#3.2 El dispatcher|Ver 1.3 · El dispatcher]]
+
+> [!question] P16 · Módulo despachador
+> ¿Cuál es el cometido del módulo **despachador** (*dispatcher*)?
+
+> [!success]- Respuesta
+>
+> **Materializar** la decisión del *scheduler*, ejecutando físicamente el **cambio de contexto** entre procesos. [[1.3 - Procesos en el sistema operativo#3.2 El dispatcher|Ver 1.3 · El dispatcher]]
+
+> [!question] P17 · Estado "Listo"
+> ¿Qué caracteriza a un proceso que se encuentra en el estado **"Listo"** (*ready*)?
+
+> [!success]- Respuesta
+>
+> Está preparado para ejecutarse y tiene **todos los recursos asignados excepto la CPU**; espera en la cola de listos a que el planificador le asigne un núcleo. [[1.3 - Procesos en el sistema operativo#2.1 Los estados|Ver 1.3 · Estados]]
+
+> [!question] P18 · Planificador a largo plazo
+> ¿Cuál es la función principal del **planificador a largo plazo** en un sistema operativo?
+
+> [!success]- Respuesta
+>
+> Seleccionar **qué procesos nuevos** pasan a la cola de preparados, controlando el **grado de multiprogramación**. [[1.3 - Procesos en el sistema operativo#3. Planificación de procesos|Ver 1.3 · Planificación]]
+
+> [!question] P19 · Planificación multinivel con retroalimentación
+> ¿Qué esquema de planificación utilizan sistemas operativos como Windows y macOS, donde los procesos entran con máxima prioridad y **se degradan** conforme consumen CPU?
+
+> [!success]- Respuesta
+>
+> **Planificación por colas multinivel con retroalimentación**. [[1.3 - Procesos en el sistema operativo#3.1 Algoritmos de planificación|Ver 1.3 · Algoritmos de planificación]]
+
+### Orden de ejecución
+
+> [!question] P20 · Orden parcial
+> ¿Qué se entiende por **orden parcial** en programación concurrente?
+
+> [!success]- Respuesta
+>
+> Que solo se conoce con certeza el orden de las instrucciones **dentro de cada proceso o hilo**, pero **no** cómo se intercalará la ejecución **entre** ellos: depende del planificador, la carga del sistema y las interrupciones. [[1.5 - Orden de ejecucion#1. Orden total vs. orden parcial|Ver 1.5 · Orden total vs. parcial]]
+
+> [!question] P21 · Condiciones de una data race
+> ¿Cuáles son las **tres condiciones simultáneas** que deben cumplirse para que exista una **carrera de datos** (*data race*)?
+
+> [!success]- Respuesta
+>
+> 1. Dos o más hilos acceden a la **misma variable compartida**.
+> 2. **Al menos uno** de los accesos es de **escritura**.
+> 3. Los accesos **no están debidamente sincronizados**.
+>
+> [[1.5 - Orden de ejecucion#3. Carrera de datos (data race)|Ver 1.5 · Carrera de datos]]
+
+> [!question] P22 · Qué NO es consecuencia de una condición de carrera
+> ¿Cuál de las siguientes **NO** es una consecuencia típica provocada por condiciones de carrera?
+> - a. Resultados incorrectos o inconsistentes.
+> - b. Fallos intermitentes.
+> - c. Vulnerabilidades de seguridad.
+> - d. Mayor velocidad de ejecución.
+
+> [!success]- Respuesta
+>
+> - d. ✅ Mayor velocidad de ejecución.
+>
+> *Por qué:* las condiciones de carrera provocan resultados inconsistentes, comportamiento errático, fallos intermitentes y vulnerabilidades; nunca mejoran el rendimiento. [[1.5 - Orden de ejecucion#2. Condición de carrera (race condition)|Ver 1.5 · Condición de carrera]]
+
+> [!question] P23 · Dificultad de depuración
+> ¿Por qué las condiciones de carrera son consideradas uno de los errores **más difíciles de depurar**?
+
+> [!success]- Respuesta
+>
+> Porque son **intermitentes** y dependen de un **entrelazado concreto** de instrucciones que solo se da bajo ciertas condiciones de carga y *timing* (los llamados *heisenbugs*), lo que las hace muy difíciles de reproducir. [[1.5 - Orden de ejecucion#2. Condición de carrera (race condition)|Ver 1.5 · Condición de carrera]]
+
+### Sincronización
+
+> [!question] P24 · Exclusión mutua con mutex
+> ¿Qué propiedad garantiza el uso de un mecanismo de **exclusión mutua** (*mutex*) sobre una región crítica que accede a una variable compartida?
+
+> [!success]- Respuesta
+>
+> La **exclusión mutua**: solo un proceso puede estar **dentro de la sección crítica** a la vez; los demás quedan bloqueados hasta que el primero la abandone. [[1.6 - Sincronizacion#3.3 Exclusión mutua y mutex|Ver 1.6 · Exclusión mutua]]
+
+> [!question] P25 · Teorema de Bernstein
+> Enuncia las **tres condiciones del Teorema de Bernstein** y di qué tipo de sincronización exige el incumplimiento de cada una.
+
+> [!success]- Respuesta
+>
+> Para cada conjunto de instrucciones `Sk`, sea `L(Sk)` lo que **lee** y `E(Sk)` lo que **escribe**:
+> 1. `L(Si) ∩ E(Sj) = ∅` → **independencia de entrada** → si falla, sincronización de **acceso a datos**.
+> 2. `E(Si) ∩ L(Sj) = ∅` → **independencia de salida** → si falla, sincronización de **acceso a datos**.
+> 3. `E(Si) ∩ E(Sj) = ∅` → **independencia de flujo de datos** → si falla, sincronización de **control**.
+>
+> Si se cumplen las tres, ambos conjuntos pueden ejecutarse **concurrentemente sin sincronización**. [[1.6 - Sincronizacion#2. Teorema de Bernstein|Ver 1.6 · Teorema de Bernstein]]
+
+> [!question] P26 · Escrituras no atómicas
+> ¿Por qué dos `x = x + 1` concurrentes pueden dejar `x = 1`? Explícalo con las instrucciones LOAD/ADD/STORE.
+
+> [!success]- Respuesta
+>
+> `x = x + 1` no es atómico: se descompone en **LOAD X R1 / ADD R1 1 / STORE R1 X**. Sin sincronización, ambos procesos pueden **leer `x = 0`**, sumar 1 y **escribir ambos 1**, con lo que uno de los incrementos **se pierde**. [[1.6 - Sincronizacion#3.1 Por qué fallan las condiciones 1ª y 2ª: escrituras no atómicas|Ver 1.6 · Escrituras no atómicas]]
+
+> [!question] P27 · Visibilidad de datos (volatile)
+> ¿Qué efecto garantiza el uso de la palabra clave `volatile` sobre un campo en Java?
+
+> [!success]- Respuesta
+>
+> Garantiza la **visibilidad**: la lectura y la escritura van **directamente a la memoria principal**, de modo que los cambios de un hilo se hacen visibles a los demás y se evita leer una versión obsoleta de la caché local. [[1.6 - Sincronizacion#4. El problema de la visibilidad de datos|Ver 1.6 · Visibilidad de datos]]
+
+> [!question] P28 · Monitor
+> ¿Qué es un **monitor** en el contexto del diseño de sistemas concurrentes?
+
+> [!success]- Respuesta
+>
+> Una abstracción de alto nivel que **encapsula un recurso compartido** y combina **exclusión mutua** (solo un hilo ejecuta sus métodos a la vez) y **sincronización condicional** (espera y notificación). En Java: `synchronized` + `wait()`/`notify()`/`notifyAll()`. [[1.6 - Sincronizacion#6. Monitor|Ver 1.6 · Monitor]]
+
+> [!question] P29 · Contención por bloqueo
+> ¿Qué es la **contención por bloqueo** (*lock contention*) y qué impacto produce en un sistema concurrente?
+
+> [!success]- Respuesta
+>
+> Es la **competición** de los procesos por entrar en una sección crítica que ya está ocupada, quedándose bloqueados **sin avanzar** mientras esperan. Degrada el rendimiento; se reduce **acortando** las secciones críticas, **reduciendo** el número de competidores y usando mecanismos **eficientes**. [[1.6 - Sincronizacion#3.3 Exclusión mutua y mutex|Ver 1.6 · Exclusión mutua]]
+
+> [!question] P30 · Condición del productor en un buffer acotado
+> ¿Qué condición de sincronización debe verificarse y cumplirse para que un hilo **productor** pueda depositar de forma segura un nuevo elemento en un buffer acotado de capacidad *N*?
+
+> [!success]- Respuesta
+>
+> Que el buffer **no esté lleno** (`tamaño < N`). Si está lleno, el productor debe **suspenderse liberando el cerrojo** y ser notificado cuando el consumidor libere espacio. [[1.6 - Sincronizacion#5.1 Productor-Consumidor|Ver 1.6 · Productor-Consumidor]]
+
+> [!question] P31 · Suspensión frente a espera activa
+> ¿Por qué el mecanismo de **suspensión y notificación** es más eficiente que el bucle de **espera activa** (*busy waiting* / spinlock) al esperar una condición de sincronización prolongada?
+
+> [!success]- Respuesta
+>
+> Porque la suspensión **cede el procesador** de forma bloqueada, sin consumir CPU, mientras que la espera activa consume ciclos comprobando la condición en un bucle. [[1.6 - Sincronizacion#5.1 Productor-Consumidor|Ver 1.6 · Condición de sincronización]]
+
+> [!question] P32 · Mutex frente a semáforos
+> ¿En qué se diferencian un **mutex** y un **semáforo binario**? ¿Y un **semáforo contador**?
+
+> [!success]- Respuesta
+>
+> El **mutex** es un cerrojo binario de propiedad (con reentrada/semántica de cerrojo); el **semáforo binario** también admite dos estados pero es más general (lo puede liberar otro proceso). El **semáforo contador** es una variable entera no negativa que permite un **número específico de accesos simultáneos** a un recurso. [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Mecanismos de exclusión mutua]]
+
+> [!question] P33 · Esperar una condición dentro de la sección crítica
+> ¿Qué problema surge si un proceso se queda esperando una **condición de sincronización dentro** de una sección crítica protegida por exclusión mutua? ¿Cómo se soluciona?
+
+> [!success]- Respuesta
+>
+> Si espera dentro mantiene bloqueado el recurso, impidiendo que entren **los procesos que podrían hacer que la condición se cumpla** → **interbloqueo (deadlock)**. Se soluciona con mecanismos que permiten al proceso **suspenderse liberando la exclusión mutua** y ser **despertado o notificado** cuando la condición se cumple. [[1.6 - Sincronizacion#5. Condición de sincronización|Ver 1.6 · Condición de sincronización]]
+
+### Corrección en programas concurrentes
+
+> [!question] P34 · Deadlock y condiciones de Coffman
+> Define qué es el **interbloqueo pasivo** (*deadlock*) y enumera las **cuatro condiciones de Coffman**.
+
+> [!success]- Respuesta
+>
+> El **deadlock** es una situación en la que un conjunto de dos o más procesos quedan **bloqueados indefinidamente**, esperando mutuamente a que otro libere un recurso. Las cuatro condiciones de Coffman (deben darse **simultáneamente**):
+> 1. **Exclusión mutua**.
+> 2. **Retención y espera** (*hold and wait*).
+> 3. **No apropiación** (*no preemption*).
+> 4. **Espera circular** (*circular wait*).
+>
+> [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Interbloqueo pasivo]]
+
+> [!question] P35 · Prevención del deadlock
+> ¿Qué estrategia es la **más habitual** para prevenir o evitar el interbloqueo?
+
+> [!success]- Respuesta
+>
+> Establecer un **orden de adquisición de recursos consistente** (jerárquico) que **evite las esperas circulares**. Otras alternativas: fijar un **tiempo máximo de espera** liberando y reintentando, o detectar ciclos en grafos de asignación. [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Prevención del deadlock]]
+
+> [!question] P36 · Livelock frente a deadlock
+> Diferencia el **interbloqueo activo** (*livelock*) del **interbloqueo pasivo** (*deadlock*). ¿Por qué es más difícil de detectar el livelock?
+
+> [!success]- Respuesta
+>
+> En el **deadlock** los procesos están **suspendidos** esperando un evento que nunca ocurrirá; en el **livelock** los procesos siguen **activos** (ejecutándose y cambiando de estado), pero **sin progresar** efectivamente. El livelock es más difícil de detectar porque **no hay un estado de bloqueo observable**, solo un patrón de reintentos repetitivo e ineficiente. [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Livelock]]
+
+> [!question] P37 · Inanición y fairness
+> Define qué es la **inanición** (*starvation*) y cómo se evita.
+
+> [!success]- Respuesta
+>
+> La inanición es cuando uno o más procesos se ven **indefinidamente privados** de acceso a un recurso que necesitan, porque el sistema o el algoritmo siempre se lo concede a otros. Se evita aplicando **fairness** (justicia), teniendo en cuenta la **antigüedad de la petición** para no discriminar sistemáticamente a ciertos procesos. [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Inanición]]
+
+> [!question] P38 · Inversión de prioridad
+> Explica qué es la **inversión de prioridad** (*priority inversion*) con el ejemplo de las tareas A (alta), B (media) y C (baja), y cómo la resuelve la **herencia de prioridad**.
+
+> [!success]- Respuesta
+>
+> C (baja) retiene un recurso que necesita A (alta); A se bloquea. Si B (media) está lista, el planificador la ejecuta **antes que a C**, con lo que A queda **indirectamente** bloqueada por B, pese a tener mayor prioridad. La **herencia de prioridad** hace que C **herede temporalmente** la prioridad de A, de modo que el planificador la ejecute antes que B, libere el recurso cuanto antes y A pueda continuar; después C recupera su prioridad original. [[1.8 - Corrección en los programas concurrentes|Ver 1.8 · Inversión de prioridad]]
+
+### Comunicación entre procesos
+
+> [!question] P39 · Tipos de canal
+> En un canal de comunicación, ¿qué diferencia hay entre **símplex**, **half duplex** y **full duplex**?
+
+> [!success]- Respuesta
+>
+> **Símplex**: unidireccional (uno solo envía). **Half duplex**: bidireccional pero **alternante**, sin transmisión simultánea. **Full duplex**: bidireccional y **simultánea**. [[Cuestionario 1-7|Ver Cuestionario 1-7 · Comunicación]]
+
+> [!question] P40 · Comunicación síncrona y asíncrona
+> ¿Qué diferencia hay entre una comunicación **síncrona** y una **asíncrona**?
+
+> [!success]- Respuesta
+>
+> En la **síncrona** el emisor queda **bloqueado** esperando a que el receptor reciba o confirme el mensaje (*handshake*). En la **asíncrona** el emisor **continúa** sin esperar, dejando el mensaje en un **buffer** para que el receptor lo recoja cuando pueda. [[Cuestionario 1-7|Ver Cuestionario 1-7 · Comunicación]]
+
+> [!question] P41 · Comunicación simétrica y asimétrica
+> ¿En qué se diferencian los modelos de comunicación **simétrico** y **asimétrico**?
+
+> [!success]- Respuesta
+>
+> En la **simétrica** todos los procesos tienen el **mismo rol** y pueden ser emisores o receptores (p. ej. una red P2P). En la **asimétrica** existen roles diferenciados de **cliente** y **servidor**. [[Cuestionario 1-7|Ver Cuestionario 1-7 · Comunicación]]
+
+> [!question] P42 · Memoria compartida frente a paso de mensajes
+> Cita una **ventaja** y un **inconveniente** del paso de mensajes mediante sockets frente al acceso a memoria compartida.
+
+> [!success]- Respuesta
+>
+> **Ventaja:** permite la comunicación entre **máquinas distribuidas**, sin memoria física común. **Inconveniente:** introduce **mayor latencia** y **sobrecarga** por la serialización de los mensajes y la transmisión por red. [[Cuestionario 1-7|Ver Cuestionario 1-7 · Comunicación]]
+
+### Java: gestión de procesos
+
+> [!question] P43 · Propiedades y variables de entorno
+> ¿Qué propiedad del sistema operativo se lee con `System.getProperty("os.name")`? ¿Y las variables de entorno, con qué método se leen?
+
+> [!success]- Respuesta
+>
+> `System.getProperty("os.name")` devuelve el **nombre del sistema operativo** (propiedad de la **JVM**). Las variables de entorno (del **SO**) se leen con `System.getenv()`; p. ej. `System.getenv("PATH")`. [[2.2 - Gestión de subprocesos#Variables de entorno y propiedades del sistema|Ver 2.2 · Entorno y propiedades]]
+
+> [!question] P44 · Órdenes internas y shell
+> ¿Por qué `dir` necesita `cmd.exe /c` pero `ls` no necesita un shell?
+
+> [!success]- Respuesta
+>
+> Porque `dir` es un **comando interno de `cmd.exe`**, no un ejecutable independiente, así que hay que invocar el intérprete con `/c`. `ls` **sí** es un ejecutable independiente que puede lanzarse directamente. [[2.2 - Gestión de subprocesos#Órdenes y shell por sistema operativo|Ver 2.2 · Órdenes y shell]]
+
+> [!question] P45 · Argumentos con espacios en ProcessBuilder
+> ¿Cómo se representa un argumento **con espacios** al construir un `ProcessBuilder`?
+
+> [!success]- Respuesta
+>
+> Como **un único elemento** de la lista de tokens, sin partirlo (p. ej. `new ProcessBuilder("java", "-jar", "mi programa.jar")`). El comando **no pasa por un shell**, por lo que los espacios no se interpretan. [[2.2 - Gestión de subprocesos#Creación y configuración con ProcessBuilder|Ver 2.2 · ProcessBuilder]]
+
+> [!question] P46 · Flujos del proceso desde el padre
+> Desde el punto de vista del **padre**, ¿qué método de `Process` sirve para **escribir en la entrada** del hijo y cuál para **leer su salida**?
+
+> [!success]- Respuesta
+>
+> Para **escribir en la entrada** del hijo: **`getOutputStream()`**. Para **leer su salida**: **`getInputStream()`**. Los nombres se entienden desde la perspectiva del padre. [[2.3 - Flujos de comunicación#Flujos predeterminados entre padre e hijo|Ver 2.3 · Flujos padre-hijo]]
+
+> [!question] P47 · redirectErrorStream
+> ¿Qué hace `redirectErrorStream(true)`?
+
+> [!success]- Respuesta
+>
+> **Combina `stderr` con `stdout`**: el flujo de errores del subproceso se fusiona con su salida estándar, y el flujo combinado se lee mediante `getInputStream()`. [[2.3 - Flujos de comunicación#Redirección de los flujos|Ver 2.3 · Redirección de flujos]]
+
+> [!question] P48 · Pipelines
+> ¿Qué método inicia un **pipeline** de procesos y desde qué versión de Java está disponible?
+
+> [!success]- Respuesta
+>
+> `ProcessBuilder.startPipeline(List<ProcessBuilder>)`, disponible desde **Java 9**. Conecta la salida estándar de cada proceso con la entrada del siguiente. [[2.3 - Flujos de comunicación#Creación de pipelines|Ver 2.3 · Pipelines]]
+
+> [!question] P49 · Valor de retorno de waitFor
+> ¿Qué devuelve `waitFor()` y qué significa que `waitFor(timeout, unit)` devuelva `false`?
+
+> [!success]- Respuesta
+>
+> `waitFor()` **bloquea** hasta que el proceso termina y devuelve su **código de salida**. En `waitFor(timeout, unit)`, `false` significa que el proceso **sigue activo** al vencer el plazo. [[2.4 - Finalización de subprocesos#Esperar a que termine un subproceso|Ver 2.4 · Esperar a un subproceso]]
+
+> [!question] P50 · exitValue fuera de tiempo
+> ¿Por qué `exitValue()` puede lanzar `IllegalThreadStateException`?
+
+> [!success]- Respuesta
+>
+> Porque `exitValue()` solo es válido **una vez que el proceso ha terminado**. Si el proceso aún está **vivo**, lanza `IllegalThreadStateException`. [[2.4 - Finalización de subprocesos#Consultar estado sin bloquear|Ver 2.4 · Consultar estado]]
+
+> [!question] P51 · Terminación normal y forzada
+> ¿Cuál es la diferencia entre `destroy()` y `destroyForcibly()`?
+
+> [!success]- Respuesta
+>
+> `destroy()` **solicita** una terminación (que puede ser normal, según la plataforma); `destroyForcibly()` **fuerza** la terminación. Patrón recomendado: `destroy()` → esperar con `waitFor(timeout, unit)` → `destroyForcibly()` si sigue vivo. [[2.4 - Finalización de subprocesos#Terminación explícita|Ver 2.4 · Terminación explícita]]
+
+> [!question] P52 · Interbloqueo por no drenar flujos
+> ¿Por qué esperar con `waitFor()` sin **drenar** las salidas del subproceso puede causar un interbloqueo?
+
+> [!success]- Respuesta
+>
+> Porque si el padre no consume `stdout`/`stderr`, los **búferes limitados de las tuberías se llenan** y el hijo se **bloquea** al intentar escribir; a su vez el padre queda esperando en `waitFor()` → **interbloqueo**. Hay que leer los flujos mientras el proceso trabaja (hilos dedicados o redirección a archivo). [[2.4 - Finalización de subprocesos#Drenar flujos durante la espera|Ver 2.4 · Drenar flujos]]
+
+> [!question] P53 · Cancelar el future de onExit
+> ¿Qué ocurre si **cancelas** el future devuelto por `onExit()`?
+
+> [!success]- Respuesta
+>
+> **Nada sobre el proceso**: cancelar el `CompletableFuture` **no termina** el proceso. Solo afecta a la reacción asíncrona, no al ciclo de vida del subproceso. [[2.4 - Finalización de subprocesos#Acciones asíncronas con onExit|Ver 2.4 · onExit]]
+
+> [!question] P54 · Process frente a ProcessHandle
+> ¿Qué diferencia hay entre `Process` y `ProcessHandle` a la hora de consultar información de procesos?
+
+> [!success]- Respuesta
+>
+> `Process` representa un proceso **iniciado por la aplicación**. `ProcessHandle` (Java 9+) permite consultar **cualquier proceso visible**: el actual (`current()`), uno por PID (`of(pid)`, que devuelve `Optional`) o todos (`allProcesses()`), además de padre e hijos. [[2.5 - Información sobre procesos#Información del proceso representado por Process|Ver 2.5 · ProcessHandle]]
+
+> [!question] P55 · Opciones de redirección de flujos
+> ¿Qué diferencia hay entre `PIPE`, `INHERIT` y `DISCARD` en `ProcessBuilder.Redirect`?
+
+> [!success]- Respuesta
+>
+> `PIPE` conecta el flujo por **tubería** hacia/desde el padre (valor **por defecto**); `INHERIT` **comparte** el flujo correspondiente del padre; `DISCARD` **descarta** la salida. También existen `from(file)`, `to(file)` y `appendTo(file)`. [[2.3 - Flujos de comunicación#Redirección de los flujos|Ver 2.3 · Redirección de flujos]]
+
+---
+
+## Esquema de repaso
+
+- **Programa → proceso:** estático en disco → entidad dinámica en ejecución con recursos (PID, contexto). **Demonio = servicio** en segundo plano.
+- **Concurrencia vs. paralelismo:** ilusión por turnos (multiprogramación, no acelera) vs. simultaneidad real (≥2 núcleos). **Cambio de contexto** = sobrecarga.
+- **SMP/AMP vs. distribuido:** memoria compartida vs. memoria local + paso de mensajes.
+- **SO:** cargador + PCB + 4 segmentos (código, datos, pila, heap); estados nuevo → listo → ejecución → terminado (+ bloqueado, suspendido, zombi); scheduler **decide**, dispatcher **materializa**.
+- **Orden parcial** → **race condition** y **data race** (misma variable + ≥1 escribe + sin sincronización).
+- **Bernstein:** L∩E, E∩L, E∩E = ∅ → paralelismo seguro. Escrituras no atómicas (LOAD/ADD/STORE) → sección crítica + exclusión mutua + mutex.
+- **JMM:** visibilidad de datos → `volatile`, `synchronized`. **Condición de sincronización** requiere suspender liberando el cerrojo. **Monitor** = exclusión mutua + condición.
+- **Seguridad vs. viveza:** Coffman (4 condiciones) → deadlock; livelock, inanición (*fairness*), inversión de prioridad (*herencia*).
+- **Comunicación:** símplex / half / full duplex; síncrona vs. asíncrona; simétrica vs. asimétrica; memoria compartida vs. mensajes.
+- **Java Tema 2:** `javac`/`java`/`jar` + manifiesto; `Runtime.exec` vs. `ProcessBuilder`; `java.home`/`java.class.path`; `getOutputStream`/`getInputStream`; `redirectErrorStream`, `INHERIT`, `startPipeline`; `waitFor`/`isAlive`/`exitValue`/`onExit`/`destroy`/`destroyForcibly`; `ProcessHandle` e `Info`.
+
+## Relaciones
+
+- [[Guia examen temas 1 y 2]] — teoría explicativa y chuleta
+- [[Practicos temas 1 y 2]] — ejercicios resueltos y explicados
+- [[1.R - Preguntas del Tema 1]] · [[1.R2 - Preguntas del Tema 1 (II)]] — repaso en formato pregunta corta
+- [[Cuestionario 1-1]] … [[Cuestionario 1-8]] — cuestionarios completos del aula
+
+### Fuentes de Programación básica por bloque de preguntas
+
+- **Procesos, hilos y sistema operativo**
+  - [[Programación basica/Tema 1/1.2 · Funciones#6. La pila|1.2 → 6. La pila]]
+  - [[Programación basica/Tema 6/Excepciones#6. Tipos de excepciones|Excepciones → 6. Tipos de excepciones]]
+- **Órdenes, `ps`/`kill`/`nice`, redirecciones**
+  - [[Programación basica/Tema 2/2.1 Escritura en pantalla#1. Introducción|2.1 → 1. Introducción]]
+  - [[Programación basica/Tema 2/2.2 Lectura por teclado#1. La clase System|2.2 → 1. La clase System]]
+- **Orden de ejecución, bucles y constantes**
+  - [[Programación basica/Tema 3/3.2 Bucles#4. Bucle for|3.2 → 4. Bucle for]]
+  - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#12. Constantes|1.1 → 12. Constantes]]
+- **Sincronización, colecciones y genéricos**
+  - [[Programación basica/Tema 12/Colecciones#12. Pilas y colas|Colecciones → 12. Pilas y colas]]
+  - [[Programación basica/Tema 11/Genéricos#2. Clases genéricas|Genéricos → 2. Clases genéricas]]
+- **Excepciones y try-catch/finally**
+  - [[Programación basica/Tema 6/Excepciones#2. Try-catch|Excepciones → 2. Try-catch]]
+  - [[Programación basica/Tema 6/Excepciones#10. Finally|Excepciones → 10. Finally]]
+- **`Optional` en `ProcessHandle.Info`**
+  - [[Programación basica/Tema 13/Programación funcional#12. Optional|Funcional → 12. Optional]]
+
+## Para repasar
+
+- [ ] Repetir las preguntas sin abrir las respuestas.
+- [ ] Repasar los estados del proceso y las 7 transiciones.
+- [ ] Repasar el teorema de Bernstein y las condiciones de Coffman.
+- [ ] Revisar las preguntas falladas directamente en el apunte enlazado.

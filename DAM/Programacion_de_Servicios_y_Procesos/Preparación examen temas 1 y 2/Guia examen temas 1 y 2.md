@@ -1,0 +1,921 @@
+---
+asignatura: PSyP
+tema: 1-2
+tipo: guia
+estado: completo
+fecha: 2026-10-12
+tags:
+  - DAM/guia
+  - DAM/psyp/programa-vs-proceso
+  - DAM/psyp/subprocesos
+---
+
+# Guía de teoría — Temas 1 y 2 (PSyP)
+
+> [!info] Asignatura
+> [[DAM/Programacion_de_Servicios_y_Procesos/Indice|Programación de Servicios y Procesos]] · Temas 1 y 2
+> Examen **tipo test + práctico** (en papel: completar huecos de código).
+
+> [!tip] Las tres partes del material
+> - [[Guia examen temas 1 y 2|🧠 Teoría y chuleta]]
+> - [[Test de repaso temas 1 y 2|✅ Test de repaso]]
+> - [[Practicos temas 1 y 2|💻 Prácticos resueltos]]
+
+
+> [!note] Qué contiene este archivo
+> **Toda la teoría explicativa** de los Temas 1 y 2: los conceptos, las tablas comparativas y las trampas del test. Los ejercicios y las preguntas de examen están en sus propios archivos:
+> - ✅ **Preguntas tipo test** → [[Test de repaso temas 1 y 2]]
+> - 💻 **Ejercicios prácticos resueltos y explicados** → [[Practicos temas 1 y 2]]
+
+---
+
+## Mapa de la materia
+
+| Bloque | Nota fuente | Peso esperado en el examen |
+| --- | --- | --- |
+| Programa vs. proceso | [[1.1 - Programa vs. Proceso]] | Medio (test) |
+| Computación concurrente | [[1.2 - Computacion concurrente]] | Alto (test) |
+| Procesos en el SO | [[1.3 - Procesos en el sistema operativo]] | Alto (test) |
+| Técnicas de programación concurrente | [[1.4 - Tecnicas de programacion concurrente]] | Medio (test) |
+| Orden de ejecución | [[1.5 - Orden de ejecucion]] | Alto (test) |
+| Sincronización | [[1.6 - Sincronizacion]] | Muy alto (test) |
+| Comunicación entre procesos | *(recuperado del Cuestionario 1‑7)* | Medio (test) |
+| Corrección en programas concurrentes | [[1.8 - Corrección en los programas concurrentes]] | Alto (test) |
+| Java: ejecución y empaquetado | [[2.1 - Instalación y configuracion de java]] | Medio (test + práctico) |
+| Java: gestión de subprocesos | [[2.2 - Gestión de subprocesos]] | Muy alto (test + práctico) |
+| Java: flujos de comunicación | [[2.3 - Flujos de comunicación]] | Muy alto (práctico) |
+| Java: finalización de subprocesos | [[2.4 - Finalización de subprocesos]] | Alto (práctico) |
+| Java: información de procesos | [[2.5 - Información sobre procesos]] | Bajo/medio (test) |
+
+---
+
+# Tema 1 — Programación concurrente
+
+## A.1 · Programa vs. proceso
+
+| Concepto | Definición | Clave para el test |
+| --- | --- | --- |
+| **Software** | Conjunto de programas informáticos que se ejecutan sobre el hardware | No es el hardware ni un fichero concreto |
+| **Programa** | Conjunto de instrucciones para realizar una tarea; **representación estática en disco** (código + datos) | Estático |
+| **Aplicación** | Programa diseñado para resolver un problema específico del usuario | Finalidad de uso |
+| **Ejecutable** | Fichero con código binario o interpretado que puede ejecutarse directamente (o por una máquina virtual) | Windows: `.exe` · Linux/macOS: permiso de **ejecución** |
+| **Proceso** | Entidad **dinámica**: la ejecución de un programa + los recursos que el SO le asigna | Dinámico |
+| **Demonio / servicio** | Proceso en segundo plano, larga duración, sin UI, a la espera de peticiones | Demonio (Unix) = servicio (Windows) |
+
+**Programas según su finalidad:**
+
+- **Gestión del hardware**: SO, controladores, **firmware** (software grabado en memoria no volátil que controla circuitos).
+- **Aplicaciones de usuario**: procesadores de texto, navegadores, editores, reproductores.
+
+**Ejecutables según el tipo de código:**
+
+| Tipo | Cómo funciona | Portabilidad | Rendimiento |
+| --- | --- | --- | --- |
+| **Binario** | Instrucciones ejecutadas directamente por la CPU | Baja (hay que recompilar por plataforma) | Mayor |
+| **Interpretado** | Un **intérprete** traduce (p. ej. la **JVM** ejecuta **bytecode**) | Alta (multiplataforma) | Menor |
+| **Script** | Interpretado **no compilado**, legible en texto plano | Alta | Menor |
+
+> [!warning] Trampas típicas del test
+> - "Un fichero `.txt` es un servicio de aplicación" → **falso**.
+> - "En Linux un fichero es ejecutable por su extensión" → **falso**: por el **permiso de ejecución**.
+> - El código intermedio que genera el compilador de Java es el **bytecode**, no "bytecode compilado".
+> - El software básico grabado en memorias no volátiles es el **firmware**.
+
+**Contexto / imagen del proceso** (5+ componentes): espacio de direcciones de memoria, contador de programa, registros de la CPU, descriptores de ficheros, información de gestión (PID, prioridad, estado).
+
+**Servicios**: del sistema operativo (red, usuarios, audio, energía) vs. de aplicación (Apache, MySQL/PostgreSQL, correo, nube). El **spooler** de impresión, sin trabajos, queda esperando y puede poner la impresora en **standby**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.1 - Programa vs. Proceso]]
+> - Programación básica:
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#2. Bytecode, JVM, JRE, JDK|1.1 → 2. Bytecode, JVM, JRE, JDK]]
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#5. Entornos de desarrollo integrado (IDE): Eclipse|1.1 → 5. IDEs]]
+
+---
+
+## A.2 · Computación concurrente
+
+| Concepto | Definición |
+| --- | --- |
+| **Computación concurrente** | Varios procesos **parecen** progresar al mismo tiempo compartiendo recursos, aunque no se ejecuten simultáneamente en un instante dado |
+| **Multitarea** | La concurrencia **vista por el usuario**: sensación de hacer varias cosas a la vez |
+| **Paralelismo** | Ejecución simultánea y **real**; requiere **≥2 núcleos** |
+| **Multiprogramación** | Simula concurrencia planificando **por turnos** en un (o varios) núcleos |
+| **Cambio de contexto** | Guardar el estado del proceso saliente y restaurar el del entrante |
+
+> [!tip] Definición precisa
+> Dos procesos son **concurrentes** cuando la primera instrucción de uno se ejecuta después de la primera del otro y **antes de la última** de aquel: hay **solapamiento**.
+
+| Característica | Paralelismo | Multiprogramación |
+| --- | --- | --- |
+| Ejecución | Simultánea y real | Por turnos (simulación) |
+| Hardware | Múltiples núcleos | Un núcleo (o varios) |
+| Tiempo global | Puede reducirlo | **No lo reduce: lo incrementa ligeramente** |
+| Objetivo | Acelerar | Simular concurrencia |
+
+**SMT / Hyper-Threading**: 1 núcleo físico se presenta como varios **núcleos lógicos** (hilos de hardware), compartiendo ALU y cachés pero con registros propios. **No es paralelismo puro**, es concurrencia muy eficiente.
+
+**Multiprocesamiento vs. Procesamiento distribuido:**
+
+| | Multiprocesamiento (SMP/AMP) | Procesamiento distribuido |
+| --- | --- | --- |
+| Memoria | **Compartida** | **Local** por nodo |
+| Comunicación | Memoria compartida (rápida) | **Paso de mensajes** por red |
+| Acoplamiento | Fuerte | Débil |
+| Escalabilidad | Limitada | Mayor |
+| Ejemplos | PC multinúcleo, servidores SMP | Clusters, supercomputadoras, Cloud |
+
+- **SMP** (simétrico): todos los procesadores iguales, cualquiera hace cualquier tarea.
+- **AMP** (asimétrico, master‑slave): un procesador **maestro** reparte tareas a los esclavos.
+- **Distribuido**: supercomputación (red a medida, cercana) → clusters (LAN, coste/rendimiento) → Grid/Cloud (WAN, heterogéneo).
+- Características: **concurrencia**, **inexistencia de reloj global** (→ sincronización por mensajes), **fallos independientes**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.2 - Computacion concurrente]]
+> - Programación básica:
+>   - [[Programación basica/Tema 1/1.2 · Funciones#6. La pila|1.2 → 6. La pila (stack de llamadas)]]
+>   - [[Programación basica/Tema 6/Excepciones#6. Tipos de excepciones|Excepciones → 6. Tipos de excepciones (Throwable, Error)]]
+
+---
+
+## A.3 · Procesos en el sistema operativo
+
+### Cargador y espacio de direcciones
+
+El **cargador de procesos** crea un espacio de direcciones **virtual** (el proceso lo percibe contiguo y exclusivo, aunque la RAM física esté fragmentada), crea el **PCB** y deja el proceso en la **cola de listos**.
+
+| Segmento | Contenido |
+| --- | --- |
+| **Código (Texto)** | Instrucciones |
+| **Datos** | Variables globales y estáticas |
+| **Pila (Stack)** | Pila de llamadas, variables locales |
+| **Heap (Montón)** | Memoria **dinámica** asignada en ejecución |
+
+> [!warning] Confinamiento
+> Si un proceso accede fuera de su espacio de direcciones: **segmentation fault** (Unix/Linux) o error de protección general (Windows).
+
+### PCB (Process Control Block)
+
+El "DNI del proceso": **PID**, estado actual, espacio de direcciones, información de planificación (prioridad, quantum), contexto para el cambio (**PC, registros, puntero de pila**), gestión de memoria, recursos utilizados.
+
+### Estados y transiciones
+
+| Estado | Significado |
+| --- | --- |
+| **Nuevo** | Se está creando (memoria + PCB); aún no se ha ejecutado |
+| **Listo** | Preparado; tiene todo **menos la CPU** |
+| **En ejecución** | Usando la CPU activamente |
+| **Bloqueado** | Espera una **E/S** o un evento; sigue en RAM |
+| **Suspendido** | Movido a disco (**swapping**) para liberar RAM |
+| **Terminado** | Finalizó; el SO libera recursos poco a poco. Mientras el padre no recoge su código → **zombie** |
+
+| Transición | De → A | Causa |
+| --- | --- | --- |
+| Asignación (dispatching) | listo → ejecución | El planificador le da CPU |
+| **Apropiación (preemption)** | ejecución → listo | **Agota el quantum** o llega uno de mayor prioridad |
+| Terminación | ejecución → terminado | Termina normal o por error |
+| Espera (event wait) | ejecución → bloqueado | Necesita E/S o un recurso (cede la CPU **voluntariamente**) |
+| Espera completada | bloqueado → listo | El evento ocurrió |
+| Suspensión | RAM → disco | El SO necesita liberar memoria |
+| Reactivación | disco → RAM | Se liberó memoria o se completó el evento |
+
+> [!note] ¿Por qué se suspende antes un proceso bloqueado?
+> Porque no está usando la CPU ni puede hacer E/S: es el mejor candidato para liberar RAM.
+
+### Planificación
+
+- **Scheduler (planificador)**: **decide** qué proceso listo pasa a la CPU y cuánto tiempo (quantum).
+  - **Corto plazo**: de la cola de preparados a ejecución (muy frecuente → algoritmo simple).
+  - **Largo plazo**: qué procesos nuevos entran; controla el **grado de multiprogramación**.
+- **Dispatcher (despachador)**: **materializa** la decisión → ejecuta el **cambio de contexto**.
+  - **Dispatch latency**: tiempo en el que la CPU **no ejecuta instrucciones útiles** de usuario.
+
+| Algoritmo | Funcionamiento | Debilidad |
+| --- | --- | --- |
+| **FIFO/FCFS** | El primero en llegar, primero en ejecutarse | Un proceso largo bloquea a los cortos |
+| **Round Robin** | Quantum rotatorio; si no termina, se expulsa | Quantum muy pequeño → sobrecarga |
+| **SJF** | El de tiempo estimado más corto primero | Hay que conocer/estimar el tiempo |
+| **Prioridades** | Siempre el de mayor prioridad | Puede causar **inanición** |
+| **Multinivel con retroalimentación** | Colas de prioridad; los procesos **se degradan** según consumen CPU | — (es el de **Windows y macOS**) |
+
+**Objetivos**: eficacia/utilización de CPU, equidad, tiempo de respuesta, tiempo de finalización, rendimiento (throughput).
+
+### Herramientas
+
+| SO | Listar | Terminar | Prioridad |
+| --- | --- | --- | --- |
+| Windows | `tasklist` | `taskkill /PID <pid>` · `/IM <nombre>` · `/F` | vía GUI |
+| Linux/macOS | `ps aux` · `pstree -AGu` | `kill <PID>` (SIGTERM) · `kill -9 <PID>` (SIGKILL) · `killall <app>` | `nice -n <nivel>` · `renice` |
+
+> [!tip] `nice`
+> Rango **-20 (mayor prioridad) a 19 (menor)**. `nice` solo afecta a procesos **nuevos**; `renice` cambia la de uno en ejecución. Los valores negativos requieren **administrador**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.3 - Procesos en el sistema operativo]]
+> - Programación básica:
+>   - [[Programación basica/Tema 6/Excepciones#6. Tipos de excepciones|Excepciones → 6. Tipos de excepciones (Error vs. Exception)]]
+>   - [[Programación basica/Tema 2/2.1 Escritura en pantalla#1. Introducción|2.1 → 1. Introducción (System.out / PrintStream)]]
+
+---
+
+## A.4 · Técnicas de programación concurrente
+
+| Tipo | Sistema | Memoria | Comunicación | Objetivo |
+| --- | --- | --- | --- | --- |
+| **Concurrente** (general) | Mono/multiprocesador | Según sistema | Según sistema | Gestionar la concurrencia |
+| **Paralela** (SMP) | Multiprocesamiento | **Compartida** | Memoria compartida | **Acelerar** con paralelismo real |
+| **Distribuida** | Procesamiento distribuido | **Local** por nodo | **Mensajes** por red | Ejecutar en nodos |
+
+> [!warning] Alcance del curso
+> Se estudia **concurrente** y, muy someramente, **paralela**, en **Java**. **No** se trata programación distribuida.
+
+**Tres tipos de interacción entre procesos:**
+
+| Tipo | ¿Comparte recursos? | ¿Qué necesita? | Ejemplo |
+| --- | --- | --- | --- |
+| **Independientes** | No (solo la CPU) | **Nada** | Varios editores, navegador + música |
+| **Cooperantes** | Sí, para una tarea común | **Comunicación** | Productor-consumidor, servidor web |
+| **Competidores** | Sí, con acceso **exclusivo** | **Sincronización** (+ exclusión mutua) | Varios procesos escribiendo el mismo log; impresora compartida |
+
+Sin sincronización aparecen: **inconsistencia de datos**, **condiciones de carrera** y **accesos corruptos**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.4 - Tecnicas de programacion concurrente]]
+> - Programación básica:
+>   - [[Programación basica/Tema 1/1.2 · Funciones#1. Introducción|1.2 → 1. Introducción (funciones y procedimientos)]]
+>   - [[Programación basica/Tema 6/Excepciones#1. Introducción|Excepciones → 1. Introducción]]
+
+---
+
+## A.5 · Orden de ejecución
+
+| | Secuencial | Concurrente |
+| --- | --- | --- |
+| Orden propio de cada hilo | Total, predeterminado | Total **dentro de cada hilo** |
+| Orden **entre** hilos | — | **Parcial** e impredecible |
+| Depende de | Código + datos | Planificador, carga del sistema, interrupciones |
+| Misma entrada → misma salida | Siempre | **No necesariamente** |
+
+> [!definition] Condición de carrera (race condition)
+> La corrección del programa depende críticamente de la **secuencia o timing** en que se ejecutan los hilos.
+
+**Consecuencias**: resultados incorrectos/inconsistentes · comportamiento errático (falla unas veces y otras no) · fallos intermitentes ("heisenbug") · vulnerabilidades de seguridad.
+
+> [!definition] Carrera de datos (data race)
+> Caso concreto: **3 condiciones simultáneas** → (1) ≥2 hilos acceden a la **misma variable compartida**, (2) **al menos uno escribe**, (3) los accesos **no están sincronizados**.
+
+> [!tip] No todo no-determinismo es un error
+> Dos hilos que imprimen en distinto orden ≠ incorrecto. Solo es un error si la **corrección** depende del orden.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.5 - Orden de ejecucion]] · [[1.R2 - Preguntas del Tema 1 (II)]]
+> - Programación básica:
+>   - [[Programación basica/Tema 3/3.2 Bucles#4. Bucle for|3.2 → bucles (bucle for del ejemplo)]]
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#12. Constantes|1.1 → 12. Constantes (static final)]]
+
+---
+
+## A.6 · Sincronización
+
+**Dos tipos:**
+
+| Tipo | Cuándo | Objetivo | Mecanismos |
+| --- | --- | --- | --- |
+| **Acceso a datos** (exclusión mutua) | Varias tareas acceden a un recurso compartido y al menos una escribe | Solo una tarea en la **sección crítica** | `synchronized`, mutex, semáforos |
+| **Control** (de flujo) | La continuidad depende de un evento previo | Establecer **orden/dependencias** | `join`, esperar un dato o una tecla |
+
+> [!tip] Thread-safe
+> Código protegido correctamente con sincronización **o inmutable** (nadie lo modifica → no hay problema).
+
+### Teorema de Bernstein
+
+Para cada conjunto de instrucciones `Sk`: **L(Sk)** = variables que **lee**, **E(Sk)** = variables que **escribe**.
+
+`Si` y `Sj` pueden ejecutarse concurrentemente **si se cumplen las 3 a la vez**:
+
+| # | Condición | Nombre | Si falla, hace falta… |
+| --- | --- | --- | --- |
+| 1 | L(Si) ∩ E(Sj) = ∅ | **Independencia de entrada** | Sincronización de **acceso a datos** |
+| 2 | E(Si) ∩ L(Sj) = ∅ | **Independencia de salida** | Sincronización de **acceso a datos** |
+| 3 | E(Si) ∩ E(Sj) = ∅ | **Independencia de flujo de datos** | Sincronización de **control** |
+
+> [!warning] Cuidado con los nombres
+> La condición 3 (E∩E = ∅) es la "**independencia de flujo de datos**", pero el caso de que A **produzca** un valor que B **necesite** es una **dependencia de flujo** que exige sincronización de **control**. La memoria lo justifica por la 3ª condición.
+
+### Sección crítica, exclusión mutua, mutex
+
+`x = x + 1` en ensamblador son **3 instrucciones no atómicas**:
+
+```asm
+LOAD  X R1     ; cargar x en el registro R1
+ADD   R1 1     ; incrementar R1
+STORE R1 X     ; guardar R1 en x
+```
+
+Con 2 procesos y esta traza, el resultado es **x = 1** (se pierde un incremento):
+
+| Paso | Proceso | Instrucción | R1 P1 | R1 P2 | x |
+| --- | --- | --- | --- | --- | --- |
+| 1 | P1 | LOAD X R1 | 0 | — | 0 |
+| 2 | P2 | LOAD X R1 | 0 | 0 | 0 |
+| 3 | P1 | ADD R1 1 | 1 | 0 | 0 |
+| 4 | P2 | ADD R1 1 | 1 | 1 | 0 |
+| 5 | P1 | STORE R1 X | 1 | 1 | 1 |
+| 6 | P2 | STORE R1 X | 1 | 1 | **1** |
+
+- **Sección crítica**: secuencia de instrucciones que debe ejecutarse de forma **atómica e indivisible**.
+- **Exclusión mutua**: si un proceso está en su sección crítica, **ningún otro** puede ejecutarla hasta que la abandone.
+- **Mutex** (*mutual exclusion*): primitiva **binaria** (bloqueado/desbloqueado) que garantiza la exclusión mutua. En Java **no hay clase `Mutex`**: se usa `synchronized` o `ReentrantLock`.
+- **Lock contention**: competición por entrar en la sección crítica → degrada el rendimiento. Se mitiga **acortando** la sección, **reduciendo competidores** y usando mecanismos eficientes.
+
+> [!note] Una sección crítica puede tener varias regiones
+> Se define **por el recurso compartido** que protege, no por un rango de líneas. `x = x + 1` y `x = x - 1` son la **misma** sección crítica de `x` si las gestiona el mismo mutex.
+
+```java
+// Las dos regiones comparten sección crítica: mismo cerrojo (this) sobre x
+class ContadorSeguro {
+    private int x = 0;
+
+    public synchronized void incrementa() { x = x + 1; }
+
+    public synchronized void decrementa() { x = x - 1; }
+}
+```
+
+### Visibilidad de datos (JMM)
+
+Cada hilo trabaja con una **caché local**; los cambios **no se propagan inmediatamente** a la memoria principal. **Java Memory Model (JMM)**: sin sincronización **no garantiza cuándo** se hace visible un cambio → otro hilo puede leer una versión **obsoleta**.
+
+| Mecanismo | Qué garantiza |
+| --- | --- |
+| `volatile` | **Visibilidad** (lectura/escritura directa en memoria maestra) |
+| `synchronized` | Visibilidad **+ exclusión mutua** |
+| `java.util.concurrent` (`Lock`, `Semaphore`, `ConcurrentHashMap`…) | Equivalentes a nivel de biblioteca |
+
+### Condición de sincronización y productor-consumidor
+
+> [!definition] Condición de sincronización
+> Un proceso **dentro de la sección crítica** no puede continuar hasta que se cumpla una condición sobre el **estado** del recurso (aunque ya tenga el acceso exclusivo).
+
+| Situación | Condición que falta | Problema si se espera dentro de la SC |
+| --- | --- | --- |
+| Consumidor lee buffer **vacío** | "buffer **no vacío**" | Bucle infinito → bloquea al productor → **deadlock** |
+| Productor escribe buffer **lleno** | "buffer **no lleno**" | Idem → bloquea al consumidor → **deadlock** |
+
+**Solución**: el proceso debe **suspenderse liberando el recurso**, y ser **notificado** cuando la condición se cumpla. Nada de *busy waiting*.
+
+### Monitor
+
+> [!definition] Monitor
+> Abstracción que **encapsula** un recurso compartido y combina **exclusión mutua** + **sincronización condicional** (esperar/notificar).
+
+En Java: **todo objeto es un monitor** → `synchronized` (exclusión mutua) + `wait()`, `notify()`, `notifyAll()` (de `Object`).
+
+```java
+// Esqueleto de monitor: métodos synchronized = sección crítica;
+// wait() se usa DENTRO de synchronized y libera el cerrojo mientras espera.
+class BufferMonitor<T> {
+    private final Queue<T> cola = new LinkedList<>();
+    private final int max;
+
+    BufferMonitor(int max) { this.max = max; }
+
+    public synchronized void producir(T item) throws InterruptedException {
+        while (cola.size() == max) wait();   // condición "no lleno" -> suspende y LIBERA el cerrojo
+        cola.add(item);
+        notifyAll();                         // despierta al consumidor
+    }
+
+    public synchronized T consumir() throws InterruptedException {
+        while (cola.isEmpty()) wait();       // condición "no vacío"
+        T item = cola.remove();
+        notifyAll();                         // despierta al productor
+        return item;
+    }
+}
+```
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.6 - Sincronizacion]] · [[1.R - Preguntas del Tema 1]]
+> - Programación básica:
+>   - [[Programación basica/Tema 12/Colecciones#12. Pilas y colas|Colecciones → 12. Pilas y colas (Queue, ArrayDeque)]]
+>   - [[Programación basica/Tema 11/Genéricos#2. Clases genéricas|Genéricos → 2. Clases genéricas (`BufferMonitor<T>`)]]
+>   - [[Programación basica/Tema 5/Programación orientada a objetos#19. Encapsulamiento|POO → 19. Encapsulamiento (atributos privados)]]
+>   - [[Programación basica/Tema 5/Programación orientada a objetos#18. Invariante de una clase|POO → 18. Invariante de una clase]]
+
+---
+
+## A.7 · Comunicación entre procesos
+
+> [!warning] Apartado sin nota propia en el vault
+> Este contenido se ha reconstruido a partir del **Cuestionario 1‑7** (comunicación) y del apartado `3` de [[1.2 - Computacion concurrente]]. Es materia evaluable: repásalo aunque no tenga apartado en el índice.
+
+**Componentes básicos de la comunicación**: emisor · receptor · **mensaje** · **canal** (soporte físico o lógico: red, cable, región de memoria).
+
+**Clasificación del canal según su capacidad:**
+
+| Tipo | Dirección | Analogía | Ejemplo |
+| --- | --- | --- | --- |
+| **Símplex** | Unidireccional | Radiodifusión, cine | Solo uno envía |
+| **Half duplex** | Bidireccional pero **alternante** | Walkie‑talkie, carril único bidireccional | Los extremos se turnan |
+| **Full duplex** | Bidireccional y **simultánea** | Teléfono, avenida de doble carril | Ambos a la vez |
+
+| Modalidad | Comportamiento |
+| --- | --- |
+| **Síncrona** | El emisor **se bloquea** esperando que el receptor reciba/confirme (*handshake*) |
+| **Asíncrona** | El emisor **continúa** sin esperar; el mensaje queda en un **buffer** |
+
+| Modelo | Roles |
+| --- | --- |
+| **Simétrico** | Todos los procesos tienen el **mismo rol**: cualquiera puede ser emisor o receptor (p. ej. red **P2P**) |
+| **Asimétrico** | Roles diferenciados de **cliente** y **servidor** |
+
+**Memoria compartida vs. paso de mensajes:**
+
+| | Memoria compartida | Paso de mensajes |
+| --- | --- | --- |
+| Paradigma | Multihilo en el mismo proceso, datos en un espacio común | Nodos sin memoria común |
+| Sincronización | **Explícita** (mutex, cerrojos) para evitar condiciones de carrera | Implícita en el envío/recepción de mensajes |
+| Latencia | Muy baja (acceso directo) | **Mayor** (red + **serialización**) |
+| Alcance | Solo máquinas locales | **Permite máquinas distribuidas** |
+
+> [!tip] Diseño mixto típico
+> **Memoria compartida** para hilos internos (alto rendimiento y baja latencia) + **paso de mensajes** para la comunicación entre servidores (supera la ausencia de memoria física común).
+
+**Otras vías de comunicación entre procesos**: *tuberías* (pipes), **sockets**, memoria compartida, JNI, semáforos.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[Cuestionario 1-7]] · [[1.2 - Computacion concurrente]] · [[2.3 - Flujos de comunicación]]
+> - Programación básica:
+>   - [[Programación basica/Tema 2/2.2 Lectura por teclado#1. La clase System|2.2 → 1. La clase System (System.in / System.out)]]
+>   - [[Programación basica/Tema 2/2.2 Lectura por teclado#3. Buffer de datos|2.2 → 3. Buffer de datos]]
+
+---
+
+## A.8 · Corrección en los programas concurrentes
+
+Dos categorías de propiedades:
+
+| Categoría | Especifican… | Ejemplos |
+| --- | --- | --- |
+| **Seguridad** | "**Lo que NO debe ocurrir**" (evitar estados incorrectos) | Exclusión mutua, condición de sincronización, **deadlock** |
+| **Viveza** | "**Lo que DEBE ocurrir**" (el programa progresa y termina) | Livelock, inanición, inversión de prioridad |
+
+> [!note] Las propiedades de viveza dependen mucho de la **política de planificación**.
+
+### Mecanismos de exclusión mutua
+
+| Mecanismo | Definición |
+| --- | --- |
+| **Mutex** | Objeto de sincronización **binario** (bloqueado/desbloqueado); un solo hilo accede al recurso |
+| **Semáforo** | Variable entera **no negativa**. **Binario** ≈ mutex; **general/contador** permite un número limitado de accesos simultáneos. Operaciones atómicas `acquire`/`wait`/`P` (decrementa, bloquea si es 0) y `release`/`signal`/`V` (incrementa) |
+| **Monitor** | Abstracción de alto nivel: exclusión mutua implícita + sincronización condicional (`wait`/`notify`) |
+
+### Deadlock (interbloqueo pasivo)
+
+> [!definition] Deadlock
+> Dos o más procesos quedan **bloqueados indefinidamente**, esperando mutuamente a que otro libere un recurso.
+
+**Espera circular** (ejemplo clásico): tarea 1 tiene A y espera B; tarea 2 tiene B y espera A → ninguna avanza.
+
+**Las 4 condiciones de Coffman** (deben darse **simultáneamente**):
+
+| # | Condición | Significado |
+| --- | --- | --- |
+| 1 | **Exclusión mutua** | Al menos un recurso es de acceso exclusivo |
+| 2 | **Retención y espera** (*hold and wait*) | Un proceso retiene recursos mientras espera otros |
+| 3 | **No apropiación** (*no preemption*) | El SO **no puede** arrebatar un recurso; solo lo libera su dueño |
+| 4 | **Espera circular** | Cadena circular de procesos esperando recursos ajenos |
+
+**Prevención** (romper alguna condición):
+
+- **Orden jerárquico** de adquisición de recursos → evita la espera circular (la más habitual).
+- **Tiempo máximo de espera**; si no lo consigue, **libera todo** y reintenta → rompe "retención y espera".
+- Detección con **grafos de asignación** y recuperación por **rollback/reinicio**.
+
+### Livelock (interbloqueo activo)
+
+Los procesos **siguen ejecutándose y cambiando de estado**, pero **no progresan** (bucle de reintentos). A diferencia del deadlock, **no están suspendidos**.
+
+> [!warning] Más difícil de detectar
+> No hay un estado de bloqueo observable, solo un patrón repetitivo. Se evita con un diseño cuidadoso (sin *espera activa* ni reintentos continuos).
+
+### Inanición (starvation)
+
+Un proceso **nunca o rara vez** accede al recurso porque el planificador favorece sistemáticamente a otros. Se evita con **fairness** (justicia): tener en cuenta la **antigüedad de la petición**. Ejemplo: planificación solo por prioridades estáticas → los de baja prioridad sufren inanición.
+
+### Inversión de prioridad
+
+Una tarea de **baja prioridad** retiene un recurso que necesita una de **alta prioridad**, y una de **media** prioridad se cuela. Con A(alta) esperando el recurso de C(baja), y B(media) lista, el planificador ejecuta B → A queda indirectamente bloqueada por B.
+
+**Solución**: **herencia de prioridad** → C hereda temporalmente la prioridad de A, termina de usar el recurso y lo libera cuanto antes; después recupera su prioridad original. **Crítico en sistemas de tiempo real**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[1.8 - Corrección en los programas concurrentes]] · [[Cuestionario 1-8]]
+> - Programación básica:
+>   - [[Programación basica/Tema 6/Excepciones#10. Finally|Excepciones → 10. Finally]]
+>   - [[Programación basica/Tema 6/Excepciones#8. Orden de los catch|Excepciones → 8. Orden de los catch]]
+>   - [[Programación basica/Tema 5/Programación orientada a objetos#18. Invariante de una clase|POO → 18. Invariante de una clase]]
+
+---
+
+
+# Tema 2 — Gestión de procesos desde Java
+
+> [!note] Estilo de código del curso
+> Seguimos el estilo de [[Programación basica/Indice|Programación básica]]: paquetes `temaN_Nombre`, clase con método `show()` y `main` que invoca `new Clase().show()`, `Scanner` para teclado, `System.out.printf`, `System.err` para errores y `try`/`catch`/`throws` para el control de excepciones. En el Tema 2, para los flujos del subproceso, los apuntes de PSyP usan además `BufferedReader`/`PrintWriter` y `try-with-resources`.
+
+## B.1 · Compilación, ejecución y empaquetado
+
+```sh
+javac Programa.java      # .java  -> .class (bytecode)
+java Programa            # ejecutar la clase (SIN extensión .class)
+java Main.java           # desde Java 11: ejecutar fuente directamente
+java -cp "Lib/*" Main.java   # Java 22: modo multifichero
+```
+
+**JAR ejecutable** → el manifiesto `META-INF/MANIFEST.MF` debe contener (con salto de línea final):
+
+```text
+Main-Class: NombreClaseMain
+```
+
+```sh
+jar cfm programa.jar META-INF/MANIFEST.MF *.class
+java -jar programa.jar
+jar tf programa.jar      # listar contenido
+```
+
+> [!tip] `jar cfm`
+> `c` = crear · `f` = nombre del fichero · `m` = manifiesto.
+
+**Argumentos de línea de comandos**: llegan como `String[] args` al `main`. `args[0]` es el primero, `args.length` cuenta. Hay que **validar cantidad y formato** (p. ej. `Integer.parseInt` gestionando `NumberFormatException`).
+
+**Redirección de los flujos estándar** (desde la shell):
+
+```sh
+java MiClase < entrada.txt       # System.in  se lee del fichero
+java MiClase > salida.txt        # System.out se escribe (sobrescribe)
+java MiClase >> salida.txt       # System.out se añade al final
+java MiClase 2> errores.txt      # System.err se redirige
+java Programa1 | java Programa2  # tubería: stdout de uno -> stdin del otro
+```
+
+> [!warning] Tuberías y bloqueos
+> Si una tubería se llena, el **escritor se bloquea** hasta que el lector consuma. Si no hay datos, el **lector espera**. `System.err` **no** se canaliza por defecto.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[2.1 - Instalación y configuracion de java]]
+> - Programación básica:
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#2. Bytecode, JVM, JRE, JDK|1.1 → 2. Bytecode, JVM, JRE, JDK]]
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#4. Versiones de Java|1.1 → 4. Versiones de Java]]
+>   - [[Programación basica/Tema 1/1.1 · Introducción al lenguaje Java#5. Entornos de desarrollo integrado (IDE): Eclipse|1.1 → 5. IDEs (compilación y JAR)]]
+>   - [[Programación basica/Tema 4/4.1 Arrays unidimensionales#14. Argumentos variables|4.1 → 14. Argumentos variables (varargs, `args`)]]
+
+---
+
+## B.2 · Gestión de subprocesos
+
+**Proceso, PID y código de salida**: el SO asigna un **PID**; al finalizar, el proceso devuelve un **código de salida** (`0` = éxito, distinto de `0` = error). `System.exit(status)` termina la JVM.
+
+### Variables de entorno vs. propiedades del sistema
+
+| | Variables de entorno | Propiedades del sistema |
+| --- | --- | --- |
+| Pertenecen a | El **SO** | La **JVM** |
+| Se leen con | `System.getenv("PATH")` (o `System.getenv()` → mapa **solo lectura**) | `System.getProperty("os.name")` |
+| Se definen con | El entorno del SO | `-Dnombre=valor` en la línea de comandos |
+
+Propiedades útiles: `java.version` · `os.name` / `os.version` · `user.home` / `user.dir` · `file.separator` / `line.separator` · **`java.home`** / **`java.class.path`**.
+
+### Órdenes y shell
+
+Un **ejecutable independiente** se lanza directamente (`ls`, `java`, `python`). Se necesita **shell** para órdenes internas o sintaxis del shell:
+
+- Windows: `cmd.exe /c dir` (`dir` es interna de `cmd.exe`).
+- Linux/macOS: `sh -c "..."` para tuberías, redirecciones, comodines, `cd`.
+
+`start` (Windows) abre la aplicación **desvinculada**: Java no captura sus flujos ni la termina.
+
+### `Runtime.exec` vs. `ProcessBuilder`
+
+```java
+// Runtime: forma de array recomendada (exec(String) está obsoleta desde Java 18)
+Process p = Runtime.getRuntime().exec(new String[]{"ls", "-l"});
+```
+
+> [!warning] `Runtime.exec`
+> **No** interpreta sintaxis de shell: si necesitas tuberías o redirecciones, lanza **explícitamente** un intérprete. El objeto `Runtime` es único (`getRuntime()`).
+
+```java
+// ProcessBuilder: API recomendada. Cada token es un argumento independiente.
+ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "dir", "/o");
+pb.directory(new File("/tmp"));                       // directorio de trabajo
+pb.environment().put("DEBUG_MODE", "TRUE");           // variables de entorno del hijo
+Process p = pb.start();                               // nuevo proceso en cada start()
+```
+
+| Aspecto | Detalle |
+| --- | --- |
+| Un argumento **con espacios** | Va como **un solo elemento** del array/lista: `new ProcessBuilder("java", "-jar", "mi programa.jar")` |
+| `start()` | Crea un proceso **nuevo** cada vez; `Process` **no** se puede reiniciar |
+| Configurar **antes** de `start()` | `command()`, `environment()`, `directory(File)`, `redirect*` |
+| Entorno heredado | `environment()` empieza como **copia** del entorno del padre |
+| Lanzar otro Java portable | `java.home` + `java.class.path` + `Clase.class.getName()` |
+
+### Abrir aplicaciones con `Desktop`
+
+`java.awt.Desktop` abre ficheros, URLs o el correo predeterminado. **No** da control sobre un `Process` (no lee su salida ni gestiona su ciclo de vida).
+
+```java
+if (Desktop.isDesktopSupported()) {
+    Desktop.getDesktop().browse(new URI("https://example.com"));
+}
+// Acciones: open(File), edit(File), print(File), browse(URI), mail()
+```
+
+> [!warning] Límite
+> `Desktop` puede **no estar disponible** en entornos *headless*.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[2.2 - Gestión de subprocesos]]
+> - Programación básica:
+>   - [[Programación basica/Tema 6/Excepciones#2. Try-catch|Excepciones → 2. Try-catch]]
+>   - [[Programación basica/Tema 6/Excepciones#6. Tipos de excepciones|Excepciones → 6. Tipos (IOException es *checked*)]]
+>   - [[Programación basica/Tema 6/Excepciones#7. Throws|Excepciones → 7. Throws (`throws IOException`)]]
+>   - [[Programación basica/Tema 1/1.4 Cadenas#5. Métodos de la clase String|1.4 → 5. Métodos de String (`toLowerCase`, `contains`)]]
+
+---
+
+## B.3 · Flujos de comunicación entre procesos
+
+Al iniciar un subproceso, sus flujos estándar se conectan por defecto a **tuberías** con el padre:
+
+| Flujo del **hijo** | Método en `Process` (padre) | Dirección |
+| --- | --- | --- |
+| `stdin` | **`getOutputStream()`** | Padre → hijo (**escribir**) |
+| `stdout` | **`getInputStream()`** | Hijo → padre (**leer**) |
+| `stderr` | **`getErrorStream()`** | Hijo → padre (leer) |
+
+> [!warning] No confundir los flujos (pregunta clásica)
+> Los nombres se leen **desde la perspectiva del padre**: `getOutputStream()` sirve para **escribir en la entrada** del hijo; `getInputStream()` para **leer su salida**.
+
+```java
+Process proceso = new ProcessBuilder("programa").start();
+
+// Escribir en la entrada del hijo
+try (BufferedWriter entrada = new BufferedWriter(
+        new OutputStreamWriter(proceso.getOutputStream(), StandardCharsets.UTF_8))) {
+    entrada.write("datos para el hijo");
+    entrada.newLine();
+}
+
+// Leer la salida del hijo
+try (BufferedReader salida = new BufferedReader(
+        new InputStreamReader(proceso.getInputStream(), StandardCharsets.UTF_8))) {
+    String linea;
+    while ((linea = salida.readLine()) != null) {
+        System.out.println(linea);
+    }
+}
+```
+
+> [!danger] Evitar interbloqueos por tuberías
+> Si el hijo **llena** `stdout` o `stderr` y el padre **no lee**, el hijo se bloquea. Si el padre hace `waitFor()` sin consumir las salidas, **ambos** pueden quedar bloqueados. Solución: **leer ambos flujos concurrentemente**, combinarlos o redirigirlos.
+
+**Codificación**: los flujos transportan **bytes**; padre e hijo deben usar un **charset compatible** (`StandardCharsets.UTF_8`).
+
+**Redirección con `ProcessBuilder`** (antes de `start()`):
+
+| Opción | Efecto |
+| --- | --- |
+| `PIPE` | Tubería hacia/desde el padre (**por defecto**) |
+| `INHERIT` | Comparte el flujo correspondiente del padre |
+| `DISCARD` | Descarta la salida |
+| `from(file)` / `to(file)` / `appendTo(file)` | Lee de un fichero / escribe / añade al final |
+
+- `inheritIO()` → hereda entrada, salida y error.
+- `redirectErrorStream(true)` → **combina `stderr` con `stdout`**; el flujo combinado se lee con `getInputStream()`.
+
+```java
+Process proceso = new ProcessBuilder("ls", "-la")
+        .redirectOutput(new File("salida.txt"))
+        .redirectError(ProcessBuilder.Redirect.INHERIT)
+        .start();
+```
+
+**Pipelines** (Java 9+): `ProcessBuilder.startPipeline(List<ProcessBuilder>)` conecta la salida estándar de cada proceso con la entrada del siguiente y devuelve la lista de `Process` en orden.
+
+**Otras alternativas**: sockets, memoria compartida, tuberías, semáforos (bibliotecas específicas) y JNI.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[2.3 - Flujos de comunicación]]
+> - Programación básica:
+>   - [[Programación basica/Tema 2/2.2 Lectura por teclado#2. La clase Scanner|2.2 → 2. La clase Scanner]]
+>   - [[Programación basica/Tema 2/2.1 Escritura en pantalla#2. El método printf|2.1 → 2. El método printf]]
+>   - [[Programación basica/Tema 1/1.4 Cadenas#3. Formatos de codificación de caracteres|1.4 → 3. Formatos de codificación (charset)]]
+>   - [[Programación basica/Tema 6/Excepciones#10. Finally|Excepciones → 10. Finally (try-with-resources)]]
+
+---
+
+## B.4 · Finalización de subprocesos
+
+| Método | Qué hace |
+| --- | --- |
+| `waitFor()` | **Bloquea** el hilo llamador hasta que el proceso termina y **devuelve el código de salida** |
+| `waitFor(timeout, unit)` | Espera **hasta el límite**; devuelve `true` si terminó, `false` si sigue activo |
+| `isAlive()` | Indica si sigue ejecutándose (consulta **sin bloquear**) |
+| `exitValue()` | Código de salida; si aún vive lanza **`IllegalThreadStateException`** |
+| `onExit()` | Devuelve un `CompletableFuture<Process>` que se completa al terminar (asíncrono) |
+| `destroy()` | Solicita la terminación |
+| `destroyForcibly()` | Fuerza la terminación |
+| `supportsNormalTermination()` | Indica si `destroy()` puede pedir un cierre normal (Java 9+) |
+
+```java
+if (proceso.waitFor(3, TimeUnit.SECONDS)) {
+    int codigo = proceso.exitValue();
+} else {
+    // Sigue activo al vencer el plazo.
+}
+```
+
+> [!tip] Patrón de terminación escalonada
+> 1. `destroy()` → 2. `waitFor(timeout, unit)` → 3. si sigue vivo, `destroyForcibly()`.
+
+> [!warning] Datos que caen en el test
+> - Los subprocesos **siguen ejecutándose** aunque termine la JVM que los lanzó (**no** hay terminación en cascada).
+> - **Cancelar** el future de `onExit()` **no** termina el proceso.
+> - Sondear `isAlive()` en bucle es **espera activa** y es menos eficiente que `waitFor(timeout, unit)`.
+> - Si se interrumpe la espera: `Thread.currentThread().interrupt()` y aplicar la política de limpieza.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[2.4 - Finalización de subprocesos]]
+> - Programación básica:
+>   - [[Programación basica/Tema 6/Excepciones#2. Try-catch|Excepciones → 2. Try-catch (InterruptedException)]]
+>   - [[Programación basica/Tema 6/Excepciones#10. Finally|Excepciones → 10. Finally]]
+
+---
+
+## B.5 · Información sobre procesos
+
+**`Process`** (un proceso lanzado por la aplicación): `pid()` · `info()` · `isAlive()` · `exitValue()` · `children()` · `descendants()` · `toHandle()` (Java 9+).
+
+**`ProcessHandle`** (cualquier proceso del sistema):
+
+| Método | Qué devuelve |
+| --- | --- |
+| `ProcessHandle.current()` | El proceso actual |
+| `ProcessHandle.of(pid)` | `Optional<ProcessHandle>` del proceso con ese PID |
+| `ProcessHandle.allProcesses()` | Flujo de procesos **visibles** para la aplicación |
+| `pid()` · `info()` · `isAlive()` · `parent()` · `children()` · `descendants()` | Datos y jerarquía |
+| `onExit()` / operaciones de terminación | Ciclo de vida |
+
+**`ProcessHandle.Info`** (todo **`Optional`**, depende de SO/permisos): `arguments()` · `command()` · `commandLine()` · `startInstant()` · `totalCpuDuration()` · `user()`.
+
+> [!warning] Limitaciones
+> **No todos** los sistemas exponen todos los datos: comprueba cada `Optional` (`orElse`, `ifPresent`). Las consultas están sujetas a **permisos**.
+
+> [!example]- 🔗 Fuente
+> - PSyP: [[2.5 - Información sobre procesos]]
+> - Programación básica:
+>   - [[Programación basica/Tema 13/Programación funcional#12. Optional|Funcional → 12. Optional]]
+>   - [[Programación basica/Tema 13/Programación funcional#12.3 Procesamiento|Funcional → 12.3 Procesamiento (`orElse`, `ifPresent`)]]
+
+---
+
+
+---
+
+# Chuleta final — resumen para memorizar
+
+## Tablas imprescindibles
+
+| Concepto | Fórmula para recordar |
+| --- | --- |
+| Programa vs. proceso | **Estático** vs. **dinámico** |
+| Paralelismo vs. multiprogramación | Real (≥2 núcleos) vs. turnos (no acelera) |
+| Cambio de contexto | Guardar saliente + restaurar entrante; **sobrecarga** |
+| Scheduler vs. dispatcher | **Decide** vs. **materializa** el cambio |
+| `ps aux` | `a` todos · `u` propietario · `x` sin terminal (demonios) |
+| `kill` vs. `kill -9` | SIGTERM (controlada) vs. SIGKILL (incondicional) |
+| `nice` | **-20 mayor** … **19 menor** prioridad |
+| `tasklist` / `taskkill` | Listar / terminar (`/F` fuerza) |
+
+| Orden de ejecución | Secuencial: **total** | Concurrente: **parcial** |
+| --- | --- | --- |
+
+| Bernstein | 1: L∩E entrada · 2: E∩L salida · 3: E∩E flujo de datos |
+| --- | --- |
+
+| Data race | misma variable + ≥1 escribe + sin sincronizar |
+| --- | --- |
+
+| Propiedades | **Seguridad** = lo que NO debe ocurrir | **Viveza** = lo que DEBE ocurrir |
+| --- | --- | --- |
+
+| Coffman (4) | Exclusión mutua · Retención y espera · No apropiación · Espera circular |
+| --- | --- |
+
+| Flujos desde el padre | `getOutputStream()` → **escribo en el hijo** · `getInputStream()` → **leo del hijo** |
+| --- | --- |
+
+| Java portable para lanzar Java | `java.home` + `java.class.path` + `Clase.class.getName()` |
+| --- | --- |
+
+## API del Tema 2
+
+```text
+javac F.java            .java -> .class
+java F                  ejecutar (sin .class)
+java -jar F.jar         ejecutar JAR (requiere Main-Class en el manifiesto)
+jar cfm f.jar META-INF/MANIFEST.MF *.class
+
+Runtime.getRuntime().exec(new String[]{...})       lanzar (obsoleto exec(String))
+new ProcessBuilder(tokens...).start()              lanzar (recomendado)
+pb.directory(File) / pb.environment().put(k,v)     configurar ANTES de start()
+pb.redirectOutput / redirectError / redirectInput  PIPE | INHERIT | DISCARD | file
+String.join(" ", command)                          unir tokens para mostrar
+
+p.getOutputStream()   escribir en el stdin del hijo
+p.getInputStream()    leer el stdout del hijo
+p.getErrorStream()    leer el stderr del hijo
+p.waitFor()           bloquear y devolver código de salida
+p.waitFor(t, unit)    true si terminó / false si sigue vivo
+p.isAlive()           consultar estado sin bloquear
+p.exitValue()         código de salida (lanza IllegalThreadStateException si vivo)
+p.onExit()            CompletableFuture<Process>
+p.pid() / p.info()    PID / ProcessHandle.Info
+p.destroy() / destroyForcibly()   terminación
+
+ProcessHandle.current() / of(pid) / allProcesses()
+ProcessHandle.Info: arguments, command, commandLine, startInstant, totalCpuDuration, user
+```
+
+## Plantilla de programa Java del curso
+
+```java
+package temaN_Nombre;
+
+public class NombreClase {
+
+    public void show() {
+        // lógica
+    }
+
+    public static void main(String[] args) {
+        new NombreClase().show();
+    }
+}
+```
+
+## Checklist la noche antes
+
+- [ ] Diferenciar programa / aplicación / ejecutable / proceso / demonio
+- [ ] Concurrencia vs. paralelismo vs. multiprogramación, y cambio de contexto
+- [ ] SMP vs. AMP vs. distribuido (memoria compartida vs. mensajes)
+- [ ] Los 4 segmentos del espacio de direcciones y los campos del PCB
+- [ ] Los 6 estados y las 7 transiciones con su causa
+- [ ] Scheduler (decide) vs. dispatcher (materializa) y los 5 algoritmos
+- [ ] Comandos: `ps aux`, `pstree`, `kill`/`kill -9`/`killall`, `nice`/`renice`, `tasklist`/`taskkill`
+- [ ] Concurrente / paralela / distribuida y los 3 tipos de interacción
+- [ ] Orden total vs. parcial; race condition vs. data race (3 condiciones)
+- [ ] Los 2 tipos de sincronización; teorema de Bernstein (3 condiciones)
+- [ ] LOAD/ADD/STORE → por qué x=1; sección crítica, exclusión mutua, mutex, lock contention
+- [ ] JMM: problema de visibilidad y solución (`volatile`, `synchronized`)
+- [ ] Condición de sincronización y productor-consumidor (por qué deadlock)
+- [ ] Monitor: exclusión mutua + sincronización condicional (`wait`/`notify`/`notifyAll`)
+- [ ] Canal: símplex / half duplex / full duplex; síncrona vs. asíncrona; simétrico vs. asimétrico
+- [ ] Memoria compartida vs. paso de mensajes (latencia, serialización, sincronización)
+- [ ] Propiedades de seguridad vs. viveza
+- [ ] Coffman (4) y prevención por orden jerárquico; livelock, starvation, inversión de prioridad
+- [ ] `javac`/`java`/`jar`, manifiesto `Main-Class`, args, redirecciones `< > >> 2> |`
+- [ ] `System.getenv` vs. `System.getProperty`; `java.home` y `java.class.path`
+- [ ] `Runtime.exec` vs. `ProcessBuilder`; configurar antes de `start()`
+- [ ] Los 3 flujos del `Process` desde la perspectiva del padre
+- [ ] `redirectErrorStream`, `INHERIT`, `PIPE`, `DISCARD`, `startPipeline` (Java 9)
+- [ ] `waitFor` / `waitFor(timeout)` / `isAlive` / `exitValue` / `onExit` / `destroy` / `destroyForcibly`
+- [ ] Por qué `waitFor()` sin drenar flujos produce interbloqueo
+- [ ] `ProcessHandle` e `Info` (todo `Optional`, depende de permisos)
+
+> [!tip] Repaso cruzado
+> - Preguntas cortas del tema 1: [[1.R - Preguntas del Tema 1]] · [[1.R2 - Preguntas del Tema 1 (II)]]
+> - Cuestionarios completos: [[Cuestionario 1-1]] · [[Cuestionario 1-8]]
+> - Ejercicios prácticos: [[2.Repaso - Ejercicio filtro con subproceso]] · [[2.Repaso - Pipeline]] · [[2.Repaso - Variables de entorno]] · [[2.Repaso - Valor de salida]] · [[2.Repaso - Comunicación con subprocesos]] · [[2.Respaso - Listar archivos con Runtime]]
+
+
+---
+
+## Guía relacionada
+
+- 🧠 **Teoría y chuleta** → [[Guia examen temas 1 y 2|Guía de teoría: Temas 1 y 2]]
+- ✅ **Test de repaso** → [[Test de repaso temas 1 y 2]]
+- 💻 **Prácticos resueltos** → [[Practicos temas 1 y 2]]
+
+
+## Relaciones
+
+- [[DAM/Programacion_de_Servicios_y_Procesos/Indice|Índice de PSyP]]
+- [[Examen año pasado]] — enunciado completo del práctico de referencia
+- [[Programación basica/Indice|Programación básica]] — estilo de código y sintaxis Java del curso
+- [[1.6 - Sincronizacion]] · [[1.8 - Corrección en los programas concurrentes]] — los dos apartados con más peso teórico
+- [[2.3 - Flujos de comunicación]] · [[2.4 - Finalización de subprocesos]] — los de más peso práctico

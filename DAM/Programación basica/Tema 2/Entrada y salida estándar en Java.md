@@ -1,0 +1,1 @@
+En Java, la entrada y salida estándar permite leer datos introducidos por el usuario y mostrar información por pantalla. Es la forma más básica de comunicación entre el programa y el usuario.

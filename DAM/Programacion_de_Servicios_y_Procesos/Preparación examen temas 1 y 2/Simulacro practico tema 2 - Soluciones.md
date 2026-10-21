@@ -1,0 +1,421 @@
+---
+asignatura: PSyP
+tema: 2
+tipo: ejercicio
+estado: completo
+fecha: 2026-10-20
+tags:
+  - DAM/ejercicio
+  - DAM/psyp/subprocesos
+  - DAM/psyp/flujos
+---
+
+# Soluciones · Simulacro examen práctico Tema 2 (PSyP)
+
+> [!info] Asignatura
+> [[DAM/Programacion_de_Servicios_y_Procesos/Indice|Programación de Servicios y Procesos]] · Tema 2 · Soluciones de [[Simulacro practico tema 2]]
+
+> [!tip] Material de examen
+> - 📝 [[Simulacro practico tema 2|Simulacro]]
+> - ✅ [[Simulacro practico tema 2 - Soluciones|Soluciones]] ← **estás aquí**
+> - 🐣 [[Explicacion desde cero temas 1 y 2|Explicación desde cero]] · 🧠 [[Guia examen temas 1 y 2|Guía]]
+
+> [!note] Cómo corregirte
+> Ve hueco a hueco con las tablas de abajo. Cada **hueco en línea** vale **0,25** y cada **línea completa** vale **0,5**: sobre 12 puntos en total, y tu nota es `puntos / 12 × 10`. Si una línea completa tuya es distinta pero **compila y hace lo mismo**, cuéntala como buena. Luego lee los «Por qué» de lo que hayas fallado.
+> El código completo de abajo está **compilado y ejecutado**: produce exactamente la salida esperada del enunciado.
+
+## Índice
+
+- [[#Huecos en línea]]
+- [[#Líneas completas]]
+- [[#Por qué, método a método]]
+- [[#Respuestas a las preguntas de comprensión]]
+- [[#Código completo]]
+- [[#Errores típicos que restan puntos]]
+
+---
+
+## Huecos en línea
+
+24 huecos × 0,25 = **6 puntos**.
+
+| Nº | Método | Solución | Idea clave |
+| --- | --- | --- | --- |
+| 1 | `validateArgs` | `length` | `args` es un **array**: `length` va **sin paréntesis** |
+| 2 | `validateArgs` | `\|\|` | Vale si es uno **o** el otro |
+| 3 | `isVerbose` | `!=` | Primero, comprobar que existe |
+| 4 | `isVerbose` | `equals` | Las cadenas se comparan con `equals`, nunca con `==` |
+| 5 | `parseGrade` | `split` | Parte `"Ana;7.5"` en `["Ana", "7.5"]` |
+| 6 | `parseGrade` | `parseDouble` | Convierte `"7.5"` en el número `7.5` |
+| 7 | `parseGrade` | `NumberFormatException` | La que lanza `parseDouble("diez")` |
+| 8 | `processInput` | `in` | El hijo lee de su entrada estándar: `System.in` |
+| 9 | `processInput` | `err` | Los avisos van a la **salida de error** |
+| 10 | `processInput` | `continue` | Ignora la línea y pasa a la siguiente |
+| 11 | `processInput` | `current` | `ProcessHandle.current()` = el proceso actual |
+| 12 | `run` (hijo) | `1` | Código de error que pide el enunciado |
+| 13 | `buildCommand` | `java.home` | Carpeta donde está instalado Java |
+| 14 | `buildCommand` | `java.class.path` | Dónde están los `.class` |
+| 15 | `buildCommand` | `-cp` | Opción de `java` para indicar el classpath |
+| 16 | `configureMaxCalculator` | `directory` | Directorio de trabajo del hijo |
+| 17 | `configureMaxCalculator` | `redirectError` | Su stderr va al fichero |
+| 18 | `sendGrades` | `OutputStreamWriter` | Escribir = Output + Writer |
+| 19 | `sendGrades` | `getOutputStream` | Lo que **sale** del padre entra al hijo |
+| 20 | `readAllOutput` | `getInputStream` | Lo que **entra** al padre viene del hijo |
+| 21 | `waitWithTimeout` | `destroy` | Terminar el proceso que no acaba |
+| 22 | `waitWithTimeout` | `exitValue` | El código de salida, sin esperar (ya terminó) |
+| 23 | `run` (padre) | `start` | Arranca el proceso y devuelve el `Process` |
+| 24 | `run` (padre) | `pid` | El PID del hijo |
+
+## Líneas completas
+
+12 líneas × 0,5 = **6 puntos**.
+
+| Línea | Solución | Alternativa válida |
+| --- | --- | --- |
+| **L1** | `String value = System.getenv("VERBOSE");` | — |
+| **L2** | `while ((line = input.readLine()) != null)` | — |
+| **L3** | `verbose = isVerbose();` | `this.verbose = isVerbose();` |
+| **L4** | `System.exit(invalidFound ? 2 : 0);` | `if (invalidFound) { System.exit(2); } else { System.exit(0); }` (no cabe en una línea, pero vale) |
+| **L5** | `pb.redirectError(ProcessBuilder.Redirect.INHERIT);` | — |
+| **L6** | `pb.environment().put("VERBOSE", "TRUE");` | — |
+| **L7** | `writer.write(line);` | — |
+| **L8** | `writer.newLine();` | `writer.write("\n");` (funciona, pero `newLine()` es lo que se espera) |
+| **L9** | `while ((line = reader.readLine()) != null)` | — |
+| **L10** | `boolean finished = process.waitFor(TIMEOUT_SECONDS, TimeUnit.SECONDS);` | Poner `5` en vez de `TIMEOUT_SECONDS` también vale, aunque peor |
+| **L11** | `int averageExit = waitWithTimeout(average);` | — |
+| **L12** | `Thread.currentThread().interrupt();` | — |
+
+> [!warning] Las líneas que más se fallan
+> - **L2 y L9**: los **dos pares de paréntesis**. `(line = input.readLine())` asigna y el resultado se compara con `!= null`. Si escribes `while (line = input.readLine() != null)`, no compila: Java intenta meter un `boolean` en un `String`.
+> - **L6**: `environment()` lleva **paréntesis**, porque es un método que devuelve un `Map`, y sobre ese mapa se hace `put`.
+> - **L11**: hay que llamar al **método propio** `waitWithTimeout(average)`, no a `average.waitFor()`. El enunciado pide el timeout, y el método ya lo implementa.
+
+---
+
+## Por qué, método a método
+
+> [!note]- 🧠 `validateArgs`, `isVerbose` y `parseGrade` (huecos 1–7, L1)
+> - **`args.length`** (1): primero se comprueba cuántos argumentos hay. Si no hubiera ninguno, `args[0]` lanzaría `ArrayIndexOutOfBoundsException`.
+> - **`||`** (2): el modo es válido si es `average` **o** `max`.
+> - **L1** `System.getenv("VERBOSE")`: lee una **variable de entorno** (del SO), que es la que el padre puso con `environment().put`. No es `getProperty`, que lee propiedades de la JVM.
+> - **`!= null && equals`** (3, 4): `getenv` devuelve `null` si la variable no existe, y eso es lo que pasa en la calculadora `max`, a la que no se le puso. `&&` no evalúa la segunda parte si la primera es falsa, así que nunca se llama a `equals` sobre `null`.
+> - **`split(";")`** (5): `"Ana;7.5".split(";")` devuelve `["Ana", "7.5"]`. Si la línea no tiene `;`, el array tiene 1 elemento y `parts.length != 2` la descarta.
+> - **`Double.parseDouble`** (6) y **`NumberFormatException`** (7): convertir `"diez"` en número falla con esa excepción. Se captura y se devuelve `-1`, que es la "señal" de línea inválida.
+
+> [!note]- 🧠 `processInput` y `run` del hijo (huecos 8–12, L2–L4)
+> - **`System.in`** (8): en un subproceso, `System.in` ya no es el teclado, sino la **tubería** por la que escribe el padre.
+> - **L2**: el bucle de lectura estándar. `readLine()` devuelve `null` cuando el padre **cierra** su writer; entonces el bucle termina.
+> - **`System.err`** (9): los avisos de líneas inválidas van a la salida de **error**. Por eso, en la calculadora `max` acaban en `max_err.log` y en la `average` salen por la consola del padre.
+> - **`continue`** (10): salta el resto del cuerpo del bucle (no suma esa nota) y pasa a la siguiente línea. Se podría hacer con un `else`, pero `continue` deja el código más plano.
+> - **`ProcessHandle.current()`** (11): "yo mismo"; `.pid()` da el PID del propio hijo.
+> - **`System.exit(1)`** (12): código de error por modo inválido.
+> - **L3** `verbose = isVerbose();`: se guarda en el **atributo** para usarlo después en `processInput()`. Si escribieras `boolean verbose = isVerbose();`, crearías una variable **local** que tapa al atributo, y `processInput()` vería siempre `false`. Es un error típico.
+> - **L4** `System.exit(invalidFound ? 2 : 0);`: operador ternario, *condición ? si-verdad : si-falso*. El padre recibe ese número en `exitValue()`.
+
+> [!note]- 🧠 `buildCommand` y las configuraciones (huecos 13–17, L5–L6)
+> - **`java.home`** (13) + `bin` + `java`: la ruta al ejecutable `java` en cualquier sistema operativo. Es lo que el enunciado llama **portable**.
+> - **`java.class.path`** (14) + **`-cp`** (15): le dice a la JVM hija dónde están los `.class`, y así encuentra `GradeCalculator`.
+> - **L5** `redirectError(ProcessBuilder.Redirect.INHERIT)`: "la misma salida de error que el padre" = **heredar**.
+> - **L6** `environment().put("VERBOSE", "TRUE")`: el mapa de entorno del hijo empieza como copia del del padre, y se le añade la variable.
+> - **`directory`** (16): cambia la carpeta de trabajo del hijo.
+> - **`redirectError(File)`** (17): manda su stderr a un fichero. Fíjate en que la ruta del fichero (`new File(reports, ...)`) la resuelve el **padre**, no el hijo.
+> - Todo esto va **antes** de `start()`. Por eso estos métodos solo **configuran** y devuelven el `ProcessBuilder`.
+
+> [!note]- 🧠 `sendGrades` y `readAllOutput` (huecos 18–20, L7–L9)
+> - **`OutputStreamWriter`** (18) + **`getOutputStream`** (19): para **escribir** al hijo, todo lleva *Output/Writer*. Leer lleva *Input/Reader*; nunca se mezclan.
+> - **L7 + L8** `write(line)` + `newLine()`: sin el salto de línea, el `readLine()` del hijo no sabe dónde acaba cada línea.
+> - El **`try (...)`** cierra el writer al salir: es el "**cerrar la comunicación**" del enunciado.
+> - **`getInputStream`** (20): para **leer** la salida estándar del hijo.
+> - **L9**: el mismo bucle que L2, ahora en el padre, guardando cada línea en la lista. Esta vez se leen **todas** las líneas (`Students` y `Result`), no solo una como en el examen del año pasado.
+
+> [!note]- 🧠 `waitWithTimeout` y `run` del padre (huecos 21–24, L10–L12)
+> - **L10** `waitFor(TIMEOUT_SECONDS, TimeUnit.SECONDS)`: espera **como mucho** 5 segundos y devuelve un `boolean`: `true` si el hijo terminó y `false` si sigue vivo. No devuelve el código de salida, a diferencia de `waitFor()` sin argumentos.
+> - **`destroy()`** (21): si no terminó a tiempo, se le pide que acabe y se devuelve `-1`.
+> - **`exitValue()`** (22): ahora es seguro llamarlo, porque sabemos que ya terminó. Si se llamara con el hijo vivo, lanzaría `IllegalThreadStateException`.
+> - **`start()`** (23) y **`pid()`** (24): arrancar el proceso y mostrar su PID.
+> - **L11**: se usa el **método propio** `waitWithTimeout`, así el padre se beneficia del timeout.
+> - **L12** `Thread.currentThread().interrupt();`: al capturar `InterruptedException`, Java "borra" la marca de interrupción. Esta línea la vuelve a poner para que no se pierda. Es la práctica recomendada en los apuntes.
+> - **El orden** de `run()` sigue el ciclo de siempre: configurar → `start` → enviar y **cerrar** → leer → esperar.
+
+---
+
+## Respuestas a las preguntas de comprensión
+
+> [!success]- 1. ¿Por qué solo aparecen mensajes `[PID: ...]` de uno de los dos procesos?
+> Porque solo la calculadora `average` tiene `VERBOSE=TRUE`: el padre se la pone con `environment().put` en L6, y la de `max` no la tiene. Además, aunque la tuviera, sus mensajes irían a `max_err.log` y no a la consola, porque su stderr está redirigido a ese fichero.
+
+> [!success]- 2. ¿Qué pasaría si no cerraras nunca el writer en `sendGrades`?
+> El hijo se quedaría para siempre en `readLine()` esperando más líneas: nunca recibe el `null`, nunca sale del bucle y nunca escribe `Students`/`Result`. El padre, mientras tanto, se queda en `readAllOutput` esperando una salida que no llega. Es un **interbloqueo** entre padre e hijo. Con el timeout, el padre solo se salvaría si llegara a `waitWithTimeout`, pero ni siquiera llega, porque se bloquea antes, al leer.
+
+> [!success]- 3. ¿Por qué comparar con `null` antes de `equals`?
+> Porque `System.getenv` devuelve `null` si la variable no existe. `value.equals("TRUE")` con `value == null` lanza un `NullPointerException`. El `&&` evalúa de izquierda a derecha y se detiene si la primera parte es falsa (evaluación en cortocircuito).
+> Alternativa que también vale: `"TRUE".equals(value)`, que nunca falla con `null`.
+
+> [!success]- 4. ¿Por qué `waitFor(timeout)` + `exitValue()` en vez de `waitFor()`?
+> `waitFor()` esperaría **para siempre** si el hijo se cuelga. `waitFor(5, SECONDS)` pone un **límite** y dice si terminó. Como esa versión devuelve un `boolean`, el código de salida se obtiene aparte con `exitValue()`, que solo es seguro llamar cuando ya sabemos que terminó.
+
+---
+
+## Código completo
+
+### `GradeCalculator.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
+public class GradeCalculator {
+
+    private String mode;              // "average" o "max"
+    private boolean verbose;          // true si VERBOSE vale TRUE
+    private int students;             // nº de líneas válidas procesadas
+    private double sum;               // suma de notas (para la media)
+    private double max;               // nota máxima encontrada
+    private boolean invalidFound;     // true si alguna línea era inválida
+
+    // Devuelve true si llega exactamente un argumento y es "average" o "max"
+    public boolean validateArgs(String[] args) {
+        if (args.length != 1) {
+            return false;
+        }
+        return args[0].equals("average") || args[0].equals("max");
+    }
+
+    // Devuelve true si la variable de entorno VERBOSE existe y vale TRUE
+    public boolean isVerbose() {
+        String value = System.getenv("VERBOSE");
+        return value != null && value.equals("TRUE");
+    }
+
+    // Extrae la nota de una línea "nombre;nota". Devuelve -1 si la línea no es válida
+    public double parseGrade(String line) {
+        String[] parts = line.split(";");
+        if (parts.length != 2) {
+            return -1;
+        }
+        try {
+            double grade = Double.parseDouble(parts[1].trim());
+            if (grade < 0 || grade > 10) {
+                return -1;
+            }
+            return grade;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    // Lee líneas de la entrada estándar hasta que el padre cierre la tubería
+    public void processInput() throws IOException {
+        BufferedReader input = new BufferedReader(
+                new InputStreamReader(System.in, StandardCharsets.UTF_8));
+        String line;
+        while ((line = input.readLine()) != null) {
+            double grade = parseGrade(line);
+            if (grade < 0) {
+                System.err.println("Invalid line: " + line);
+                invalidFound = true;
+                continue;
+            }
+            students++;
+            sum += grade;
+            if (grade > max) {
+                max = grade;
+            }
+            if (verbose) {
+                System.err.printf("[PID: %d] Processed: %s -> %.2f%n",
+                        ProcessHandle.current().pid(), line.split(";")[0], grade);
+            }
+        }
+    }
+
+    public void run(String[] args) {
+        if (!validateArgs(args)) {
+            System.err.println("Error: Invalid mode");
+            System.exit(1);
+        }
+        mode = args[0];
+        verbose = isVerbose();
+        try {
+            processInput();
+        } catch (IOException e) {
+            System.err.println("Read error: " + e.getMessage());
+            System.exit(1);
+        }
+        double result = mode.equals("average") ? (students > 0 ? sum / students : 0) : max;
+        System.out.println("Students: " + students);
+        System.out.printf("Result: %.2f%n", result);
+        System.exit(invalidFound ? 2 : 0);
+    }
+
+    public static void main(String[] args) {
+        new GradeCalculator().run(args);
+    }
+}
+```
+
+### `GradeManager.java`
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class GradeManager {
+
+    private static final int TIMEOUT_SECONDS = 5;
+
+    private final List<String> grades;
+
+    public GradeManager() {
+        // Notas a procesar ("nombre;nota"). "Luis;diez" es inválida a propósito
+        grades = List.of("Ana;7.5", "Pedro;4.25", "Luis;diez", "Marta;9", "Juan;6");
+    }
+
+    // Comando portable: <java.home>/bin/java -cp <classpath> GradeCalculator <mode>
+    public List<String> buildCommand(String mode) {
+        String javaPath = System.getProperty("java.home")
+                + File.separator + "bin" + File.separator + "java";
+        // Ruta absoluta: el hijo "max" cambia de directorio y un classpath relativo dejaría de valer
+        String classPath = new File(System.getProperty("java.class.path")).getAbsolutePath();
+
+        List<String> command = new ArrayList<>();
+        command.add(javaPath);
+        command.add("-cp");
+        command.add(classPath);
+        command.add("GradeCalculator");
+        command.add(mode);
+        return command;
+    }
+
+    // Calculadora de media: errores por la consola del padre y VERBOSE=TRUE
+    public ProcessBuilder configureAverageCalculator() {
+        ProcessBuilder pb = new ProcessBuilder(buildCommand("average"));
+        pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+        pb.environment().put("VERBOSE", "TRUE");
+        return pb;
+    }
+
+    // Calculadora de máximo: directorio ./reports y errores a reports/max_err.log
+    public ProcessBuilder configureMaxCalculator() {
+        ProcessBuilder pb = new ProcessBuilder(buildCommand("max"));
+        File reports = new File("./reports");
+        reports.mkdirs();                                  // si no existe, start() fallaría
+        pb.directory(reports);
+        pb.redirectError(new File(reports, "max_err.log"));
+        return pb;
+    }
+
+    // Envía cada nota como una línea y cierra la entrada del hijo
+    public void sendGrades(Process process, List<String> lines) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(process.getOutputStream(), StandardCharsets.UTF_8))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+    }
+
+    // Lee TODAS las líneas que el hijo escribe en su salida estándar
+    public List<String> readAllOutput(Process process) throws IOException {
+        List<String> output = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.add(line);
+            }
+        }
+        return output;
+    }
+
+    // Espera como mucho TIMEOUT_SECONDS. Si no termina, lo destruye y devuelve -1
+    public int waitWithTimeout(Process process) throws InterruptedException {
+        boolean finished = process.waitFor(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        if (!finished) {
+            process.destroy();
+            return -1;
+        }
+        return process.exitValue();
+    }
+
+    // Traduce el código de salida a un mensaje
+    public String describeExitCode(int code) {
+        if (code == 0) {
+            return "OK";
+        } else if (code == 2) {
+            return "OK con líneas inválidas";
+        } else if (code == -1) {
+            return "Tiempo agotado";
+        }
+        return "Error (código " + code + ")";
+    }
+
+    public void run() {
+        try {
+            Process average = configureAverageCalculator().start();
+            Process max = configureMaxCalculator().start();
+
+            System.out.println("PID average: " + average.pid());
+            System.out.println("PID max: " + max.pid());
+
+            sendGrades(average, grades);
+            sendGrades(max, grades);
+
+            List<String> averageOutput = readAllOutput(average);
+            List<String> maxOutput = readAllOutput(max);
+
+            int averageExit = waitWithTimeout(average);
+            int maxExit = waitWithTimeout(max);
+
+            System.out.println("Average calculator -> " + averageOutput
+                    + " · " + describeExitCode(averageExit));
+            System.out.println("Max calculator -> " + maxOutput
+                    + " · " + describeExitCode(maxExit));
+        } catch (IOException e) {
+            System.err.println("I/O error: " + e.getMessage());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Wait interrupted.");
+        }
+    }
+
+    public static void main(String[] args) {
+        new GradeManager().run();
+    }
+}
+```
+
+> [!tip] Cómo probarlo
+> En IntelliJ: pon las dos clases en `src/` (sin paquete) y ejecuta `GradeManager`. Desde la terminal, con un JDK instalado: `javac *.java && java GradeManager`, y después `cat reports/max_err.log`.
+
+---
+
+## Errores típicos que restan puntos
+
+- [ ] Confundir `getOutputStream()` (escribir al hijo) con `getInputStream()` (leer del hijo).
+- [ ] Olvidar `newLine()` o **no cerrar** el writer, lo que bloquea al hijo.
+- [ ] Escribir `args.length()` con paréntesis (es un array) o `line.length` sin paréntesis (es un `String`).
+- [ ] Comparar cadenas con `==` en vez de `equals`.
+- [ ] Usar `getProperty("VERBOSE")` en vez de `getenv("VERBOSE")`.
+- [ ] Poner `boolean verbose = ...` en `run()`: crea una variable local y el atributo se queda en `false`.
+- [ ] Creer que `waitFor(5, TimeUnit.SECONDS)` devuelve el código de salida: devuelve un `boolean`.
+- [ ] Llamar a `exitValue()` sin saber si el proceso ha terminado (lanza `IllegalThreadStateException`).
+- [ ] Configurar el `ProcessBuilder` **después** de `start()`.
+- [ ] Olvidar el `;` al final de las líneas completas.
+
+## Guía relacionada
+
+- 📝 **Volver al simulacro** → [[Simulacro practico tema 2]]
+- 🐣 **Recetario de funciones** → [[Explicacion desde cero temas 1 y 2#Parte 4 · Recetario de funciones típicas|Explicación desde cero → Parte 4]]
+- 🧠 **Teoría** → [[Guia examen temas 1 y 2#B.3 · Flujos de comunicación entre procesos|Guía → B.3 · Flujos]] · [[Guia examen temas 1 y 2#B.4 · Finalización de subprocesos|Guía → B.4 · Finalización]]
+- 📄 Fuentes: [[2.2 - Gestión de subprocesos]] · [[2.3 - Flujos de comunicación]] · [[2.4 - Finalización de subprocesos]] · [[2.5 - Información sobre procesos]]

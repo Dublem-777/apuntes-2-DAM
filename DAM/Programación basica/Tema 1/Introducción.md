@@ -1,0 +1,1 @@
+En este tema se introducen los conceptos básicos de Java para que el alumno pueda empezar a trabajar con el lenguaje.

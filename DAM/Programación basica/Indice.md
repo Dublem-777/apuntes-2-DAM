@@ -1,0 +1,30 @@
+# Programación básica — Índice
+
+## Programación
+
+1. [[Introducción]]
+   [[1.1 · Introducción al lenguaje Java]]
+   [[1.2 · Funciones]]
+   [[1.3 Iniciación a la Programación Orientada a Objetos]]
+   [[1.4 Cadenas]]
+2. [[Entrada y salida estándar en Java]]
+   [[2.2 Lectura por teclado]]
+   [[2.2 Lectura por teclado]]
+3. [[Programación estructurada]]
+   [[3.1 Sentencias condicionales]]
+   [[3.2 Bucles]]
+   [[3.3 Recursividad]]
+4. [[Arrays]]
+   [[4.1 Arrays unidimensionales]]
+   [[4.2 Arrays multidimensionales]]
+5. [[Programación orientada a objetos]]
+6. [[Excepciones]]
+7. [[Herencia]]
+8. [[Tipos enumerados]]
+9. [[Expresiones regulares]]
+10. [[Fechas]]
+11. [[Genéricos]]
+12. [[Colecciones]]
+13. [[Programación funcional]]
+14. [[Streams]]
+

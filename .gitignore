@@ -1,0 +1,56 @@
+# Lista blanca: por defecto se ignora todo lo de Core/ y solo se suben estas carpetas
+/*
+!/.gitignore
+!/README.md
+!/scripts/
+!/DAM/
+!/resources/
+
+# Repo propio (https://github.com/dmadmer501/WarrantyKeep)
+DAM/Proyecto/
+
+# Instrucciones para la IA y archivos del IDE / compilados
+**/CLAUDE.md
+**/.idea/
+**/out/
+**/logs/
+*.class
+*.iml
+__pycache__/
+
+# Libros y temario del profesor (copyright)
+DAM/Sistema_de_Gestion_Empresarial/Sistemas-de-Gestion-Empresarial-LIBRO.pdf
+DAM/Sistema_de_Gestion_Empresarial/Tema 2/UD2. ERP (Enterprise Resource Planning).pdf
+DAM/Inglés/Libro Ingles.pdf
+DAM/Inglés/Computing-and-Information-Technology.pdf
+
+# Datos personales (correos, DNIs, teléfonos)
+DAM/Inglés/Unit_2/2026-10-05 - Unit 2 - Email.md
+DAM/Sistema_de_Gestion_Empresarial/Practica/ListadoClientes_Zoho_Cuentas.csv
+DAM/Sistema_de_Gestion_Empresarial/Practica/1-1-b-ListadoClientes.xlsx
+
+# >>> resources usados (generado)
+resources/*
+!resources/Pasted image 20260925083856.png
+!resources/Pasted image 20260925084109.png
+!resources/Pasted image 20260925084527.png
+!resources/Pasted image 20260925085009.png
+!resources/Pasted image 20260925090054.png
+!resources/Pasted image 20260925091634.png
+!resources/Pasted image 20260925091709.png
+!resources/Pasted image 20260925092607.png
+!resources/Pasted image 20260925093059.png
+!resources/Pasted image 20260925093449.png
+!resources/Pasted image 20260925093518.png
+!resources/Pasted image 20260925093603.png
+!resources/WhatsApp Image 2026-10-02 at 10.52.41.jpeg
+!resources/distribuida.jpg
+!resources/estados_proceso.png
+!resources/gantt_concurrent.svg
+!resources/gantt_sequential.svg
+!resources/multiprocesamiento.png
+!resources/multiprogramacion_vs_paralelismo.jpg
+!resources/proceso_memoria.png
+!resources/process_control_blocks.gif
+!resources/process_queues.gif
+# <<< resources usados (generado)
