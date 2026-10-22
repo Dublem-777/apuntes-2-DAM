@@ -9,13 +9,15 @@ tags:
 # Programación de Servicios y Procesos — Índice
 
 > [!tip] Preparación de examen (Temas 1 y 2)
-> - 🐣 [[Explicacion desde cero temas 1 y 2|Explicación desde cero]] — empieza aquí: Tema 1 con analogías y palabras de los huecos, Tema 2 paso a paso y recetario para completar funciones.
-> - 📝 [[Simulacro practico tema 2]] — simulacro del práctico (1 h, 24 huecos + 12 líneas completas) · [[Simulacro practico tema 2 - Soluciones|soluciones]]
-> - 🧠 [[Guia examen temas 1 y 2|Teoría y chuleta]] — conceptos, tablas comparativas y resumen final.
-> - ✅ [[Test de repaso temas 1 y 2]] — 55 preguntas tipo test con solución razonada.
-> - ⏱️ [[Simulacros tipo test tema 1]] — 8 simulacros (174 preguntas de los cuestionarios Moodle, uno por apartado) con hoja de respuestas.
-> - 📝 [[Simulacro examen tema 1 (50 preguntas)]] — examen completo de 50 preguntas con opciones barajadas y patrones de respuesta detectados.
-> - 💻 [[Practicos temas 1 y 2]] — ejercicios resueltos y explicados (huecos de código).
+> - 🐣 [[1.1 Explicacion desde cero (T1-T2)|Explicación desde cero]] — empieza aquí: Tema 1 y Tema 2 con analogías y palabras de los huecos (test del jueves), Tema 2 paso a paso y recetario para completar funciones.
+> - 📝 [[3.2 Simulacro examen practico (T2)]] — simulacro del práctico (1 h, 24 huecos + 12 líneas completas) · [[3.3 Simulacro examen practico (T2) - Soluciones|soluciones]]
+> - 🧠 [[1.2 Guia y chuleta (T1-T2)|Teoría y chuleta]] — conceptos, tablas comparativas y resumen final.
+> - ✅ [[2.1 Repaso general - 55 preguntas (T1-T2)]] — 55 preguntas tipo test con solución razonada.
+> - ⏱️ [[2.2 Simulacros por apartado (T1)]] — 8 simulacros (174 preguntas de los cuestionarios Moodle, uno por apartado) con hoja de respuestas.
+> - 📝 [[2.4 Examen completo - 50 preguntas (T1)]] — examen completo de 50 preguntas con opciones barajadas y patrones de respuesta detectados.
+> - ⏱️ [[2.3 Simulacros por apartado (T2)]] — 5 simulacros (las 149 preguntas reales de los cuestionarios 2-1 … 2-5, uno por apartado) con hoja de respuestas.
+> - 📝 [[2.5 Examen completo - 40 preguntas (T2)]] — examen tipo test del Tema 2 (30 de test + 10 de hueco de los cuestionarios 2-1 … 2-5), con nota con y sin penalización.
+> - 💻 [[3.1 Ejercicios resueltos (T1-T2)]] — ejercicios resueltos y explicados (huecos de código).
 
 # Procesos e Hilos
 
@@ -36,7 +38,7 @@ tags:
 - 2 - Gestión de procesos
     - [Intro 2]
     - [[2.Repaso - Ejercicio filtro con subproceso]] ✅
-    - [[2.Respaso - Listar archivos con Runtime]] ✅
+    - [[2.Repaso - Listar archivos con Runtime]] ✅
     - [[2.1 - Instalación y configuracion de java]] ✅
     - [[2.2 - Gestión de subprocesos]] ✅
     - [[2.3 - Flujos de comunicación]] ✅

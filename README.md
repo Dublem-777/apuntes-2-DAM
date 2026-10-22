@@ -10,7 +10,7 @@ Apuntes, ejercicios y material de estudio del segundo curso del **Grado Superior
 | [Acceso a Datos](DAM/Acceso_a_datos/README.md) | — | 4 |
 | [Desarrollo de Interfaces](DAM/Desarrollo_de_Interfaces/README.md) | 3 | 6 |
 | [Inglés](DAM/Ingl%C3%A9s/README.md) | 2 | 10 |
-| [Programación de Servicios y Procesos](DAM/Programacion_de_Servicios_y_Procesos/README.md) | 3 | 45 |
+| [Programación de Servicios y Procesos](DAM/Programacion_de_Servicios_y_Procesos/README.md) | 3 | 52 |
 | [Programacion Multimedia y Dispositivos Moviles](DAM/Programacion_Multimedia_y_Dispositivos_Moviles/README.md) | 7 | 15 |
 | [Programación básica](DAM/Programaci%C3%B3n%20basica/README.md) | 14 | 25 |
 | [Sistema de Gestión Empresarial](DAM/Sistema_de_Gestion_Empresarial/README.md) | 3 | 17 |

@@ -7,7 +7,7 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Preparación examen temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/README.md) | 26 |
+| [Preparación examen temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/README.md) | 33 |
 | [Tema 1](Tema%201/README.md) | 10 |
 | [Tema 2](Tema%202/README.md) | 9 |
 
@@ -21,13 +21,15 @@
 
 > [!TIP]
 > **Preparación de examen (Temas 1 y 2)**
-> - 🐣 [Explicación desde cero](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Explicacion%20desde%20cero%20temas%201%20y%202.md) — empieza aquí: Tema 1 con analogías y palabras de los huecos, Tema 2 paso a paso y recetario para completar funciones.
-> - 📝 [Simulacro practico tema 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Simulacro%20practico%20tema%202.md) — simulacro del práctico (1 h, 24 huecos + 12 líneas completas) · [soluciones](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Simulacro%20practico%20tema%202%20-%20Soluciones.md)
-> - 🧠 [Teoría y chuleta](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Guia%20examen%20temas%201%20y%202.md) — conceptos, tablas comparativas y resumen final.
-> - ✅ [Test de repaso temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Test%20de%20repaso%20temas%201%20y%202.md) — 55 preguntas tipo test con solución razonada.
-> - ⏱️ [Simulacros tipo test tema 1](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Simulacros%20tipo%20test%20tema%201.md) — 8 simulacros (174 preguntas de los cuestionarios Moodle, uno por apartado) con hoja de respuestas.
-> - 📝 [Simulacro examen tema 1 (50 preguntas)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Simulacro%20examen%20tema%201%20%2850%20preguntas%29.md) — examen completo de 50 preguntas con opciones barajadas y patrones de respuesta detectados.
-> - 💻 [Practicos temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Practicos%20temas%201%20y%202.md) — ejercicios resueltos y explicados (huecos de código).
+> - 🐣 [Explicación desde cero](Preparaci%C3%B3n%20examen%20temas%201%20y%202/1%20-%20Teoria/1.1%20Explicacion%20desde%20cero%20%28T1-T2%29.md) — empieza aquí: Tema 1 y Tema 2 con analogías y palabras de los huecos (test del jueves), Tema 2 paso a paso y recetario para completar funciones.
+> - 📝 [3.2 Simulacro examen practico (T2)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/3%20-%20Practico/3.2%20Simulacro%20examen%20practico%20%28T2%29.md) — simulacro del práctico (1 h, 24 huecos + 12 líneas completas) · [soluciones](Preparaci%C3%B3n%20examen%20temas%201%20y%202/3%20-%20Practico/3.3%20Simulacro%20examen%20practico%20%28T2%29%20-%20Soluciones.md)
+> - 🧠 [Teoría y chuleta](Preparaci%C3%B3n%20examen%20temas%201%20y%202/1%20-%20Teoria/1.2%20Guia%20y%20chuleta%20%28T1-T2%29.md) — conceptos, tablas comparativas y resumen final.
+> - ✅ [2.1 Repaso general - 55 preguntas (T1-T2)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/2%20-%20Test/2.1%20Repaso%20general%20-%2055%20preguntas%20%28T1-T2%29.md) — 55 preguntas tipo test con solución razonada.
+> - ⏱️ [2.2 Simulacros por apartado (T1)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/2%20-%20Test/2.2%20Simulacros%20por%20apartado%20%28T1%29.md) — 8 simulacros (174 preguntas de los cuestionarios Moodle, uno por apartado) con hoja de respuestas.
+> - 📝 [2.4 Examen completo - 50 preguntas (T1)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/2%20-%20Test/2.4%20Examen%20completo%20-%2050%20preguntas%20%28T1%29.md) — examen completo de 50 preguntas con opciones barajadas y patrones de respuesta detectados.
+> - ⏱️ [2.3 Simulacros por apartado (T2)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/2%20-%20Test/2.3%20Simulacros%20por%20apartado%20%28T2%29.md) — 5 simulacros (las 149 preguntas reales de los cuestionarios 2-1 … 2-5, uno por apartado) con hoja de respuestas.
+> - 📝 [2.5 Examen completo - 40 preguntas (T2)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/2%20-%20Test/2.5%20Examen%20completo%20-%2040%20preguntas%20%28T2%29.md) — examen tipo test del Tema 2 (30 de test + 10 de hueco de los cuestionarios 2-1 … 2-5), con nota con y sin penalización.
+> - 💻 [3.1 Ejercicios resueltos (T1-T2)](Preparaci%C3%B3n%20examen%20temas%201%20y%202/3%20-%20Practico/3.1%20Ejercicios%20resueltos%20%28T1-T2%29.md) — ejercicios resueltos y explicados (huecos de código).
 
 ## Procesos e Hilos
 
@@ -47,8 +49,8 @@
     
 - 2 - Gestión de procesos
     - [Intro 2]
-    - [2.Repaso - Ejercicio filtro con subproceso](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Ejercicios%20practicos/2.Repaso%20-%20Ejercicio%20filtro%20con%20subproceso.md) ✅
-    - [2.Respaso - Listar archivos con Runtime](Preparaci%C3%B3n%20examen%20temas%201%20y%202/Ejercicios%20practicos/2.Respaso%20-%20Listar%20archivos%20con%20Runtime.md) ✅
+    - [2.Repaso - Ejercicio filtro con subproceso](Preparaci%C3%B3n%20examen%20temas%201%20y%202/3%20-%20Practico/Enunciados%20de%20repaso/2.Repaso%20-%20Ejercicio%20filtro%20con%20subproceso.md) ✅
+    - [2.Repaso - Listar archivos con Runtime](Preparaci%C3%B3n%20examen%20temas%201%20y%202/3%20-%20Practico/Enunciados%20de%20repaso/2.Repaso%20-%20Listar%20archivos%20con%20Runtime.md) ✅
     - [2.1 - Instalación y configuracion de java](Tema%202/2.1%20-%20Instalaci%C3%B3n%20y%20configuracion%20de%20java.md) ✅
     - [2.2 - Gestión de subprocesos](Tema%202/2.2%20-%20Gesti%C3%B3n%20de%20subprocesos.md) ✅
     - [2.3 - Flujos de comunicación](Tema%202/2.3%20-%20Flujos%20de%20comunicaci%C3%B3n.md) ✅
