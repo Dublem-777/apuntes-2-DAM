@@ -3,7 +3,7 @@ asignatura: PMDM
 tema: 1
 tipo: ejercicio
 estado: en curso
-fecha: 2026-10-28
+fecha: 2026-10-31
 tags:
   - DAM/ejercicio
   - DAM/pmdm/kotlin
@@ -15,9 +15,10 @@ tags:
 > [!info] Origen
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[01 - Introduccion a Kotlin]] · [[02 - Jerarquia de tipos]] · [[04 - Estructuras básicas]]
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque1/`
 
 > [!note] Sobre las soluciones
-> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. No se ha modificado la carpeta externa de proyectos.
+> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque1/Ejercicio1.K/` (ver **Ruta fuente**).
 
 ---
 
@@ -50,7 +51,7 @@ println("Hola " + name)
 println("Hola $name, tu nota es ${"%.2f".format(grade)}") // Hola Daniel, tu nota es 7,26
 ```
 
-### Código fuente (`Ejercicio1/src/Main.kt`)
+### Código fuente (`Ejercicio1.1/src/Main.kt`)
 
 ```kotlin
 fun main() {
@@ -137,6 +138,7 @@ fun main() {
 ## Relaciones
 
 - Teoría: [[01 - Introduccion a Kotlin]] · [[02 - Jerarquia de tipos]] · [[04 - Estructuras básicas]]
+- Bloque siguiente: [[Ejercicios Bloque 2]]
 - Boletín con el mismo estilo: [[01.1 - Ejercicios 1 Introduccion a Kotlin]]
 - Índice de la asignatura: [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Índice de PMDM]]
 

@@ -32,7 +32,21 @@ tags:
 - [[10.1 - Ejercicios 10 Programación funcional]] ✅ ejercicios 10.1–10.12
 - [[11 - Colecciones]] ✅ completo
 - [[11.1 - Ejercicios 11 Colecciones]] ✅ ejercicios 11.1–11.6
-- [[Bloque 1 - Ejercicios Kotlin]] 🔄 en curso · ejercicio 1
+- [[Ejercicios Bloque 1]] 🔄 en curso · ejercicio 1
+- [[Ejercicios Bloque 2]] ✅ ejercicios 1–2 (ordenar 3 números · mayúscula/minúscula por código)
+- [[Ejercicios Bloque 3]] ✅ ejercicios 1–6 (arrays · `Any?` · primos · bisiestos · argumentos por defecto y con nombre)
+- [[Ejercicios Bloque 4]] ✅ ejercicios 1–5 (`vararg` · `infix` · `when` anidado, sin sujeto y con sujeto)
+- [[Ejercicios Bloque 5]] ✅ ejercicios 1–3 (`when` sobre `Any?` con guardas · árbol de Navidad con `for` y con `repeat`)
+- [[Ejercicios Bloque 6]] ✅ ejercicios 1–3 (llamada segura `?.` · Elvis `?:` · cast seguro `as?`)
+- [[Ejercicios Bloque 7]] ✅ ejercicios 1–3 (`init` y `require` · constructor secundario · setter con validación)
+- [[Ejercicios Bloque 8]] ✅ ejercicios 1–5 (propiedad de respaldo · herencia · `inner` · `object` · `companion object`)
+- [[Ejercicios Bloque 9]] ✅ ejercicios 1–3 (`data class` y `copy()` · desestructuración · clase abstracta)
+- [[Ejercicios Bloque 10]] ✅ ejercicios 1–3 (enum con propiedades · interfaces · *object expressions*)
+- [[Ejercicios Bloque 11]] ✅ ejercicios 1–3 (`const val` en `companion object` · *extension function* · *extension property*)
+- [[Ejercicios Bloque 12]] ✅ ejercicios 1–5 (*top-level* y `private` · `lateinit` · orden superior · `filter`/`map`/`sumOf`)
+- [[Ejercicios Bloque 13]] ✅ ejercicios 1–3 (sobrecarga de `+` · `by lazy` · singleton perezoso)
+- [[Ejercicios Bloque 14]] ✅ ejercicios 1–9 (*sealed* · *value class* · `fun interface` · `inline` · genéricos · `hacerCon` con receptor)
+- [[Ejercicios Bloque 15]] ✅ ejercicios 1–6 (crear y convertir colecciones · operadores · métodos de listas · `filter`/`sortedBy` · secuencias)
 
 ---
 

@@ -7,7 +7,8 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Tema 1](Tema%201/README.md) | 3 |
+| [Bloques](Bloques/README.md) | 15 |
+| [Tema 1](Tema%201/README.md) | 2 |
 | [Tema 2](Tema%202/README.md) | 2 |
 | [Tema 3](Tema%203/README.md) | 2 |
 | [Tema 4](Tema%204/README.md) | 2 |
@@ -51,7 +52,21 @@
 - [10.1 - Ejercicios 10 Programación funcional](Tema%2010/10.1%20-%20Ejercicios%2010%20Programaci%C3%B3n%20funcional.md) ✅ ejercicios 10.1–10.12
 - [11 - Colecciones](Tema%2011/11%20-%20Colecciones.md) ✅ completo
 - [11.1 - Ejercicios 11 Colecciones](Tema%2011/11.1%20-%20Ejercicios%2011%20Colecciones.md) ✅ ejercicios 11.1–11.6
-- [Bloque 1 - Ejercicios Kotlin](Tema%201/Bloque%201%20-%20Ejercicios%20Kotlin.md) 🔄 en curso · ejercicio 1
+- [Ejercicios Bloque 1](Bloques/Ejercicios%20Bloque%201.md) 🔄 en curso · ejercicio 1
+- [Ejercicios Bloque 2](Bloques/Ejercicios%20Bloque%202.md) ✅ ejercicios 1–2 (ordenar 3 números · mayúscula/minúscula por código)
+- [Ejercicios Bloque 3](Bloques/Ejercicios%20Bloque%203.md) ✅ ejercicios 1–6 (arrays · `Any?` · primos · bisiestos · argumentos por defecto y con nombre)
+- [Ejercicios Bloque 4](Bloques/Ejercicios%20Bloque%204.md) ✅ ejercicios 1–5 (`vararg` · `infix` · `when` anidado, sin sujeto y con sujeto)
+- [Ejercicios Bloque 5](Bloques/Ejercicios%20Bloque%205.md) ✅ ejercicios 1–3 (`when` sobre `Any?` con guardas · árbol de Navidad con `for` y con `repeat`)
+- [Ejercicios Bloque 6](Bloques/Ejercicios%20Bloque%206.md) ✅ ejercicios 1–3 (llamada segura `?.` · Elvis `?:` · cast seguro `as?`)
+- [Ejercicios Bloque 7](Bloques/Ejercicios%20Bloque%207.md) ✅ ejercicios 1–3 (`init` y `require` · constructor secundario · setter con validación)
+- [Ejercicios Bloque 8](Bloques/Ejercicios%20Bloque%208.md) ✅ ejercicios 1–5 (propiedad de respaldo · herencia · `inner` · `object` · `companion object`)
+- [Ejercicios Bloque 9](Bloques/Ejercicios%20Bloque%209.md) ✅ ejercicios 1–3 (`data class` y `copy()` · desestructuración · clase abstracta)
+- [Ejercicios Bloque 10](Bloques/Ejercicios%20Bloque%2010.md) ✅ ejercicios 1–3 (enum con propiedades · interfaces · *object expressions*)
+- [Ejercicios Bloque 11](Bloques/Ejercicios%20Bloque%2011.md) ✅ ejercicios 1–3 (`const val` en `companion object` · *extension function* · *extension property*)
+- [Ejercicios Bloque 12](Bloques/Ejercicios%20Bloque%2012.md) ✅ ejercicios 1–5 (*top-level* y `private` · `lateinit` · orden superior · `filter`/`map`/`sumOf`)
+- [Ejercicios Bloque 13](Bloques/Ejercicios%20Bloque%2013.md) ✅ ejercicios 1–3 (sobrecarga de `+` · `by lazy` · singleton perezoso)
+- [Ejercicios Bloque 14](Bloques/Ejercicios%20Bloque%2014.md) ✅ ejercicios 1–9 (*sealed* · *value class* · `fun interface` · `inline` · genéricos · `hacerCon` con receptor)
+- [Ejercicios Bloque 15](Bloques/Ejercicios%20Bloque%2015.md) ✅ ejercicios 1–6 (crear y convertir colecciones · operadores · métodos de listas · `filter`/`sortedBy` · secuencias)
 
 ---
 

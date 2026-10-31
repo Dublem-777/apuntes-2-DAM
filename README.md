@@ -11,7 +11,7 @@ Apuntes, ejercicios y material de estudio del segundo curso del **Grado Superior
 | [Desarrollo de Interfaces](DAM/Desarrollo_de_Interfaces/README.md) | 4 | 7 |
 | [Inglés](DAM/Ingl%C3%A9s/README.md) | 4 | 13 |
 | [Programación de Servicios y Procesos](DAM/Programacion_de_Servicios_y_Procesos/README.md) | 3 | 53 |
-| [Programacion Multimedia y Dispositivos Moviles](DAM/Programacion_Multimedia_y_Dispositivos_Moviles/README.md) | 11 | 23 |
+| [Programacion Multimedia y Dispositivos Moviles](DAM/Programacion_Multimedia_y_Dispositivos_Moviles/README.md) | 12 | 37 |
 | [Programación básica](DAM/Programaci%C3%B3n%20basica/README.md) | 14 | 25 |
 | [Sistema de Gestión Empresarial](DAM/Sistema_de_Gestion_Empresarial/README.md) | 4 | 20 |
 | Proyecto intermodular · WarrantyKeep | — | [repositorio propio](https://github.com/dmadmer501/WarrantyKeep) |

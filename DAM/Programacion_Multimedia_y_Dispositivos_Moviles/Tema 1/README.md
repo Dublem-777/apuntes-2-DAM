@@ -10,4 +10,3 @@
 ## 💻 Ejercicios y actividades
 
 - [01.1 · Ejercicios 1: Introducción a Kotlin](01.1%20-%20Ejercicios%201%20Introduccion%20a%20Kotlin.md) ✅
-- [Bloque 1 · Ejercicios de Kotlin](Bloque%201%20-%20Ejercicios%20Kotlin.md) 🕒
