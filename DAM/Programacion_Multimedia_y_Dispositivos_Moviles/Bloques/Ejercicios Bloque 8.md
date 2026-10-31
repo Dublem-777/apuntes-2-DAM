@@ -18,7 +18,7 @@ tags:
 > Apuntes relacionados: [[06 - POO I]] · [[11 - Colecciones]]
 > Bloque anterior: [[Ejercicios Bloque 7]]
 > **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema6-POO I/` (`Ejercicio6.7`, `6.9`, `6.11`, `6.13`, `6.14`)
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque8/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque08/`
 
 > [!note] Sobre las soluciones
 > - Son los mismos enunciados que los ejercicios 6.7, 6.9, 6.11, 6.13 y 6.14 de [[06.1 - Ejercicios 6 Programación Orientada a Objetos 1|el boletín 6]].
@@ -26,7 +26,7 @@ tags:
 > - **Ejercicio 2:** tu `Ejercicio6.9` con la errata `programmingLenguages` corregida y un `main()` con más casos.
 > - **Ejercicios 3 y 5:** tus `Ejercicio6.11` y `Ejercicio6.14`, copiados tal cual.
 > - **Ejercicio 4:** tu `Ejercicio6.13` con `describe()` reescrito usando `entries`, como pide el enunciado.
-> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque8/Ejercicio8.K/` (ver **Ruta fuente**).
+> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque08/Ejercicio8.K/` (ver **Ruta fuente**).
 > - Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---

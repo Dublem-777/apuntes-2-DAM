@@ -17,10 +17,10 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[02 - Jerarquia de tipos]] · [[03 - Funciones]] · [[04 - Estructuras básicas]]
 > Bloque anterior: [[Ejercicios Bloque 2]]
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque3/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque03/`
 
 > [!note] Sobre las soluciones
-> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque3/Ejercicio3.K/` (ver **Ruta fuente**). Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
+> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque03/Ejercicio3.K/` (ver **Ruta fuente**). Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---
 

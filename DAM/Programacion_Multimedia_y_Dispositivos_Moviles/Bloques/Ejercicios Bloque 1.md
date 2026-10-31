@@ -15,10 +15,10 @@ tags:
 > [!info] Origen
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[01 - Introduccion a Kotlin]] · [[02 - Jerarquia de tipos]] · [[04 - Estructuras básicas]]
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque1/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque01/`
 
 > [!note] Sobre las soluciones
-> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque1/Ejercicio1.K/` (ver **Ruta fuente**).
+> Soluciones didácticas desarrolladas para este bloque con conceptos explicados en los temas anteriores. Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque01/Ejercicio1.K/` (ver **Ruta fuente**).
 
 ---
 

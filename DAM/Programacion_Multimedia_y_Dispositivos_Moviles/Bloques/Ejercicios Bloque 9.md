@@ -17,11 +17,11 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[07 - POO II]] · [[06 - POO I]]
 > Bloque anterior: [[Ejercicios Bloque 8]]
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque9/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque09/`
 
 > [!note] Sobre las soluciones
 > - Son los mismos enunciados que los ejercicios 7.1, 7.2 y 7.4 de [[07.1 - Ejercicios 7 Programación Orientada a Objetos 2|el boletín 7]], y el código parte de esas soluciones.
-> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque9/Ejercicio9.K/` (ver **Ruta fuente**).
+> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque09/Ejercicio9.K/` (ver **Ruta fuente**).
 > - Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---

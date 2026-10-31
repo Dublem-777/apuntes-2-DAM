@@ -17,14 +17,14 @@ tags:
 > Apuntes relacionados: [[02 - Jerarquia de tipos]] · [[04 - Estructuras básicas]]
 > Bloque anterior: [[Ejercicios Bloque 4]]
 > **Ruta fuente (boletín, ejercicio 2):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema4-Estructuras-Basicas/Ejercicio4.6/src/Main.kt`
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque5/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque05/`
 
 > [!note] Sobre las soluciones
 > - Son los mismos enunciados que los ejercicios 4.4, 4.6 y 4.7 de [[04.1 - Ejercicios 4 Estructuras básicas|el boletín 4]].
 > - **Ejercicio 2:** es tu código del proyecto `Ejercicio4.6`, copiado tal cual.
 > - **Ejercicio 3:** tu proyecto del boletín no tenía el árbol con `repeat` (la carpeta `Ejercicio4.7` contiene el juego de adivinar), así que está hecho a partir de tu ejercicio 2, cambiando solo los bucles.
 > - **Ejercicio 1:** solución propia (ver el aviso del ejercicio sobre el proyecto `Ejercicio4.4`).
-> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque5/Ejercicio5.K/` (ver **Ruta fuente**).
+> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque05/Ejercicio5.K/` (ver **Ruta fuente**).
 > - Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---

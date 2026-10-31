@@ -18,14 +18,14 @@ tags:
 > Apuntes relacionados: [[05 - Operaciones con tipos nullables]] · [[06 - POO I]] · [[03 - Funciones]]
 > Bloque anterior: [[Ejercicios Bloque 5]]
 > **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema5-OperacionesConTiposNullables/` (`Ejercicio5.2/src/Main2.kt`, `Ejercicio5.4`, `Ejercicio5.7`)
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque6/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque06/`
 
 > [!note] Sobre las soluciones
 > - Son los mismos enunciados que los ejercicios 5.2, 5.4 y 5.7 de [[05.1 - Ejercicios 5 Operaciones con tipos nullables|el boletín 5]].
 > - **Ejercicio 1:** tu código de `Ejercicio5.2/src/Main2.kt`, con una prueba corregida (ver el aviso del ejercicio).
 > - **Ejercicio 2:** solución nueva, porque tu `Ejercicio5.4` no sigue el formato `Nickname: <nickname>` que pide este enunciado (ver el aviso).
 > - **Ejercicio 3:** tu código de `Ejercicio5.7`, copiado tal cual.
-> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque6/Ejercicio6.K/` (ver **Ruta fuente**).
+> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque06/Ejercicio6.K/` (ver **Ruta fuente**).
 > - Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---

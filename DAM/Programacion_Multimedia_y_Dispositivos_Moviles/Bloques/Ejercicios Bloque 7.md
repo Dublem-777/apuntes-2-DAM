@@ -18,14 +18,14 @@ tags:
 > Apuntes relacionados: [[06 - POO I]] · [[04 - Estructuras básicas]]
 > Bloque anterior: [[Ejercicios Bloque 6]]
 > **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema6-POO I/` (`Ejercicio6.1`, `Ejercicio6.2`)
-> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque7/`
+> **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque07/`
 
 > [!note] Sobre las soluciones
 > - Los ejercicios 1 y 2 son los mismos enunciados que el 6.1 y el 6.2 de [[06.1 - Ejercicios 6 Programación Orientada a Objetos 1|el boletín 6]].
 > - **Ejercicio 1:** solución a partir de tu `Ejercicio6.2`, porque tu `Ejercicio6.1` rechaza un salario de 0 (ver el aviso del ejercicio).
 > - **Ejercicio 2:** tu código de `Ejercicio6.2`, copiado tal cual.
 > - **Ejercicio 3:** solución nueva; en tus proyectos del Tema 6 no había ningún `Product`.
-> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque7/Ejercicio7.K/` (ver **Ruta fuente**).
+> - Cada ejercicio tiene su proyecto de IntelliJ en `Programas_clase/…/Bloques/Bloque07/Ejercicio7.K/` (ver **Ruta fuente**).
 > - Todo el código se ha **compilado y ejecutado** con `kotlinc` 2.4; las salidas de las pruebas son reales.
 
 ---
