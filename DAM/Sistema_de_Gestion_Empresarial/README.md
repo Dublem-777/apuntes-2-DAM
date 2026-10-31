@@ -7,9 +7,10 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Practica](Practica/README.md) | 2 |
+| [Practica](Practica/README.md) | 1 |
 | [Tema 1](Tema%201/README.md) | 14 |
-| [Tema 2](Tema%202/README.md) | 1 |
+| [Tema 2](Tema%202/README.md) | 4 |
+| [Tema 4](Tema%204/README.md) | 1 |
 
 ---
 
@@ -27,8 +28,11 @@
 - [Una empresa sin un sistema integrado](Tema%201/Tareas/Una%20empresa%20sin%20un%20sistema%20integrado.md) — Tema 1
 - [Trabajo grupal](Tema%201/Tareas/Trabajo%20grupal.md) — Tema 1
 - [Práctica Zoho CRM - Informe de usuario](Practica/Pr%C3%A1ctica%20Zoho%20CRM%20-%20Informe%20de%20usuario.md) — Informe y preparación de importación (borrador pendiente de evidencias)
-- [2.1 - Análisis de casos reales e investigación de herramientas CRM](Practica/2.1%20-%20An%C3%A1lisis%20de%20casos%20reales%20e%20investigaci%C3%B3n%20de%20herramientas%20CRM.md) — T2.1 y T2.2: casos y comparativa de CRM
+- [2.1 - Análisis de casos reales e investigación de herramientas CRM](Tema%202/Tareas/2.1%20-%20An%C3%A1lisis%20de%20casos%20reales%20e%20investigaci%C3%B3n%20de%20herramientas%20CRM.md) — T2.1 y T2.2: casos y comparativa de CRM
 - [Ejercicio 1](Tema%202/Tareas/Ejercicio%201.md) — Tema 2: departamentos y flujo de información en un proceso de venta con ERP
+- [DanielMadridMerida-Definicion-y-modulos-ERP](Tema%202/Tareas/DanielMadridMerida-Definicion-y-modulos-ERP.md) — Tema 2: definición de ERP y sus módulos
+- [DanielMadridMerida-SergioCasadoSanchez - Infraestructura-ERP](Tema%202/Tareas/DanielMadridMerida-SergioCasadoSanchez%20-%20Infraestructura-ERP.md) — Tema 2: infraestructura de un ERP (en grupo, en curso)
+- [DanielMadridMerida-Cloud-y-licencias-ERP](Tema%204/Tareas/DanielMadridMerida-Cloud-y-licencias-ERP.md) — Tema 4: cloud computing y licencias de software
 
 ### Temas
 
@@ -39,7 +43,7 @@
 	4. [1.4 - Historia](Tema%201/1.4%20-%20Historia.md)
 	5. [1.5 - La fidelización del cliente. Concepto CRM](Tema%201/1.5%20-%20La%20fidelizaci%C3%B3n%20del%20cliente.%20Concepto%20CRM.md)
 
-- [2.1 - Análisis de casos reales e investigación de herramientas CRM](Practica/2.1%20-%20An%C3%A1lisis%20de%20casos%20reales%20e%20investigaci%C3%B3n%20de%20herramientas%20CRM.md) ✅
+- [2.1 - Análisis de casos reales e investigación de herramientas CRM](Tema%202/Tareas/2.1%20-%20An%C3%A1lisis%20de%20casos%20reales%20e%20investigaci%C3%B3n%20de%20herramientas%20CRM.md) ✅
 
 ### Material de apoyo
 

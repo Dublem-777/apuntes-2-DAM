@@ -2140,8 +2140,8 @@ Debemos tener en cuenta que la clase `Optional<T>` ha sido diseñada específica
 
 ## Relaciones
 
-- [[Genéricos]] — parámetros de tipo en interfaces funcionales y `Optional`.
-- [[Colecciones]] — operaciones funcionales para procesar elementos de colecciones.
+- [[DAM/Programación basica/Tema 11/Genéricos]] — parámetros de tipo en interfaces funcionales y `Optional`.
+- [[DAM/Programación basica/Tema 12/Colecciones]] — operaciones funcionales para procesar elementos de colecciones.
 - [[Expresiones regulares]] — uso de funciones y predicados para validar cadenas.
 
 ## Para repasar

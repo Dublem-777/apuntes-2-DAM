@@ -23,8 +23,8 @@
 8. [[Tipos enumerados]]
 9. [[Expresiones regulares]]
 10. [[Fechas]]
-11. [[Genéricos]]
-12. [[Colecciones]]
-13. [[Programación funcional]]
+11. [[DAM/Programación basica/Tema 11/Genéricos]]
+12. [[DAM/Programación basica/Tema 12/Colecciones]]
+13. [[DAM/Programación basica/Tema 13/Programación funcional]]
 14. [[Streams]]
 

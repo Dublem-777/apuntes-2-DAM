@@ -3756,7 +3756,7 @@ La clase `Collections` contiene numerosos métodos estáticos para utilizar con 
 
 ## Relaciones
 
-- [[Genéricos]] — colecciones tipadas con parámetros genéricos.
+- [[DAM/Programación basica/Tema 11/Genéricos]] — colecciones tipadas con parámetros genéricos.
 - [[Herencia]] — elementos pueden ordenarse por `Comparable` o `Comparator`.
 - [[4.1 Arrays unidimensionales]] — arrays como origen o destino de colecciones.
 

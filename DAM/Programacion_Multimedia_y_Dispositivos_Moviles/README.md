@@ -7,19 +7,17 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Tema 1](Tema%201/README.md) | 2 |
+| [Tema 1](Tema%201/README.md) | 3 |
 | [Tema 2](Tema%202/README.md) | 2 |
 | [Tema 3](Tema%203/README.md) | 2 |
 | [Tema 4](Tema%204/README.md) | 2 |
 | [Tema 5](Tema%205/README.md) | 2 |
 | [Tema 6](Tema%206/README.md) | 2 |
 | [Tema 7](Tema%207/README.md) | 2 |
-
-## 📄 Notas generales
-
-### 📎 Otros
-
-- [01.1 · Ejercicios 1: Introducción a Kotlin](Recopilacion%20boletines%20PMDM.md)
+| [Tema 8](Tema%208/README.md) | 2 |
+| [Tema 9](Tema%209/README.md) | 2 |
+| [Tema 10](Tema%2010/README.md) | 2 |
+| [Tema 11](Tema%2011/README.md) | 2 |
 
 ---
 
@@ -41,14 +39,19 @@
 - [04.1 - Ejercicios 4 Estructuras básicas](Tema%204/04.1%20-%20Ejercicios%204%20Estructuras%20b%C3%A1sicas.md) ✅ ejercicios 4.1–4.10
 - [05 - Operaciones con tipos nullables](Tema%205/05%20-%20Operaciones%20con%20tipos%20nullables.md) ✅ completo
 - [05.1 - Ejercicios 5 Operaciones con tipos nullables](Tema%205/05.1%20-%20Ejercicios%205%20Operaciones%20con%20tipos%20nullables.md) ✅ ejercicios 5.1–5.7
-- [Programación Orientada a Objetos 1](Tema%206/Programaci%C3%B3n%20Orientada%20a%20Objetos%201.md) ✅ completo
+- [06 - POO I](Tema%206/06%20-%20POO%20I.md) ✅ completo
 - [06.1 - Ejercicios 6 Programación Orientada a Objetos 1](Tema%206/06.1%20-%20Ejercicios%206%20Programaci%C3%B3n%20Orientada%20a%20Objetos%201.md) ✅ ejercicios 6.1–6.14
-- [Programación Orientada a Objetos 2](Tema%207/Programaci%C3%B3n%20Orientada%20a%20Objetos%202.md) ✅ completo
+- [07 - POO II](Tema%207/07%20-%20POO%20II.md) ✅ completo
 - [07.1 - Ejercicios 7 Programación Orientada a Objetos 2](Tema%207/07.1%20-%20Ejercicios%207%20Programaci%C3%B3n%20Orientada%20a%20Objetos%202.md) ✅ ejercicios 7.1–7.11
-- [08 - POO III]
-- [09 - Genéricos]
-- [10 - Programación funcional]
-- [11 - Colecciones]
+- [08 - POO III](Tema%208/08%20-%20POO%20III.md) ✅ completo
+- [08.1 - Ejercicios 8 POO III](Tema%208/08.1%20-%20Ejercicios%208%20POO%20III.md) ✅ ejercicios 8.1–8.14
+- [09 - Genéricos](Tema%209/09%20-%20Gen%C3%A9ricos.md) ✅ completo
+- [09.1 - Ejercicios 9 Genéricos](Tema%209/09.1%20-%20Ejercicios%209%20Gen%C3%A9ricos.md) ✅ ejercicios 9.1–9.7
+- [10 - Programación funcional](Tema%2010/10%20-%20Programaci%C3%B3n%20funcional.md) ✅ completo
+- [10.1 - Ejercicios 10 Programación funcional](Tema%2010/10.1%20-%20Ejercicios%2010%20Programaci%C3%B3n%20funcional.md) ✅ ejercicios 10.1–10.12
+- [11 - Colecciones](Tema%2011/11%20-%20Colecciones.md) ✅ completo
+- [11.1 - Ejercicios 11 Colecciones](Tema%2011/11.1%20-%20Ejercicios%2011%20Colecciones.md) ✅ ejercicios 11.1–11.6
+- [Bloque 1 - Ejercicios Kotlin](Tema%201/Bloque%201%20-%20Ejercicios%20Kotlin.md) 🔄 en curso · ejercicio 1
 
 ---
 

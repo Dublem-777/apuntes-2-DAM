@@ -5,7 +5,7 @@
 
 ## 📖 Teoría y apuntes
 
-- [06 · Programación Orientada a Objetos I](Programaci%C3%B3n%20Orientada%20a%20Objetos%201.md) ✅
+- [06 · Programación Orientada a Objetos I](06%20-%20POO%20I.md) ✅
 
 ## 💻 Ejercicios y actividades
 

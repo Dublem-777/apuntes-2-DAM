@@ -7,7 +7,7 @@
 
 - [Unit 2 - Business skills for IT](2026-10-05%20-%20Unit%202%20-%20Exercise%201.md)
 - [Unit 2 - Business skills for IT](2026-10-05%20-%20Unit%202%20-%20Exercise.md)
-- [Unit 2 - Business skills for IT](2026-19-05%20-%20Unit%202%20-%20Exercise%202.md)
+- [Unit 2 - Business skills for IT](2026-10-15%20-%20Unit%202%20-%20Exercise%202.md)
 
 ## 📎 Adjuntos
 

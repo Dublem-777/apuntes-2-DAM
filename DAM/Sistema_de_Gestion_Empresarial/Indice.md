@@ -16,8 +16,11 @@ tags:
 - [[Tema 1/Tareas/Una empresa sin un sistema integrado]] — Tema 1
 - [[Tema 1/Tareas/Trabajo grupal]] — Tema 1
 - [[Practica/Práctica Zoho CRM - Informe de usuario]] — Informe y preparación de importación (borrador pendiente de evidencias)
-- [[Practica/2.1 - Análisis de casos reales e investigación de herramientas CRM]] — T2.1 y T2.2: casos y comparativa de CRM
+- [[Tema 2/Tareas/2.1 - Análisis de casos reales e investigación de herramientas CRM]] — T2.1 y T2.2: casos y comparativa de CRM
 - [[Tema 2/Tareas/Ejercicio 1]] — Tema 2: departamentos y flujo de información en un proceso de venta con ERP
+- [[Tema 2/Tareas/DanielMadridMerida-Definicion-y-modulos-ERP]] — Tema 2: definición de ERP y sus módulos
+- [[Tema 2/Tareas/DanielMadridMerida-SergioCasadoSanchez - Infraestructura-ERP]] — Tema 2: infraestructura de un ERP (en grupo, en curso)
+- [[Tema 4/Tareas/DanielMadridMerida-Cloud-y-licencias-ERP]] — Tema 4: cloud computing y licencias de software
 
 ## Temas
 
@@ -28,7 +31,7 @@ tags:
 	4. [[1.4 - Historia]]
 	5. [[1.5 - La fidelización del cliente. Concepto CRM]]
 
-- [[Practica/2.1 - Análisis de casos reales e investigación de herramientas CRM]] ✅
+- [[Tema 2/Tareas/2.1 - Análisis de casos reales e investigación de herramientas CRM]] ✅
 
 ## Material de apoyo
 

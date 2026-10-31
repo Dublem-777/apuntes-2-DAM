@@ -16,5 +16,5 @@
 ## 📎 Otros
 
 - [2026-10-01 - Unit 1 - Exercises](2026-10-01%20-%20Unit%201%20-%20Exercises.md)
-- [2026-10-01 - Unit 1 - Liseining](2026-10-01%20-%20Unit%201%20-%20Liseining.md)
+- [2026-10-01 - Unit 1 - Listening](2026-10-01%20-%20Unit%201%20-%20Listening.md)
 - [Software requirements for Transmore](Speaking.md)

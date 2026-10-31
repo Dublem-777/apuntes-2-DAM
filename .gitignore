@@ -53,4 +53,10 @@ resources/*
 !resources/proceso_memoria.png
 !resources/process_control_blocks.gif
 !resources/process_queues.gif
+!resources/registro_01_vacio.png
+!resources/registro_02_ayuda.png
+!resources/registro_03_errores.png
+!resources/registro_04_errores2.png
+!resources/registro_05_correcto.png
+!resources/registro_06_exito.png
 # <<< resources usados (generado)

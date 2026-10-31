@@ -5,7 +5,7 @@
 
 ## 📖 Teoría y apuntes
 
-- [07 · Programación Orientada a Objetos II](Programaci%C3%B3n%20Orientada%20a%20Objetos%202.md) ✅
+- [07 · Programación Orientada a Objetos II](07%20-%20POO%20II.md) ✅
 
 ## 💻 Ejercicios y actividades
 

@@ -32,7 +32,7 @@ tags:
     - [[1.6 - Sincronizacion]] ✅
     - [[1.R - Preguntas del Tema 1]] ✅ (repaso 14 preguntas)
     - [[1.R2 - Preguntas del Tema 1 (II)]] ✅ (repaso 13 preguntas)
-    - [1.7 - Comunicación]
+    - [[1.7 - Comunicación]] ✅
     - [1.8 - Propiedades de corrección]
     
 - 2 - Gestión de procesos

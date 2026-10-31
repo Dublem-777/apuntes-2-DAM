@@ -8,7 +8,7 @@
 | Carpeta | Notas |
 | --- | --- |
 | [Preparación examen temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/README.md) | 33 |
-| [Tema 1](Tema%201/README.md) | 10 |
+| [Tema 1](Tema%201/README.md) | 11 |
 | [Tema 2](Tema%202/README.md) | 9 |
 
 ---
@@ -44,7 +44,7 @@
     - [1.6 - Sincronizacion](Tema%201/1.6%20-%20Sincronizacion.md) ✅
     - [1.R - Preguntas del Tema 1](Tema%201/Ejercicios/1.R%20-%20Preguntas%20del%20Tema%201.md) ✅ (repaso 14 preguntas)
     - [1.R2 - Preguntas del Tema 1 (II)](Tema%201/Ejercicios/1.R2%20-%20Preguntas%20del%20Tema%201%20%28II%29.md) ✅ (repaso 13 preguntas)
-    - [1.7 - Comunicación]
+    - [1.7 - Comunicación](Tema%201/1.7%20-%20Comunicaci%C3%B3n.md) ✅
     - [1.8 - Propiedades de corrección]
     
 - 2 - Gestión de procesos

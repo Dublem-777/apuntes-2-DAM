@@ -19,3 +19,8 @@ tags:
 - [[01.1 - Actividades evaluables 01]] ✅ 6 ejercicios resueltos (unidades 01–06) — solo faltan las capturas
 - [[02.1 - Actividad evaluable - Rediseño accesible de Lens para Amazon]] · Rediseño accesible de una búsqueda visual
 - [[03.1 - Customer Journey Map - App de guardias]] ✅ dos perfiles: receptiva y menos receptiva
+- [[04.1 - Formulario de registro movil]] ✅ formulario de registro en 4 pantallas con validación (HTML + PDF)
+
+## Recursos
+
+- [[Aprende Dart - Moises Belchin - Patricia Juberias.pdf|Aprende Dart (Moisés Belchín y Patricia Juberías)]]

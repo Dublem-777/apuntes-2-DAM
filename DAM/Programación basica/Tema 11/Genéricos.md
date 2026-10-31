@@ -773,7 +773,7 @@ Sí tienen el mismo tamaño
 
 - [[Programación orientada a objetos]] — clases, métodos, interfaces y tipos.
 - [[Herencia]] — límites genéricos como `<T extends Number>` usan jerarquías de tipos.
-- [[Colecciones]] — colecciones de Java se apoyan ampliamente en tipos genéricos.
+- [[DAM/Programación basica/Tema 12/Colecciones]] — colecciones de Java se apoyan ampliamente en tipos genéricos.
 
 ## Para repasar
 

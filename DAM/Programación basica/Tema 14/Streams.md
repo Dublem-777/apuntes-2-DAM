@@ -3040,9 +3040,9 @@ Este método es de la versión 12 de Java. En versiones anteriores, sería neces
 
 ## Relaciones
 
-- [[Colecciones]] — los streams procesan datos provenientes de colecciones.
-- [[Programación funcional]] — lambdas, interfaces funcionales y funciones de orden superior.
-- [[Genéricos]] — streams y collectors parametrizan tipos de entrada y salida.
+- [[DAM/Programación basica/Tema 12/Colecciones]] — los streams procesan datos provenientes de colecciones.
+- [[DAM/Programación basica/Tema 13/Programación funcional]] — lambdas, interfaces funcionales y funciones de orden superior.
+- [[DAM/Programación basica/Tema 11/Genéricos]] — streams y collectors parametrizan tipos de entrada y salida.
 
 ## Para repasar
 

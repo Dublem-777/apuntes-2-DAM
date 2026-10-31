@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registro · TaskFlow</title>
+<style>
+  :root {
+    --primary: #3b4fd8; --primary-dark: #2a3aa8; --on-primary: #fff;
+    --text: #1b1c22; --muted: #5b5e6b; --outline: #8a8d99;
+    --error: #b3261e; --error-bg: #fdecea; --ok: #1e7d3a;
+    --surface: #ffffff; --bg: #f5f6fb;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); }
+  body { font-family: "Roboto", "Noto Sans", "DejaVu Sans", sans-serif; color: var(--text); width: 390px; }
+  .status { height: 28px; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; font-size: 13px; font-weight: 600; background: var(--surface); }
+  .appbar { height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 12px; background: var(--surface); border-bottom: 1px solid #e3e4ec; }
+  .appbar .back { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 22px; }
+  .appbar h1 { font-size: 20px; font-weight: 500; margin: 0; }
+  main { padding: 18px 20px 28px; }
+  .intro { margin: 0 0 18px; color: var(--muted); font-size: 14px; line-height: 1.4; }
+  .req-note { font-size: 12px; color: var(--muted); margin: -8px 0 16px; }
+  .field { margin-bottom: 14px; }
+  label.lbl { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  label.lbl .opt { font-weight: 400; color: var(--muted); }
+  .box { position: relative; display: flex; align-items: center; height: 52px; background: var(--surface); border: 1.5px solid var(--outline); border-radius: 10px; padding: 0 12px; }
+  .box .ico { width: 22px; margin-right: 10px; text-align: center; color: var(--muted); font-size: 17px; }
+  .box input { flex: 1; border: 0; outline: 0; font-size: 16px; background: transparent; color: var(--text); font-family: inherit; min-width: 0; }
+  .box input::placeholder { color: #9a9daa; }
+  .box .state { width: 24px; text-align: center; font-weight: 700; font-size: 16px; }
+  .box .eye { font-size: 13px; color: var(--primary); font-weight: 600; margin-left: 6px; padding: 8px 4px; }
+  .field.focus .box { border: 2px solid var(--primary); box-shadow: 0 0 0 3px rgba(59,79,216,.15); }
+  .field.invalid .box { border: 2px solid var(--error); background: var(--error-bg); }
+  .field.invalid .ico { color: var(--error); }
+  .field.invalid .state { color: var(--error); }
+  .field.valid .box { border-color: var(--ok); }
+  .field.valid .state { color: var(--ok); }
+  .msg { font-size: 12.5px; margin-top: 5px; line-height: 1.35; min-height: 17px; display: flex; gap: 5px; }
+  .msg.help { color: var(--muted); }
+  .msg.err { color: var(--error); font-weight: 500; }
+  .meter { display: flex; gap: 4px; margin-top: 6px; }
+  .meter span { flex: 1; height: 5px; border-radius: 3px; background: #dcdde5; }
+  .meter.s1 span:nth-child(-n+1) { background: var(--error); }
+  .meter.s2 span:nth-child(-n+2) { background: #e08600; }
+  .meter.s3 span:nth-child(-n+3) { background: #c9a400; }
+  .meter.s4 span:nth-child(-n+4) { background: var(--ok); }
+  .checks { list-style: none; padding: 0; margin: 6px 0 0; font-size: 12.5px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; }
+  .checks li { color: var(--muted); }
+  .checks li.ok { color: var(--ok); }
+  .checks li.ko { color: var(--error); }
+  .terms { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.4; margin-top: 6px; padding: 6px 0; }
+  .terms .cb { flex: none; width: 24px; height: 24px; border: 2px solid var(--outline); border-radius: 5px; display: grid; place-items: center; color: #fff; font-size: 15px; font-weight: 700; margin-top: 1px; }
+  .terms.checked .cb { background: var(--primary); border-color: var(--primary); }
+  .terms.invalid .cb { border-color: var(--error); background: var(--error-bg); }
+  .terms a, .login a { color: var(--primary); font-weight: 500; text-decoration: underline; }
+  .btn { display: block; width: 100%; height: 52px; margin-top: 18px; border: 0; border-radius: 26px; font-size: 16px; font-weight: 600; letter-spacing: .2px; background: var(--primary); color: var(--on-primary); font-family: inherit; }
+  .btn:disabled { background: #d9dae3; color: #7d808c; }
+  .banner { display: none; background: var(--error-bg); border-left: 4px solid var(--error); color: var(--error); border-radius: 8px; padding: 10px 12px; font-size: 13.5px; margin-bottom: 16px; line-height: 1.4; }
+  .banner.show { display: block; }
+  .login { text-align: center; font-size: 14px; margin-top: 16px; color: var(--muted); }
+  /* Pantalla de éxito */
+  #success { display: none; padding: 70px 28px; text-align: center; }
+  #success .circle { width: 96px; height: 96px; margin: 0 auto 22px; border-radius: 50%; background: #e2f3e6; color: var(--ok); display: grid; place-items: center; font-size: 52px; font-weight: 700; }
+  #success h2 { font-size: 24px; margin: 0 0 10px; }
+  #success p { color: var(--muted); line-height: 1.5; margin: 0 0 6px; }
+  body.done #form-screen { display: none; }
+  body.done #success { display: block; }
+</style>
+</head>
+<body>
+  <div class="status"><span>9:41</span><span>▂▄▆ 📶 🔋 87%</span></div>
+  <header class="appbar"><div class="back" aria-label="Volver">←</div><h1>Crear cuenta</h1></header>
+
+  <main id="form-screen">
+    <p class="intro">Regístrate en <b>TaskFlow</b> para organizar tus tareas desde cualquier dispositivo.</p>
+    <p class="req-note">Todos los campos son obligatorios salvo los marcados como <i>opcional</i>.</p>
+    <div class="banner" id="banner" role="alert">⚠ Revisa los campos marcados en rojo antes de continuar.</div>
+
+    <form id="f" novalidate>
+      <div class="field" data-f="name">
+        <label class="lbl" for="name">Nombre y apellidos</label>
+        <div class="box"><span class="ico">👤</span><input id="name" autocomplete="name" placeholder="Ej. Laura Gómez Ruiz"><span class="state"></span></div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field" data-f="email">
+        <label class="lbl" for="email">Correo electrónico</label>
+        <div class="box"><span class="ico">✉</span><input id="email" type="email" inputmode="email" autocomplete="email" placeholder="nombre@ejemplo.com"><span class="state"></span></div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field" data-f="phone">
+        <label class="lbl" for="phone">Teléfono móvil <span class="opt">(opcional)</span></label>
+        <div class="box"><span class="ico">📱</span><input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="600 123 456"><span class="state"></span></div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field" data-f="birth">
+        <label class="lbl" for="birth">Fecha de nacimiento</label>
+        <div class="box"><span class="ico">📅</span><input id="birth" inputmode="numeric" placeholder="dd/mm/aaaa"><span class="state"></span></div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field" data-f="pass">
+        <label class="lbl" for="pass">Contraseña</label>
+        <div class="box"><span class="ico">🔒</span><input id="pass" type="password" autocomplete="new-password" placeholder="Crea una contraseña"><span class="state"></span><span class="eye">Mostrar</span></div>
+        <div class="meter" id="meter"><span></span><span></span><span></span><span></span></div>
+        <ul class="checks" id="checks">
+          <li data-c="len">○ 8 caracteres o más</li>
+          <li data-c="up">○ Una mayúscula</li>
+          <li data-c="num">○ Un número</li>
+          <li data-c="sym">○ Un símbolo (!@#…)</li>
+        </ul>
+        <div class="msg"></div>
+      </div>
+
+      <div class="field" data-f="pass2">
+        <label class="lbl" for="pass2">Repite la contraseña</label>
+        <div class="box"><span class="ico">🔒</span><input id="pass2" type="password" autocomplete="new-password" placeholder="Vuelve a escribirla"><span class="state"></span></div>
+        <div class="msg"></div>
+      </div>
+
+      <div class="terms" id="terms" role="checkbox" aria-checked="false">
+        <span class="cb"></span>
+        <span>He leído y acepto los <a>Términos de uso</a> y la <a>Política de privacidad</a>.</span>
+      </div>
+      <div class="msg" id="terms-msg"></div>
+
+      <button class="btn" id="submit" type="submit">Crear cuenta</button>
+    </form>
+    <p class="login">¿Ya tienes cuenta? <a>Inicia sesión</a></p>
+  </main>
+
+  <section id="success">
+    <div class="circle">✓</div>
+    <h2>¡Cuenta creada!</h2>
+    <p>Te hemos enviado un correo a <b id="sent-to"></b> para confirmar tu dirección.</p>
+    <p>Revisa tu bandeja de entrada (y la carpeta de spam).</p>
+    <button class="btn">Ir a mis tareas</button>
+  </section>
+
+<script>
+// Textos de ayuda que se muestran mientras el campo no tiene error
+const HELP = {
+  name:  'Tal y como aparece en tu documento de identidad.',
+  email: 'Te enviaremos un enlace para confirmar la cuenta.',
+  phone: '9 dígitos. Solo lo usaremos para recuperar tu cuenta.',
+  birth: 'Debes tener al menos 14 años para registrarte.',
+  pass:  'Usa al menos 8 caracteres con mayúscula, número y símbolo.',
+  pass2: 'Debe coincidir con la contraseña anterior.'
+};
+
+const $ = id => document.getElementById(id);
+let accepted = false;
+
+function passChecks(p) {
+  return { len: p.length >= 8, up: /[A-ZÁÉÍÓÚÑ]/.test(p), num: /\d/.test(p), sym: /[^A-Za-z0-9ÁÉÍÓÚÑáéíóúñ\s]/.test(p) };
+}
+
+function parseDate(s) {
+  const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s);
+  if (!m) return null;
+  const d = new Date(+m[3], +m[2] - 1, +m[1]);
+  return d.getDate() === +m[1] && d.getMonth() === +m[2] - 1 ? d : null;
+}
+
+// Cada validador devuelve '' si es correcto o el mensaje de error
+const RULES = {
+  name(v) {
+    if (!v.trim()) return 'Escribe tu nombre y apellidos.';
+    if (/\d/.test(v)) return 'El nombre no puede contener números.';
+    if (v.trim().split(/\s+/).length < 2) return 'Escribe también al menos un apellido.';
+    return '';
+  },
+  email(v) {
+    if (!v.trim()) return 'Escribe tu correo electrónico.';
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)) return 'Formato no válido. Ejemplo: nombre@ejemplo.com';
+    return '';
+  },
+  phone(v) {
+    if (!v.trim()) return '';
+    const digits = v.replace(/\s/g, '');
+    if (/\D/.test(digits)) return 'Solo se admiten números.';
+    if (digits.length !== 9) return `Debe tener 9 dígitos (has escrito ${digits.length}).`;
+    return '';
+  },
+  birth(v) {
+    if (!v.trim()) return 'Indica tu fecha de nacimiento.';
+    const d = parseDate(v);
+    if (!d) return 'Fecha no válida. Usa el formato dd/mm/aaaa.';
+    const today = new Date(2026, 9, 21);
+    let age = today.getFullYear() - d.getFullYear();
+    if (today < new Date(today.getFullYear(), d.getMonth(), d.getDate())) age--;
+    if (d > today) return 'La fecha no puede ser futura.';
+    if (age < 14) return `Debes tener al menos 14 años (tienes ${age}).`;
+    return '';
+  },
+  pass(v) {
+    if (!v) return 'Crea una contraseña.';
+    const c = passChecks(v);
+    if (!(c.len && c.up && c.num && c.sym)) return 'Contraseña demasiado débil: cumple los requisitos en rojo.';
+    return '';
+  },
+  pass2(v) {
+    if (!v) return 'Repite la contraseña.';
+    if (v !== $('pass').value) return 'Las contraseñas no coinciden.';
+    return '';
+  }
+};
+
+function updateMeter() {
+  const p = $('pass').value, c = passChecks(p);
+  const score = p ? Object.values(c).filter(Boolean).length : 0;
+  $('meter').className = 'meter' + (score ? ' s' + score : '');
+  document.querySelectorAll('#checks li').forEach(li => {
+    const ok = c[li.dataset.c];
+    li.className = !p ? '' : ok ? 'ok' : (touched.pass ? 'ko' : '');
+    li.textContent = (!p ? '○ ' : ok ? '✓ ' : '✕ ') + li.textContent.slice(2);
+  });
+}
+
+const touched = {};
+
+// Pinta un campo: ayuda si está sin tocar, error o ✓ tras validarlo
+function render(key) {
+  const field = document.querySelector(`[data-f="${key}"]`);
+  const v = $(key).value, msg = field.querySelector('.msg'), state = field.querySelector('.state');
+  field.classList.remove('invalid', 'valid');
+  if (!touched[key]) {
+    msg.className = 'msg help'; msg.textContent = HELP[key]; state.textContent = '';
+    return true;
+  }
+  const err = RULES[key](v);
+  if (err) {
+    field.classList.add('invalid');
+    msg.className = 'msg err'; msg.textContent = '⚠ ' + err; state.textContent = '!';
+  } else {
+    if (v) field.classList.add('valid');
+    msg.className = 'msg help'; msg.textContent = v ? '' : HELP[key]; state.textContent = v ? '✓' : '';
+  }
+  if (key === 'pass') updateMeter();
+  return !err;
+}
+
+function renderTerms(show) {
+  $('terms').classList.toggle('checked', accepted);
+  $('terms').classList.toggle('invalid', show && !accepted);
+  $('terms').querySelector('.cb').textContent = accepted ? '✓' : '';
+  $('terms-msg').className = 'msg err';
+  $('terms-msg').textContent = show && !accepted ? '⚠ Debes aceptar los términos para continuar.' : '';
+}
+
+function validateAll() {
+  let ok = true;
+  Object.keys(RULES).forEach(k => { touched[k] = true; ok = render(k) && ok; });
+  renderTerms(true);
+  ok = ok && accepted;
+  $('banner').classList.toggle('show', !ok);
+  return ok;
+}
+
+// El botón siempre está activo: al pulsarlo se muestran todos los errores pendientes
+function refreshButton() {}
+
+// Interacción real: validación al perder el foco y en vivo una vez tocado
+Object.keys(RULES).forEach(k => {
+  $(k).addEventListener('focus', () => document.querySelector(`[data-f="${k}"]`).classList.add('focus'));
+  $(k).addEventListener('blur', () => { document.querySelector(`[data-f="${k}"]`).classList.remove('focus'); touched[k] = true; render(k); refreshButton(); });
+  $(k).addEventListener('input', () => { if (k === 'pass') updateMeter(); if (touched[k]) render(k); refreshButton(); });
+});
+$('terms').addEventListener('click', () => { accepted = !accepted; renderTerms(false); refreshButton(); });
+$('f').addEventListener('submit', e => {
+  e.preventDefault();
+  if (validateAll()) { $('sent-to').textContent = $('email').value; document.body.classList.add('done'); }
+});
+
+// Estados predefinidos para las capturas: ?estado=...
+const DATA = {
+  ayuda:    { name: 'Daniel Madrid', email: 'daniel.madrid@', pass: 'daniel2', _touch: ['name'], _focus: 'pass' },
+  errores:  { name: 'Dani3l', email: 'daniel.madrid@gmail', phone: '6001234', birth: '31/02/2005', pass: 'daniel', pass2: 'daniel1', _all: true },
+  errores2: { name: 'Daniel', email: 'daniel madrid@gmail.com', phone: '600-12A-456', birth: '15/03/2015', pass: 'Daniel2003', pass2: 'Daniel2003', _all: true },
+  correcto: { name: 'Daniel Madrid Mérida', email: 'daniel.madrid@gmail.com', phone: '600 123 456', birth: '14/05/2003', pass: 'Dam2026!seguro', pass2: 'Dam2026!seguro', _terms: true, _touchAll: true },
+  exito:    { name: 'Daniel Madrid Mérida', email: 'daniel.madrid@gmail.com', phone: '600 123 456', birth: '14/05/2003', pass: 'Dam2026!seguro', pass2: 'Dam2026!seguro', _terms: true, _submit: true }
+};
+
+const estado = new URLSearchParams(location.search).get('estado') || 'vacio';
+const d = DATA[estado] || {};
+Object.keys(RULES).forEach(k => { if (d[k] !== undefined) $(k).value = d[k]; });
+if (d._terms) accepted = true;
+Object.keys(RULES).forEach(k => render(k));
+updateMeter();
+renderTerms(false);
+(d._touch || []).forEach(k => { touched[k] = true; render(k); });
+if (d._touchAll) Object.keys(RULES).forEach(k => { touched[k] = true; render(k); });
+if (d._focus) document.querySelector(`[data-f="${d._focus}"]`).classList.add('focus');
+if (d._all) validateAll();
+refreshButton();
+if (d._submit && validateAll()) { $('sent-to').textContent = $('email').value; document.body.classList.add('done'); }
+</script>
+</body>
+</html>

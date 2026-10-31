@@ -11,6 +11,7 @@
 - [1.4 · Técnicas de programación concurrente](1.4%20-%20Tecnicas%20de%20programacion%20concurrente.md) ✅
 - [1.5 · Orden de ejecución](1.5%20-%20Orden%20de%20ejecucion.md) ✅
 - [1.6 · Sincronización](1.6%20-%20Sincronizacion.md) ✅
+- [1.7 · Comunicación](1.7%20-%20Comunicaci%C3%B3n.md) ✅
 
 ## 📎 Otros
 

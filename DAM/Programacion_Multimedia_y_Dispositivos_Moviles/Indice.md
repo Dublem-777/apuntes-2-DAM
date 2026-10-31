@@ -20,14 +20,19 @@ tags:
 - [[04.1 - Ejercicios 4 Estructuras básicas]] ✅ ejercicios 4.1–4.10
 - [[05 - Operaciones con tipos nullables]] ✅ completo
 - [[05.1 - Ejercicios 5 Operaciones con tipos nullables]] ✅ ejercicios 5.1–5.7
-- [[Programación Orientada a Objetos 1]] ✅ completo
+- [[06 - POO I]] ✅ completo
 - [[06.1 - Ejercicios 6 Programación Orientada a Objetos 1]] ✅ ejercicios 6.1–6.14
-- [[Programación Orientada a Objetos 2]] ✅ completo
+- [[07 - POO II]] ✅ completo
 - [[07.1 - Ejercicios 7 Programación Orientada a Objetos 2]] ✅ ejercicios 7.1–7.11
-- [08 - POO III]
-- [09 - Genéricos]
-- [10 - Programación funcional]
-- [11 - Colecciones]
+- [[08 - POO III]] ✅ completo
+- [[08.1 - Ejercicios 8 POO III]] ✅ ejercicios 8.1–8.14
+- [[09 - Genéricos]] ✅ completo
+- [[09.1 - Ejercicios 9 Genéricos]] ✅ ejercicios 9.1–9.7
+- [[10 - Programación funcional]] ✅ completo
+- [[10.1 - Ejercicios 10 Programación funcional]] ✅ ejercicios 10.1–10.12
+- [[11 - Colecciones]] ✅ completo
+- [[11.1 - Ejercicios 11 Colecciones]] ✅ ejercicios 11.1–11.6
+- [[Bloque 1 - Ejercicios Kotlin]] 🔄 en curso · ejercicio 1
 
 ---
 
