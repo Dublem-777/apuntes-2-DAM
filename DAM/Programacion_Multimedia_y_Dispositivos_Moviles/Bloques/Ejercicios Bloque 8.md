@@ -17,7 +17,6 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[06 - POO I]] · [[11 - Colecciones]]
 > Bloque anterior: [[Ejercicios Bloque 7]]
-> **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema6-POO I/` (`Ejercicio6.7`, `6.9`, `6.11`, `6.13`, `6.14`)
 > **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque08/`
 
 > [!note] Sobre las soluciones

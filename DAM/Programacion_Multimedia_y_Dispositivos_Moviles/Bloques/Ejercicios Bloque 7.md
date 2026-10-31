@@ -17,7 +17,6 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[06 - POO I]] · [[04 - Estructuras básicas]]
 > Bloque anterior: [[Ejercicios Bloque 6]]
-> **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema6-POO I/` (`Ejercicio6.1`, `Ejercicio6.2`)
 > **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque07/`
 
 > [!note] Sobre las soluciones

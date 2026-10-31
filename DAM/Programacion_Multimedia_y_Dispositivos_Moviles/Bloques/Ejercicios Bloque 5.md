@@ -16,7 +16,6 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[02 - Jerarquia de tipos]] · [[04 - Estructuras básicas]]
 > Bloque anterior: [[Ejercicios Bloque 4]]
-> **Ruta fuente (boletín, ejercicio 2):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema4-Estructuras-Basicas/Ejercicio4.6/src/Main.kt`
 > **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque05/`
 
 > [!note] Sobre las soluciones

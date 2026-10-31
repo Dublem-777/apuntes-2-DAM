@@ -17,7 +17,6 @@ tags:
 > [[DAM/Programacion_Multimedia_y_Dispositivos_Moviles/Indice|Programación Multimedia y Dispositivos Móviles]] · Bloque de ejercicios de Kotlin
 > Apuntes relacionados: [[05 - Operaciones con tipos nullables]] · [[06 - POO I]] · [[03 - Funciones]]
 > Bloque anterior: [[Ejercicios Bloque 5]]
-> **Ruta fuente (boletín):** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Tema5-OperacionesConTiposNullables/` (`Ejercicio5.2/src/Main2.kt`, `Ejercicio5.4`, `Ejercicio5.7`)
 > **Ruta fuente:** `/home/dublem/Documentos/Programas_clase/Programación Multimedia y para Dispositivos Móviles/Bloques/Bloque06/`
 
 > [!note] Sobre las soluciones
