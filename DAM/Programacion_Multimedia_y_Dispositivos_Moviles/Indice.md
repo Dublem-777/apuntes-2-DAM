@@ -52,14 +52,23 @@ tags:
 
 # Android
 
-- [01 - Introducción a la programación para Android]
-- [02 - Creación de un proyecto]
-- [03 - Recursos]
-- [04 - Vistas básicas I]
-- [05 - Vistas básicas II]
-- [06 - Vistas básicas III]
-- [07 - Mensajes emergentes]
-- [08 - Gestión de la entrada de texto]
+> [!info] Asignatura: Optativa
+> Este temario se imparte en la **Optativa**, aunque los apuntes estén aquí, en PMDM. Las notas llevan `asignatura: Optativa` y tags `DAM/optativa/…`.
+
+- [[01 - Introducción a la programación para Android]] ✅ completo
+- [[02 - Creación de un proyecto]] ✅ completo
+- [[03 - Recursos]] ✅ completo
+- [[03.1 - Ejercicios 3 Recursos]] ✅ ejercicio 3.1 (proyecto HelloWorld con recursos)
+- [[04 - Vistas básicas I]] ✅ completo
+- [[04.1 - Ejercicios 4 Vistas básicas I]] ✅ ejercicio 4.1 (proyecto CountingClicks)
+- [[05 - Vistas básicas II]] ✅ completo
+- [[06 - Vistas básicas III]] ✅ completo
+- [[07 - Mensajes emergentes]] ✅ completo
+- [[08 - Gestión de la entrada de texto]] ✅ completo
+- [[08.1 - Ejercicios 8 Gestión de la entrada de texto]] ✅ ejercicio 8.1 (proyecto Login)
+- [[Práctica 0 - Marco Polo]] ✅ completa
+- [[Práctica 1 - BMI]] ✅ completa
+- [[Práctica 2 - Login con Snackbar y diálogo]] ✅ completa
 - [09 - ViewGroups básicos]
 - [10 - ConstraintLayout]
 - [11 - Cards y FABs]

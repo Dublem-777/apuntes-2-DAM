@@ -7,18 +7,8 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Bloques](Bloques/README.md) | 15 |
-| [Tema 1](Tema%201/README.md) | 2 |
-| [Tema 2](Tema%202/README.md) | 2 |
-| [Tema 3](Tema%203/README.md) | 2 |
-| [Tema 4](Tema%204/README.md) | 2 |
-| [Tema 5](Tema%205/README.md) | 2 |
-| [Tema 6](Tema%206/README.md) | 2 |
-| [Tema 7](Tema%207/README.md) | 2 |
-| [Tema 8](Tema%208/README.md) | 2 |
-| [Tema 9](Tema%209/README.md) | 2 |
-| [Tema 10](Tema%2010/README.md) | 2 |
-| [Tema 11](Tema%2011/README.md) | 2 |
+| [Android](Android/README.md) | 14 |
+| [Kotlin](Kotlin/README.md) | 37 |
 
 ---
 
@@ -30,56 +20,66 @@
 
 ## Kotlin
 
-- [01 - Introduccion a Kotlin](Tema%201/01%20-%20Introduccion%20a%20Kotlin.md) ✅ completo
-- [01.1 - Ejercicios 1 Introduccion a Kotlin](Tema%201/01.1%20-%20Ejercicios%201%20Introduccion%20a%20Kotlin.md) ✅ ejercicio 1.1
-- [02 - Jerarquia de tipos](Tema%202/02%20-%20Jerarquia%20de%20tipos.md) ✅ completo
-- [02.1 - Ejercicios 2 Jerarquia de Tipos](Tema%202/02.1%20-%20Ejercicios%202%20Jerarquia%20de%20Tipos.md) ✅ ejercicios 2.1–2.10
-- [03 - Funciones](Tema%203/03%20-%20Funciones.md) ✅ completo
-- [03.1 - Ejercicios 3 Funciones](Tema%203/03.1%20-%20Ejercicios%203%20Funciones.md) ✅ ejercicios 3.1–3.11
-- [04 - Estructuras básicas](Tema%204/04%20-%20Estructuras%20b%C3%A1sicas.md) ✅ completo
-- [04.1 - Ejercicios 4 Estructuras básicas](Tema%204/04.1%20-%20Ejercicios%204%20Estructuras%20b%C3%A1sicas.md) ✅ ejercicios 4.1–4.10
-- [05 - Operaciones con tipos nullables](Tema%205/05%20-%20Operaciones%20con%20tipos%20nullables.md) ✅ completo
-- [05.1 - Ejercicios 5 Operaciones con tipos nullables](Tema%205/05.1%20-%20Ejercicios%205%20Operaciones%20con%20tipos%20nullables.md) ✅ ejercicios 5.1–5.7
-- [06 - POO I](Tema%206/06%20-%20POO%20I.md) ✅ completo
-- [06.1 - Ejercicios 6 Programación Orientada a Objetos 1](Tema%206/06.1%20-%20Ejercicios%206%20Programaci%C3%B3n%20Orientada%20a%20Objetos%201.md) ✅ ejercicios 6.1–6.14
-- [07 - POO II](Tema%207/07%20-%20POO%20II.md) ✅ completo
-- [07.1 - Ejercicios 7 Programación Orientada a Objetos 2](Tema%207/07.1%20-%20Ejercicios%207%20Programaci%C3%B3n%20Orientada%20a%20Objetos%202.md) ✅ ejercicios 7.1–7.11
-- [08 - POO III](Tema%208/08%20-%20POO%20III.md) ✅ completo
-- [08.1 - Ejercicios 8 POO III](Tema%208/08.1%20-%20Ejercicios%208%20POO%20III.md) ✅ ejercicios 8.1–8.14
-- [09 - Genéricos](Tema%209/09%20-%20Gen%C3%A9ricos.md) ✅ completo
-- [09.1 - Ejercicios 9 Genéricos](Tema%209/09.1%20-%20Ejercicios%209%20Gen%C3%A9ricos.md) ✅ ejercicios 9.1–9.7
-- [10 - Programación funcional](Tema%2010/10%20-%20Programaci%C3%B3n%20funcional.md) ✅ completo
-- [10.1 - Ejercicios 10 Programación funcional](Tema%2010/10.1%20-%20Ejercicios%2010%20Programaci%C3%B3n%20funcional.md) ✅ ejercicios 10.1–10.12
-- [11 - Colecciones](Tema%2011/11%20-%20Colecciones.md) ✅ completo
-- [11.1 - Ejercicios 11 Colecciones](Tema%2011/11.1%20-%20Ejercicios%2011%20Colecciones.md) ✅ ejercicios 11.1–11.6
-- [Ejercicios Bloque 1](Bloques/Ejercicios%20Bloque%201.md) 🔄 en curso · ejercicio 1
-- [Ejercicios Bloque 2](Bloques/Ejercicios%20Bloque%202.md) ✅ ejercicios 1–2 (ordenar 3 números · mayúscula/minúscula por código)
-- [Ejercicios Bloque 3](Bloques/Ejercicios%20Bloque%203.md) ✅ ejercicios 1–6 (arrays · `Any?` · primos · bisiestos · argumentos por defecto y con nombre)
-- [Ejercicios Bloque 4](Bloques/Ejercicios%20Bloque%204.md) ✅ ejercicios 1–5 (`vararg` · `infix` · `when` anidado, sin sujeto y con sujeto)
-- [Ejercicios Bloque 5](Bloques/Ejercicios%20Bloque%205.md) ✅ ejercicios 1–3 (`when` sobre `Any?` con guardas · árbol de Navidad con `for` y con `repeat`)
-- [Ejercicios Bloque 6](Bloques/Ejercicios%20Bloque%206.md) ✅ ejercicios 1–3 (llamada segura `?.` · Elvis `?:` · cast seguro `as?`)
-- [Ejercicios Bloque 7](Bloques/Ejercicios%20Bloque%207.md) ✅ ejercicios 1–3 (`init` y `require` · constructor secundario · setter con validación)
-- [Ejercicios Bloque 8](Bloques/Ejercicios%20Bloque%208.md) ✅ ejercicios 1–5 (propiedad de respaldo · herencia · `inner` · `object` · `companion object`)
-- [Ejercicios Bloque 9](Bloques/Ejercicios%20Bloque%209.md) ✅ ejercicios 1–3 (`data class` y `copy()` · desestructuración · clase abstracta)
-- [Ejercicios Bloque 10](Bloques/Ejercicios%20Bloque%2010.md) ✅ ejercicios 1–3 (enum con propiedades · interfaces · *object expressions*)
-- [Ejercicios Bloque 11](Bloques/Ejercicios%20Bloque%2011.md) ✅ ejercicios 1–3 (`const val` en `companion object` · *extension function* · *extension property*)
-- [Ejercicios Bloque 12](Bloques/Ejercicios%20Bloque%2012.md) ✅ ejercicios 1–5 (*top-level* y `private` · `lateinit` · orden superior · `filter`/`map`/`sumOf`)
-- [Ejercicios Bloque 13](Bloques/Ejercicios%20Bloque%2013.md) ✅ ejercicios 1–3 (sobrecarga de `+` · `by lazy` · singleton perezoso)
-- [Ejercicios Bloque 14](Bloques/Ejercicios%20Bloque%2014.md) ✅ ejercicios 1–9 (*sealed* · *value class* · `fun interface` · `inline` · genéricos · `hacerCon` con receptor)
-- [Ejercicios Bloque 15](Bloques/Ejercicios%20Bloque%2015.md) ✅ ejercicios 1–6 (crear y convertir colecciones · operadores · métodos de listas · `filter`/`sortedBy` · secuencias)
+- [01 - Introduccion a Kotlin](Kotlin/Tema%201/01%20-%20Introduccion%20a%20Kotlin.md) ✅ completo
+- [01.1 - Ejercicios 1 Introduccion a Kotlin](Kotlin/Tema%201/01.1%20-%20Ejercicios%201%20Introduccion%20a%20Kotlin.md) ✅ ejercicio 1.1
+- [02 - Jerarquia de tipos](Kotlin/Tema%202/02%20-%20Jerarquia%20de%20tipos.md) ✅ completo
+- [02.1 - Ejercicios 2 Jerarquia de Tipos](Kotlin/Tema%202/02.1%20-%20Ejercicios%202%20Jerarquia%20de%20Tipos.md) ✅ ejercicios 2.1–2.10
+- [03 - Funciones](Kotlin/Tema%203/03%20-%20Funciones.md) ✅ completo
+- [03.1 - Ejercicios 3 Funciones](Kotlin/Tema%203/03.1%20-%20Ejercicios%203%20Funciones.md) ✅ ejercicios 3.1–3.11
+- [04 - Estructuras básicas](Kotlin/Tema%204/04%20-%20Estructuras%20b%C3%A1sicas.md) ✅ completo
+- [04.1 - Ejercicios 4 Estructuras básicas](Kotlin/Tema%204/04.1%20-%20Ejercicios%204%20Estructuras%20b%C3%A1sicas.md) ✅ ejercicios 4.1–4.10
+- [05 - Operaciones con tipos nullables](Kotlin/Tema%205/05%20-%20Operaciones%20con%20tipos%20nullables.md) ✅ completo
+- [05.1 - Ejercicios 5 Operaciones con tipos nullables](Kotlin/Tema%205/05.1%20-%20Ejercicios%205%20Operaciones%20con%20tipos%20nullables.md) ✅ ejercicios 5.1–5.7
+- [06 - POO I](Kotlin/Tema%206/06%20-%20POO%20I.md) ✅ completo
+- [06.1 - Ejercicios 6 Programación Orientada a Objetos 1](Kotlin/Tema%206/06.1%20-%20Ejercicios%206%20Programaci%C3%B3n%20Orientada%20a%20Objetos%201.md) ✅ ejercicios 6.1–6.14
+- [07 - POO II](Kotlin/Tema%207/07%20-%20POO%20II.md) ✅ completo
+- [07.1 - Ejercicios 7 Programación Orientada a Objetos 2](Kotlin/Tema%207/07.1%20-%20Ejercicios%207%20Programaci%C3%B3n%20Orientada%20a%20Objetos%202.md) ✅ ejercicios 7.1–7.11
+- [08 - POO III](Kotlin/Tema%208/08%20-%20POO%20III.md) ✅ completo
+- [08.1 - Ejercicios 8 POO III](Kotlin/Tema%208/08.1%20-%20Ejercicios%208%20POO%20III.md) ✅ ejercicios 8.1–8.14
+- [09 - Genéricos](Kotlin/Tema%209/09%20-%20Gen%C3%A9ricos.md) ✅ completo
+- [09.1 - Ejercicios 9 Genéricos](Kotlin/Tema%209/09.1%20-%20Ejercicios%209%20Gen%C3%A9ricos.md) ✅ ejercicios 9.1–9.7
+- [10 - Programación funcional](Kotlin/Tema%2010/10%20-%20Programaci%C3%B3n%20funcional.md) ✅ completo
+- [10.1 - Ejercicios 10 Programación funcional](Kotlin/Tema%2010/10.1%20-%20Ejercicios%2010%20Programaci%C3%B3n%20funcional.md) ✅ ejercicios 10.1–10.12
+- [11 - Colecciones](Kotlin/Tema%2011/11%20-%20Colecciones.md) ✅ completo
+- [11.1 - Ejercicios 11 Colecciones](Kotlin/Tema%2011/11.1%20-%20Ejercicios%2011%20Colecciones.md) ✅ ejercicios 11.1–11.6
+- [Ejercicios Bloque 1](Kotlin/Bloques/Ejercicios%20Bloque%201.md) 🔄 en curso · ejercicio 1
+- [Ejercicios Bloque 2](Kotlin/Bloques/Ejercicios%20Bloque%202.md) ✅ ejercicios 1–2 (ordenar 3 números · mayúscula/minúscula por código)
+- [Ejercicios Bloque 3](Kotlin/Bloques/Ejercicios%20Bloque%203.md) ✅ ejercicios 1–6 (arrays · `Any?` · primos · bisiestos · argumentos por defecto y con nombre)
+- [Ejercicios Bloque 4](Kotlin/Bloques/Ejercicios%20Bloque%204.md) ✅ ejercicios 1–5 (`vararg` · `infix` · `when` anidado, sin sujeto y con sujeto)
+- [Ejercicios Bloque 5](Kotlin/Bloques/Ejercicios%20Bloque%205.md) ✅ ejercicios 1–3 (`when` sobre `Any?` con guardas · árbol de Navidad con `for` y con `repeat`)
+- [Ejercicios Bloque 6](Kotlin/Bloques/Ejercicios%20Bloque%206.md) ✅ ejercicios 1–3 (llamada segura `?.` · Elvis `?:` · cast seguro `as?`)
+- [Ejercicios Bloque 7](Kotlin/Bloques/Ejercicios%20Bloque%207.md) ✅ ejercicios 1–3 (`init` y `require` · constructor secundario · setter con validación)
+- [Ejercicios Bloque 8](Kotlin/Bloques/Ejercicios%20Bloque%208.md) ✅ ejercicios 1–5 (propiedad de respaldo · herencia · `inner` · `object` · `companion object`)
+- [Ejercicios Bloque 9](Kotlin/Bloques/Ejercicios%20Bloque%209.md) ✅ ejercicios 1–3 (`data class` y `copy()` · desestructuración · clase abstracta)
+- [Ejercicios Bloque 10](Kotlin/Bloques/Ejercicios%20Bloque%2010.md) ✅ ejercicios 1–3 (enum con propiedades · interfaces · *object expressions*)
+- [Ejercicios Bloque 11](Kotlin/Bloques/Ejercicios%20Bloque%2011.md) ✅ ejercicios 1–3 (`const val` en `companion object` · *extension function* · *extension property*)
+- [Ejercicios Bloque 12](Kotlin/Bloques/Ejercicios%20Bloque%2012.md) ✅ ejercicios 1–5 (*top-level* y `private` · `lateinit` · orden superior · `filter`/`map`/`sumOf`)
+- [Ejercicios Bloque 13](Kotlin/Bloques/Ejercicios%20Bloque%2013.md) ✅ ejercicios 1–3 (sobrecarga de `+` · `by lazy` · singleton perezoso)
+- [Ejercicios Bloque 14](Kotlin/Bloques/Ejercicios%20Bloque%2014.md) ✅ ejercicios 1–9 (*sealed* · *value class* · `fun interface` · `inline` · genéricos · `hacerCon` con receptor)
+- [Ejercicios Bloque 15](Kotlin/Bloques/Ejercicios%20Bloque%2015.md) ✅ ejercicios 1–6 (crear y convertir colecciones · operadores · métodos de listas · `filter`/`sortedBy` · secuencias)
 
 ---
 
 ## Android
 
-- [01 - Introducción a la programación para Android]
-- [02 - Creación de un proyecto]
-- [03 - Recursos]
-- [04 - Vistas básicas I]
-- [05 - Vistas básicas II]
-- [06 - Vistas básicas III]
-- [07 - Mensajes emergentes]
-- [08 - Gestión de la entrada de texto]
+> [!NOTE]
+> **Asignatura: Optativa**
+> Este temario se imparte en la **Optativa**, aunque los apuntes estén aquí, en PMDM. Las notas llevan `asignatura: Optativa` y tags `DAM/optativa/…`.
+
+- [01 - Introducción a la programación para Android](Android/Tema%201/01%20-%20Introducci%C3%B3n%20a%20la%20programaci%C3%B3n%20para%20Android.md) ✅ completo
+- [02 - Creación de un proyecto](Android/Tema%202/02%20-%20Creaci%C3%B3n%20de%20un%20proyecto.md) ✅ completo
+- [03 - Recursos](Android/Tema%203/03%20-%20Recursos.md) ✅ completo
+- [03.1 - Ejercicios 3 Recursos](Android/Tema%203/03.1%20-%20Ejercicios%203%20Recursos.md) ✅ ejercicio 3.1 (proyecto HelloWorld con recursos)
+- [04 - Vistas básicas I](Android/Tema%204/04%20-%20Vistas%20b%C3%A1sicas%20I.md) ✅ completo
+- [04.1 - Ejercicios 4 Vistas básicas I](Android/Tema%204/04.1%20-%20Ejercicios%204%20Vistas%20b%C3%A1sicas%20I.md) ✅ ejercicio 4.1 (proyecto CountingClicks)
+- [05 - Vistas básicas II](Android/Tema%205/05%20-%20Vistas%20b%C3%A1sicas%20II.md) ✅ completo
+- [06 - Vistas básicas III](Android/Tema%206/06%20-%20Vistas%20b%C3%A1sicas%20III.md) ✅ completo
+- [07 - Mensajes emergentes](Android/Tema%207/07%20-%20Mensajes%20emergentes.md) ✅ completo
+- [08 - Gestión de la entrada de texto](Android/Tema%208/08%20-%20Gesti%C3%B3n%20de%20la%20entrada%20de%20texto.md) ✅ completo
+- [08.1 - Ejercicios 8 Gestión de la entrada de texto](Android/Tema%208/08.1%20-%20Ejercicios%208%20Gesti%C3%B3n%20de%20la%20entrada%20de%20texto.md) ✅ ejercicio 8.1 (proyecto Login)
+- [Práctica 0 - Marco Polo](Android/Practicas/Pr%C3%A1ctica%200%20-%20Marco%20Polo.md) ✅ completa
+- [Práctica 1 - BMI](Android/Practicas/Pr%C3%A1ctica%201%20-%20BMI.md) ✅ completa
+- [Práctica 2 - Login con Snackbar y diálogo](Android/Practicas/Pr%C3%A1ctica%202%20-%20Login%20con%20Snackbar%20y%20di%C3%A1logo.md) ✅ completa
 - [09 - ViewGroups básicos]
 - [10 - ConstraintLayout]
 - [11 - Cards y FABs]
