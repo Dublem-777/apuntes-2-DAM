@@ -5,7 +5,7 @@
 
 ## 📖 Teoría y apuntes
 
-- [1 · Ficheros](01%20-%20Ficheros.md) 🕒
+- [1 · Ficheros](01%20-%20Ficheros.md) ✅
 
 ## 📁 Ejercicios
 
