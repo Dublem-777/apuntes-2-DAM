@@ -7,7 +7,7 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Android](Android/README.md) | 14 |
+| [Android](Android/README.md) | 15 |
 | [Kotlin](Kotlin/README.md) | 37 |
 
 ---
@@ -65,6 +65,10 @@
 > [!NOTE]
 > **Asignatura: Optativa**
 > Este temario se imparte en la **Optativa**, aunque los apuntes estén aquí, en PMDM. Las notas llevan `asignatura: Optativa` y tags `DAM/optativa/…`.
+
+> [!TIP]
+> **¿Empiezas con Android?**
+> Lee primero [Guía - Cómo hacer un ejercicio de Android](Android/Gu%C3%ADa%20-%20C%C3%B3mo%20hacer%20un%20ejercicio%20de%20Android.md): las piezas de una app, la receta de 7 pasos para cualquier ejercicio, una chuleta y los errores típicos.
 
 - [01 - Introducción a la programación para Android](Android/Tema%201/01%20-%20Introducci%C3%B3n%20a%20la%20programaci%C3%B3n%20para%20Android.md) ✅ completo
 - [02 - Creación de un proyecto](Android/Tema%202/02%20-%20Creaci%C3%B3n%20de%20un%20proyecto.md) ✅ completo

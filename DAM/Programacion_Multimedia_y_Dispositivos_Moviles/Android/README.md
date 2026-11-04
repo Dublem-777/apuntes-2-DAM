@@ -3,6 +3,10 @@
 
 [⬅️ Volver a Programacion Multimedia y Dispositivos Moviles](../README.md) · [🏠 Inicio](../../../README.md)
 
+## 📖 Teoría y apuntes
+
+- [Guía · Cómo hacer un ejercicio de Android (desde cero)](Gu%C3%ADa%20-%20C%C3%B3mo%20hacer%20un%20ejercicio%20de%20Android.md) ✅
+
 ## 📁 Practicas
 
 ### 💻 Ejercicios y actividades
