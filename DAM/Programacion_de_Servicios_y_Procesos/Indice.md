@@ -51,18 +51,19 @@ tags:
     
 - 3 - Gestión de hilos
     - [Intro 3]
-    - [3.1 - Introducción]
-    - [3.2 - Thread]
-    - [3.3 - Runnable]
-    - [3.4 - Prioridad]
-    - [3.5 - Interrumpir]
-    - [3.6 - Dormir]
-    - [3.7 - Esperar la finalización]
-    - [3.8 - Daemons]
-    - [3.9 - UncaughtExceptionHandler]
-    - [3.10 - ThreadGroup]
-    - [3.11 - ThreadFactory]
-    - [3.12 - ThreadLocal]
+    - [[3.1 - Introduccion|3.1 - Introducción]] ✅
+    - [[3.2 - Thread]] ✅
+    - [[3.3 - Runnable]] ✅
+    - [[3.4 - Prioridad]] ✅
+    - [[3.5 - Interrumpir]] ✅
+    - [[3.6 - Dormir]] ✅
+    - [[3.7 - Esperar la finalización]] ✅
+    - [[3.8 - Daemons]] ✅
+    - [[3.9 - UncaughtExceptionHandler]] ✅
+    - [[3.10 - ThreadGroup]] ✅
+    - [[3.11 - ThreadFactory]] ✅
+    - [[3.12 - ThreadLocal]] ✅
+    - [[3.E - Ejercicios del Tema 3]] (en curso: ejercicios 3.1–3.4)
     
 - 4 - Cerrojos
     - [Intro 4]

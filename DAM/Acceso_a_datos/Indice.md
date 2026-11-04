@@ -42,9 +42,9 @@ tags:
 		- 11.3 Biblioteca Jackson
 - [[01.1 - Ejercicios 1 Directorios]] ✅ boletín 1 (ejercicios 1–5)
 - [[01.2 - Ejercicios 1 Ficheros de texto]] ✅ boletín 1 (ejercicios 1–4)
-- [[01.3 - Ejercicios 1 Ficheros binarios]] _(pendiente)_
-- [[01.4 - Ejercicios 1 Ficheros binarios de objetos]] _(pendiente)_
-- [[01.5 - Ejercicios 1 Ficheros de acceso aleatorio]] _(pendiente)_
+- [[01.3 - Ejercicios 1 Ficheros binarios]] ✅ boletín 1 (ejercicio 1)
+- [[01.4 - Ejercicios 1 Ficheros binarios de objetos]] ✅ boletín 1 (ejercicio 1)
+- [[01.5 - Ejercicios 1 Ficheros de acceso aleatorio]] ✅ boletín 1 (ejercicio 1)
 - 02 - Bases de datos relacionales _(pendiente)_
 
 ## Normas

@@ -10,6 +10,7 @@
 | [Preparación examen temas 1 y 2](Preparaci%C3%B3n%20examen%20temas%201%20y%202/README.md) | 33 |
 | [Tema 1](Tema%201/README.md) | 11 |
 | [Tema 2](Tema%202/README.md) | 9 |
+| [Tema 3](Tema%203/README.md) | 13 |
 
 ---
 
@@ -63,18 +64,19 @@
     
 - 3 - Gestión de hilos
     - [Intro 3]
-    - [3.1 - Introducción]
-    - [3.2 - Thread]
-    - [3.3 - Runnable]
-    - [3.4 - Prioridad]
-    - [3.5 - Interrumpir]
-    - [3.6 - Dormir]
-    - [3.7 - Esperar la finalización]
-    - [3.8 - Daemons]
-    - [3.9 - UncaughtExceptionHandler]
-    - [3.10 - ThreadGroup]
-    - [3.11 - ThreadFactory]
-    - [3.12 - ThreadLocal]
+    - [3.1 - Introducción](Tema%203/3.1%20-%20Introduccion.md) ✅
+    - [3.2 - Thread](Tema%203/3.2%20-%20Thread.md) ✅
+    - [3.3 - Runnable](Tema%203/3.3%20-%20Runnable.md) ✅
+    - [3.4 - Prioridad](Tema%203/3.4%20-%20Prioridad.md) ✅
+    - [3.5 - Interrumpir](Tema%203/3.5%20-%20Interrumpir.md) ✅
+    - [3.6 - Dormir](Tema%203/3.6%20-%20Dormir.md) ✅
+    - [3.7 - Esperar la finalización](Tema%203/3.7%20-%20Esperar%20la%20finalizaci%C3%B3n.md) ✅
+    - [3.8 - Daemons](Tema%203/3.8%20-%20Daemons.md) ✅
+    - [3.9 - UncaughtExceptionHandler](Tema%203/3.9%20-%20UncaughtExceptionHandler.md) ✅
+    - [3.10 - ThreadGroup](Tema%203/3.10%20-%20ThreadGroup.md) ✅
+    - [3.11 - ThreadFactory](Tema%203/3.11%20-%20ThreadFactory.md) ✅
+    - [3.12 - ThreadLocal](Tema%203/3.12%20-%20ThreadLocal.md) ✅
+    - [3.E - Ejercicios del Tema 3](Tema%203/Ejercicios/3.E%20-%20Ejercicios%20del%20Tema%203.md) (en curso: ejercicios 3.1–3.4)
     
 - 4 - Cerrojos
     - [Intro 4]

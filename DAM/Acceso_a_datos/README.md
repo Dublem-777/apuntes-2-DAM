@@ -57,9 +57,9 @@
 		- 11.3 Biblioteca Jackson
 - [01.1 - Ejercicios 1 Directorios](Tema%201/Ejercicios/01.1%20-%20Ejercicios%201%20Directorios.md) ✅ boletín 1 (ejercicios 1–5)
 - [01.2 - Ejercicios 1 Ficheros de texto](Tema%201/Ejercicios/01.2%20-%20Ejercicios%201%20Ficheros%20de%20texto.md) ✅ boletín 1 (ejercicios 1–4)
-- [01.3 - Ejercicios 1 Ficheros binarios](Tema%201/Ejercicios/01.3%20-%20Ejercicios%201%20Ficheros%20binarios.md) _(pendiente)_
-- [01.4 - Ejercicios 1 Ficheros binarios de objetos](Tema%201/Ejercicios/01.4%20-%20Ejercicios%201%20Ficheros%20binarios%20de%20objetos.md) _(pendiente)_
-- [01.5 - Ejercicios 1 Ficheros de acceso aleatorio](Tema%201/Ejercicios/01.5%20-%20Ejercicios%201%20Ficheros%20de%20acceso%20aleatorio.md) _(pendiente)_
+- [01.3 - Ejercicios 1 Ficheros binarios](Tema%201/Ejercicios/01.3%20-%20Ejercicios%201%20Ficheros%20binarios.md) ✅ boletín 1 (ejercicio 1)
+- [01.4 - Ejercicios 1 Ficheros binarios de objetos](Tema%201/Ejercicios/01.4%20-%20Ejercicios%201%20Ficheros%20binarios%20de%20objetos.md) ✅ boletín 1 (ejercicio 1)
+- [01.5 - Ejercicios 1 Ficheros de acceso aleatorio](Tema%201/Ejercicios/01.5%20-%20Ejercicios%201%20Ficheros%20de%20acceso%20aleatorio.md) ✅ boletín 1 (ejercicio 1)
 - 02 - Bases de datos relacionales _(pendiente)_
 
 ### Normas
