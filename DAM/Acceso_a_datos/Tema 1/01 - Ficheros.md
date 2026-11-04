@@ -2,7 +2,7 @@
 asignatura: AD
 tema: 1
 tipo: tema
-estado: en curso
+estado: completo
 fecha: 2026-09-17
 tags:
   - DAM/tema
@@ -12,7 +12,7 @@ tags:
 # 1 · Ficheros
 
 > [!info] Asignatura
-> [[DAM/Acceso_a_datos/Indice|Acceso a Datos]] · Tema 1 · por ahora dados 1–5
+> [[DAM/Acceso_a_datos/Indice|Acceso a Datos]] · Tema 1 · completo
 
 ## Índice del tema
 
@@ -28,25 +28,25 @@ tags:
 	- [[#4.6 Renombrar un directorio]] ✅
 	- [[#4.7 Mover y renombrar al mismo tiempo un directorio]] ✅
 - [[#5. Listar elementos de un directorio]] ✅
-- [[#6. Flujos]]
-- [[#7. Ficheros de texto]]
-	- [[#7.1 Método Files.readAllLines]]
-	- [[#7.2 Método Files.writeString]]
-	- [[#7.3 Método Files.write]]
-	- [[#7.4 Clases BufferedReader y BufferedWriter]]
-	- [[#7.5 Operaciones con arrays y desplazamientos]]
-		- [[#7.5.1 Lectura]]
-		- [[#7.5.2 Escritura]]
-- [[#8. Método flush]]
-- [[#9. Ficheros binarios]]
-	- [[#9.1 FileInputStream y FileOutputStream]]
-	- [[#9.2 DataInputStream y DataOutputStream]]
-	- [[#9.3 ObjectInputStream y ObjectOutputStream]]
-- [[#10. Ficheros de acceso aleatorio]]
-- [[#11. Ficheros XML y JSON]]
-	- [[#11.1 Ficheros XML]]
-	- [[#11.2 Ficheros JSON]]
-	- [[#11.3 Biblioteca Jackson]]
+- [[#6. Flujos]] ✅
+- [[#7. Ficheros de texto]] ✅
+	- [[#7.1 Método Files.readAllLines]] ✅
+	- [[#7.2 Método Files.writeString]] ✅
+	- [[#7.3 Método Files.write]] ✅
+	- [[#7.4 Clases BufferedReader y BufferedWriter]] ✅
+	- [[#7.5 Operaciones con arrays y desplazamientos]] ✅
+		- [[#7.5.1 Lectura]] ✅
+		- [[#7.5.2 Escritura]] ✅
+- [[#8. Método flush]] ✅
+- [[#9. Ficheros binarios]] ✅
+	- [[#9.1 FileInputStream y FileOutputStream]] ✅
+	- [[#9.2 DataInputStream y DataOutputStream]] ✅
+	- [[#9.3 ObjectInputStream y ObjectOutputStream]] ✅
+- [[#10. Ficheros de acceso aleatorio]] ✅
+- [[#11. Ficheros XML y JSON]] ✅
+	- [[#11.1 Ficheros XML]] ✅
+	- [[#11.2 Ficheros JSON]] ✅
+	- [[#11.3 Biblioteca Jackson]] ✅
 - [[#Esquema]]
 - [[#Relaciones]]
 - [[#Para repasar]]
