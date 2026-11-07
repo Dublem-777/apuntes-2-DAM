@@ -48,6 +48,145 @@ showingMarco = !showingMarco   // false: ahora toca "Polo"
 showingMarco = !showingMarco   // true: vuelve a "Marco"
 ```
 
+### Tutorial: cómo hacerla paso a paso
+
+> [!tip] Cómo seguir este tutorial
+> La app se construye **en trozos pequeños**, y al final de cada paso se ejecuta para comprobar que funciona. Si algo falla, sabes que está en lo último que has escrito.
+> Los callouts **🆕** explican cada elemento nuevo de la práctica. Los pasos generales (crear el proyecto, activar ViewBinding…) están en la [[Guía - Cómo hacer un ejercicio de Android|guía de cómo hacer un ejercicio de Android]], que usa esta misma práctica de ejemplo.
+
+#### Paso 1 · Plan en papel
+
+Antes de abrir Android Studio, apunta las tres listas de la guía:
+
+| Pregunta | Respuesta | Se convierte en… |
+| --- | --- | --- |
+| ¿Qué se ve? | Un texto y un botón, uno debajo del otro | `LinearLayout` vertical con `lblMessage` y `btnToggle` |
+| ¿Qué pasa cuando…? | Pulso el botón → se intercambian las palabras | `setOnClickListener { toggle() }` |
+| ¿Qué recuerda la app? | Qué palabra se está mostrando | `var showingMarco: Boolean` |
+
+#### Paso 2 · Crear y preparar el proyecto
+
+1. *Empty Views Activity* llamada `MarcoPolo`, con el paquete `es.iessaladillo.pedrojoya.marcopolo` y *Minimum SDK* API 27 ([[Guía - Cómo hacer un ejercicio de Android#Paso 2 · Crear el proyecto|guía, paso 2]]).
+2. Activa ViewBinding, renombra el *layout* a `main_activity.xml` y pon el esqueleto de la actividad con `setupViews()` vacío ([[Guía - Cómo hacer un ejercicio de Android#Paso 3 · Preparar el proyecto (siempre igual)|guía, paso 3]]).
+
+> [!success] ✅ Comprueba
+> Ejecuta: sale una pantalla en blanco (o con el «Hello World!» de la plantilla) y la app **no se cierra**. Si no compila, el fallo está en la preparación y no en tu código.
+
+#### Paso 3 · Los recursos
+
+En `res/values/strings.xml` añade las dos palabras, y crea `res/values/dimens.xml` (clic derecho en `values` → `New -> Values Resource File`) con el relleno y el margen. El contenido está en el [[#Código fuente (proyecto `MarcoPolo`)|código fuente]].
+
+> [!abstract] 🆕 Por qué «Marco» y «Polo» son recursos
+> Las dos palabras se usan **en dos sitios**: en el XML (texto inicial) y en el Kotlin (al intercambiarlas). Si las escribieras a mano en cada sitio y luego cambiaras una, la otra quedaría desfasada. Con `@string/main_marco` y `R.string.main_marco` las dos partes leen del mismo cajón de la despensa.
+
+#### Paso 4 · El *layout*: un `LinearLayout` vertical
+
+Sustituye todo el contenido de `main_activity.xml` por la raíz vacía:
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/main_padding">
+
+</LinearLayout>
+```
+
+> [!abstract] 🆕 `LinearLayout` y `android:orientation`
+> Un `LinearLayout` es una **estantería**: coloca a sus hijas en fila, una tras otra.
+> - `orientation="vertical"` → de arriba abajo (es lo que pide el enunciado).
+> - `orientation="horizontal"` → de izquierda a derecha (la usarás en la Práctica 1 para poner cosas en la misma fila).
+>
+> `padding` deja un margen **interior** de 16 dp para que el contenido no quede pegado al borde de la pantalla. [[02 - Creación de un proyecto#10. Propiedades principales de ViewGroup|Ver 2 · 10. ViewGroup]]
+
+#### Paso 5 · El texto y el botón
+
+Dentro del `LinearLayout`, primero el `TextView` y después el `Button` (el orden en el XML es el orden en la pantalla):
+
+```xml
+<TextView
+    android:id="@+id/lblMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="@string/main_marco"
+    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium" />
+
+<Button
+    android:id="@+id/btnToggle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/main_btnToggle_marginTop"
+    android:text="@string/main_polo" />
+```
+
+> [!abstract] 🆕 Los atributos que aparecen aquí
+> | Atributo | Qué hace |
+> | --- | --- |
+> | `android:id="@+id/lblMessage"` | El `+` **crea** el id. Gracias a él existirá `binding.lblMessage` en el Kotlin. Sin id, la vista no está en el binding. |
+> | `layout_width="match_parent"` | La vista ocupa todo el ancho de su padre. |
+> | `layout_height="wrap_content"` | La vista mide lo justo para su contenido. |
+> | `gravity="center"` | Centra el **texto dentro** del `TextView`. Como la vista ocupa todo el ancho, el texto queda en el centro de la pantalla. |
+> | `textAppearance="@style/…HeadlineMedium"` | Aplica un estilo de texto ya hecho de Material 3 (tamaño de título). Así no hay que inventar tamaños con `textSize`. |
+> | `layout_marginTop` | Separación **exterior** entre el botón y el texto de arriba. |
+>
+> [[04 - Vistas básicas I#1. TextView|Ver 4 · 1. TextView]] · [[04 - Vistas básicas I#2. Button|Ver 4 · 2. Button]]
+
+> [!success] ✅ Comprueba
+> Mira la pestaña **Split** del editor y ejecuta: arriba «Marco» centrado y debajo el botón «Polo». Pulsar el botón aún no hace nada, porque falta el Kotlin.
+
+#### Paso 6 · El estado y el *listener*
+
+En `MainActivity`, debajo de `binding`, declara el estado, y en `setupViews()` engancha el botón:
+
+```kotlin
+// true mientras la etiqueta muestra "Marco" (y el botón "Polo")
+private var showingMarco: Boolean = true
+
+private fun setupViews() {
+    binding.btnToggle.setOnClickListener { toggle() }
+}
+
+private fun toggle() {
+    showingMarco = !showingMarco
+}
+```
+
+> [!abstract] 🆕 El estado de la pantalla
+> Es una propiedad de la actividad que **recuerda** algo entre click y click. Es como la libreta del camarero: no mira la mesa para adivinar qué ha pedido el cliente, lo tiene apuntado.
+> No hace falta mirar qué texto tiene la etiqueta para decidir el siguiente: basta con consultar el `Boolean`, y `!` lo invierte (`true` → `false` → `true`…).
+
+> [!abstract] 🆕 `setOnClickListener { … }`
+> `OnClickListener` es una interfaz de **un solo método** (`onClick`). Por eso Kotlin deja pasar una lambda en su lugar (conversión SAM): lo que va entre llaves se ejecuta en cada pulsación.
+> En Java sería `btnToggle.setOnClickListener(v -> toggle());`. [[04 - Vistas básicas I#3. Listeners|Ver 4 · 3. Listeners]]
+
+#### Paso 7 · Pintar la pantalla según el estado
+
+Añade `showWords()`, que es la **única** función que toca las vistas, y llámala desde `toggle()` y desde el final de `setupViews()`:
+
+```kotlin
+private fun showWords() {
+    if (showingMarco) {
+        binding.lblMessage.setText(R.string.main_marco)
+        binding.btnToggle.setText(R.string.main_polo)
+    } else {
+        binding.lblMessage.setText(R.string.main_polo)
+        binding.btnToggle.setText(R.string.main_marco)
+    }
+}
+```
+
+> [!abstract] 🆕 `setText(R.string.x)` y no `text = R.string.x`
+> `R.string.main_marco` no es el texto, sino un **número** (`Int`) que identifica el recurso. El **método** `setText(Int)` sabe buscar el texto con ese número; la **propiedad** `text` espera un texto (`CharSequence`), así que `text = R.string.main_marco` **no compila**.
+> Si tienes un texto ya hecho (`"Hola"`), puedes usar `text = "Hola"`; si tienes un recurso, usa siempre `setText(R.string…)`. [[03 - Recursos#1. La clase Resources|Ver 3 · 1. La clase Resources]]
+
+> [!success] ✅ Comprueba
+> Ejecuta y pulsa varias veces: las palabras se intercambian en cada click. Si quieres ver el estado, prueba a poner `showingMarco = false` al declararlo: la pantalla arranca al revés, porque `setupViews()` llama a `showWords()`.
+
+Con esto la práctica está terminada. El código completo, con todos los archivos juntos, es el siguiente.
+
 ### Código fuente (proyecto `MarcoPolo`)
 
 Proyecto *Empty Views Activity* con el paquete `es.iessaladillo.pedrojoya.marcopolo`, el *layout* renombrado a `main_activity.xml` y ViewBinding activado (`buildFeatures { viewBinding = true }` en `app/build.gradle.kts`, igual que en el [[03.1 - Ejercicios 3 Recursos|ejercicio 3.1]]).

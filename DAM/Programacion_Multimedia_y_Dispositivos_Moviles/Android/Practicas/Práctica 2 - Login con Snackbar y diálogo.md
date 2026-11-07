@@ -61,6 +61,215 @@ Snackbar.make(binding.root, "User logged in", Snackbar.LENGTH_LONG)
     .show()
 ```
 
+### Tutorial: cómo hacerla paso a paso
+
+> [!tip] Cómo seguir este tutorial
+> La app se construye **en trozos pequeños** y se ejecuta al final de cada paso (**✅ Comprueba**). Los callouts **🆕** explican lo nuevo respecto a la [[Práctica 1 - BMI|Práctica 1]]: los iconos y el texto de ayuda de los campos, el **Snackbar** y el **diálogo**. Lo que ya salió allí (`TextInputLayout`, `error`, tecla ✓, `hideSoftKeyboard()`) solo se enlaza.
+
+#### Paso 1 · Plan en papel (a partir de las capturas)
+
+Compara las capturas de dos en dos y pregúntate qué ha hecho el usuario para pasar de una a otra:
+
+| De… | a… | Qué ha pasado | Se convierte en… |
+| --- | --- | --- | --- |
+| `default.png` | `error.png` | Login con campos vacíos | `validateFields()` pone los errores |
+| `default.png` | `not_found.png` | Login con datos que no son los de `baldomero` | Snackbar sin acción |
+| `default.png` | `logged_in.png` | Login correcto | Snackbar con acción «SHOW» |
+| `logged_in.png` | `dialogo.png` | Pulsar «SHOW» | `showUserData()` abre el diálogo |
+
+Estado que recordar: **ninguno**. Los campos guardan su propio texto y las credenciales válidas son constantes.
+
+#### Paso 2 · Proyecto y recursos
+
+1. *Empty Views Activity* `PracticaLogin` con el paquete `es.iessaladillo.pedrojoya.practicalogin`, preparada como siempre ([[Guía - Cómo hacer un ejercicio de Android#Paso 3 · Preparar el proyecto (siempre igual)|guía, paso 3]]) y con el tema `NoActionBar`, como en la [[Práctica 1 - BMI|Práctica 1]] (las capturas no tienen barra de título).
+2. Copia `strings.xml` y `dimens.xml` del [[#Código fuente (proyecto `PracticaLogin`)|código fuente]].
+
+> [!abstract] 🆕 Tres detalles de `strings.xml`
+> - **El apóstrofo:** `Can\'t be blank`. En los recursos de cadena `'` es un carácter especial; sin la `\` el proyecto **no compila**.
+> - **`%1$s`:** en `Logged in as %1$s` el hueco se rellena con el nombre de usuario (`getString(R.string.main_logged_in_as, username)`), igual que las cadenas con parámetros del BMI.
+> - **«SHOW» en mayúsculas:** en Material 3 los botones ya no pasan el texto a mayúsculas solos, así que se escribe tal cual se quiere ver.
+
+#### Paso 3 · El *layout*: campos con icono y texto de ayuda
+
+Un `LinearLayout` vertical con los dos `TextInputLayout` y el botón ([[#Código fuente (proyecto `PracticaLogin`)|código fuente]]). Lo nuevo son tres atributos del marco (`til…`) y uno del cuadro (`txt…`):
+
+```xml
+<!-- Usuario -->
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/tilUsername"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+    ...
+    app:endIconMode="clear_text"
+    app:helperText="@string/main_required">
+
+<!-- Contraseña -->
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/tilPassword"
+    ...
+    app:endIconMode="password_toggle"
+    app:helperText="@string/main_required">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txtPassword"
+        ...
+        android:inputType="textPassword" />
+```
+
+> [!abstract] 🆕 `app:endIconMode`: iconos que funcionan solos
+> Es un icono a la derecha del campo que el `TextInputLayout` gestiona **sin una línea de Kotlin**:
+> | Valor | Icono | Qué hace |
+> | --- | --- | --- |
+> | `clear_text` | ✕ | Vacía el campo. Solo aparece cuando el campo tiene el foco **y** texto. |
+> | `password_toggle` | 👁 | Cambia entre ver los puntos y ver el texto. Necesita que el campo sea `textPassword`. |
+>
+> [[04 - Vistas básicas I#7. TextInputLayout|Ver 4 · 7. TextInputLayout]]
+
+> [!abstract] 🆕 `android:inputType="textPassword"`
+> Se pone en el **cuadro** (`TextInputEditText`): oculta lo escrito con puntos y el teclado no sugiere ni recuerda palabras. Sin él, el ojo de `password_toggle` no tiene nada que ocultar.
+
+> [!abstract] 🆕 `app:helperText` frente a `error`
+> `helperText` es un texto de ayuda permanente debajo del campo («* required»). El `TextInputLayout` tiene **un solo hueco** debajo del campo:
+> - Si hay `error`, se ve el error (en rojo).
+> - Si `error = null`, vuelve a verse el `helperText`.
+>
+> Es como un cartel con dos caras: no hay que borrar ni volver a escribir «* required» a mano.
+
+> [!success] ✅ Comprueba
+> Ejecuta sin haber escrito nada de Kotlin: debajo de cada campo sale «* required». Escribe en la contraseña y pulsa el ojo: se ve el texto. Escribe en el usuario: aparece el ✕, y al pulsarlo se vacía.
+
+#### Paso 4 · Las credenciales válidas como constantes
+
+Al principio de `MainActivity`:
+
+```kotlin
+companion object {
+    // El único usuario válido del enunciado
+    private const val VALID_USERNAME = "baldomero"
+    private const val VALID_PASSWORD = "llegateligero"
+}
+```
+
+> [!abstract] 🆕 `companion object` con `private const val`
+> El `companion object` es lo que pertenece a la **clase** y no a cada objeto (lo más parecido al `static` de Java). Dentro, `const val` declara constantes conocidas al compilar, como `private static final String VALID_USERNAME = "baldomero";` en Java. Son `private` porque solo las usa esta actividad, y así no hay textos «mágicos» sueltos en mitad de `login()`. [[06 - POO I#17. Objetos compañeros|Ver POO I · 17. Objetos compañeros]] · [[08 - POO III#3. Constantes conocidas en tiempo de compilación|POO III · 3. const val]]
+
+#### Paso 5 · Validar los campos
+
+```kotlin
+private fun validateFields(username: String, password: String): Boolean {
+    val isUsernameValid = username.isNotBlank()
+    val isPasswordValid = password.isNotBlank()
+    binding.tilUsername.error = if (isUsernameValid) null else getString(R.string.main_blank_username)
+    binding.tilPassword.error = if (isPasswordValid) null else getString(R.string.main_invalid_password)
+    if (!isUsernameValid) {
+        binding.txtUsername.requestFocus()
+    } else if (!isPasswordValid) {
+        binding.txtPassword.requestFocus()
+    }
+    return isUsernameValid && isPasswordValid
+}
+```
+
+Y un primer `login()` que solo lee los campos y valida, enganchado al botón con `binding.btnLogin.setOnClickListener { login() }`:
+
+```kotlin
+private fun login() {
+    val username = binding.txtUsername.text.toString()
+    val password = binding.txtPassword.text.toString()
+    if (!validateFields(username, password)) {
+        return
+    }
+}
+```
+
+> [!abstract] 🆕 `isNotBlank()`
+> `isNotEmpty()` daría por bueno un usuario de tres espacios. `isNotBlank()` exige que haya **algún carácter que no sea espacio**: rechaza `""` y `"   "`.
+
+> [!abstract] 🆕 `if` como expresión para el error
+> `error = if (valido) null else getString(…)` pone o quita el error en una sola línea. Se calculan **los dos** errores antes de mover el foco, para que, si fallan ambos, se vean los dos a la vez (como en `error.png`).
+
+> [!success] ✅ Comprueba
+> Login con todo vacío: «Can't be blank» y «Invalid password» en rojo, en lugar de «* required», y el cursor en el usuario. Escribe un usuario y vuelve a pulsar: el error del usuario se va y el foco salta a la contraseña.
+
+#### Paso 6 · El Snackbar «User not found»
+
+Completa `login()`: si la validación pasa, cierra el teclado y compara con las constantes:
+
+```kotlin
+hideSoftKeyboard()
+if (username == VALID_USERNAME && password == VALID_PASSWORD) {
+    showLoggedIn(username)
+} else {
+    Snackbar.make(binding.root, R.string.main_user_not_found, Snackbar.LENGTH_SHORT).show()
+}
+```
+
+`hideSoftKeyboard()` es la de `SoftInputUtils.kt`, igual que en la [[Práctica 1 - BMI#Paso 12 · Remates (errores, tecla ✓, teclado y Reset)|Práctica 1]].
+
+> [!abstract] 🆕 `Snackbar.make(vista, texto, duración)`
+> Un Snackbar es un mensaje que **sube desde abajo** y se va solo. Es el hermano mayor del `Toast`: se ve dentro de la app (no flotando encima) y puede llevar un botón.
+> | Parámetro | Aquí | Por qué |
+> | --- | --- | --- |
+> | `vista` | `binding.root` | El Snackbar necesita una vista de la pantalla para saber **dónde** colgarse; busca desde ella hacia arriba el sitio adecuado. Sirve cualquier vista visible; la raíz es lo más cómodo. |
+> | `texto` | `R.string.main_user_not_found` | Admite el id del recurso directamente. |
+> | `duración` | `Snackbar.LENGTH_SHORT` | `LENGTH_SHORT` (~2 s), `LENGTH_LONG` (~3,5 s) o `LENGTH_INDEFINITE` (hasta que se cierre). |
+>
+> Como el `Toast`, **sin `.show()` no aparece**. [[07 - Mensajes emergentes#2. Snackbar|Ver 7 · 2. Snackbar]]
+
+> [!tip] Mientras no tengas `showLoggedIn()`
+> Para probar este paso, escribe provisionalmente `showLoggedIn()` con un `Snackbar` igual que el de error, con el texto `R.string.main_user_logged_in`.
+
+> [!success] ✅ Comprueba
+> `baldo` y `1234` → el teclado se cierra y abajo sale «User not found» unos segundos (`not_found.png`).
+
+#### Paso 7 · Snackbar con acción y diálogo
+
+```kotlin
+private fun showLoggedIn(username: String) {
+    Snackbar.make(binding.root, R.string.main_user_logged_in, Snackbar.LENGTH_LONG)
+        .setAction(R.string.main_show) { showUserData(username) }
+        .show()
+}
+
+private fun showUserData(username: String) {
+    val dialog: Dialog = MaterialAlertDialogBuilder(this)
+        .setTitle(R.string.main_user_data)
+        .setMessage(getString(R.string.main_logged_in_as, username))
+        .setPositiveButton(R.string.main_accept, null)
+        .create()
+    dialog.show()
+}
+```
+
+> [!abstract] 🆕 `setAction(texto) { … }`
+> Añade un **botón** al Snackbar (a la derecha, con el color principal del tema). La lambda se ejecuta al pulsarlo, y después el Snackbar se cierra solo. Se usa `LENGTH_LONG` para dar tiempo a pulsarlo.
+> Las llamadas van **encadenadas** (`make(…).setAction(…).show()`) porque cada método devuelve el mismo Snackbar: es como ir rellenando un formulario y al final entregarlo con `show()`. [[07 - Mensajes emergentes#2. Snackbar|Ver 7 · 2. Snackbar]]
+
+> [!abstract] 🆕 `MaterialAlertDialogBuilder`
+> Un diálogo es una ventana pequeña **encima** de la pantalla que hay que cerrar para seguir. Se construye con el patrón *Builder*: se va configurando por partes y al final se fabrica.
+> | Llamada | Qué pone |
+> | --- | --- |
+> | `MaterialAlertDialogBuilder(this)` | Crea el constructor. `this` es la actividad: el diálogo necesita saber a qué pantalla pertenece. |
+> | `setTitle(…)` | «User data». |
+> | `setMessage(…)` | «Logged in as baldomero» (cadena con parámetro). |
+> | `setPositiveButton(texto, null)` | El botón «Accept». El segundo parámetro es su *listener*; `null` porque solo tiene que **cerrar**, y eso lo hace el diálogo solo. |
+> | `create()` y `show()` | Fabrica el `Dialog` y lo muestra. |
+>
+> [[07 - Mensajes emergentes#3. Diálogos|Ver 7 · 3. Diálogos]]
+
+> [!success] ✅ Comprueba
+> `baldomero` / `llegateligero` → Snackbar «User logged in» con «SHOW» (`logged_in.png`). Pulsa «SHOW» → diálogo «User data» (`dialogo.png`). «Accept» lo cierra.
+
+#### Paso 8 · Remates
+
+Igual que en la [[Práctica 1 - BMI|Práctica 1]], en `setupViews()`:
+1. `doAfterTextChanged { binding.tilX.error = null }` en cada campo, para que al escribir se vaya el error y vuelva «* required». [[08 - Gestión de la entrada de texto#4. Gestión de la escritura|Ver 8 · 4. Gestión de la escritura]]
+2. `setOnEditorActionListener` en la contraseña, para que la tecla ✓ (o Enter) llame a `login()`. [[08 - Gestión de la entrada de texto#3. ImeOptions|Ver 8 · 3. ImeOptions]]
+
+> [!success] ✅ Comprueba
+> Repite la prueba completa que hay al final de la [[#Explicación paso a paso|explicación paso a paso]], más abajo.
+
+Con esto la práctica está terminada. El código completo, con todos los archivos juntos, es el siguiente.
+
 ### Código fuente (proyecto `PracticaLogin`)
 
 Proyecto *Empty Views Activity* con el paquete `es.iessaladillo.pedrojoya.practicalogin`, el *layout* renombrado a `main_activity.xml` y ViewBinding activado (`buildFeatures { viewBinding = true }` en `app/build.gradle.kts`). El tema hereda de `Theme.Material3.DayNight.NoActionBar`, como se ve en las capturas, que no tienen barra de título.
