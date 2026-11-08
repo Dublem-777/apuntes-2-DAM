@@ -9,8 +9,7 @@
 | --- | --- |
 | [Practica](Practica/README.md) | 1 |
 | [Tema 1](Tema%201/README.md) | 14 |
-| [Tema 2](Tema%202/README.md) | 4 |
-| [Tema 4](Tema%204/README.md) | 1 |
+| [Tema 2](Tema%202/README.md) | 7 |
 
 ---
 
@@ -32,7 +31,8 @@
 - [Ejercicio 1](Tema%202/Tareas/Ejercicio%201.md) — Tema 2: departamentos y flujo de información en un proceso de venta con ERP
 - [DanielMadridMerida-Definicion-y-modulos-ERP](Tema%202/Tareas/DanielMadridMerida-Definicion-y-modulos-ERP.md) — Tema 2: definición de ERP y sus módulos
 - [DanielMadridMerida-SergioCasadoSanchez - Infraestructura-ERP](Tema%202/Tareas/DanielMadridMerida-SergioCasadoSanchez%20-%20Infraestructura-ERP.md) — Tema 2: infraestructura de un ERP (en grupo, en curso)
-- [DanielMadridMerida-Cloud-y-licencias-ERP](Tema%204/Tareas/DanielMadridMerida-Cloud-y-licencias-ERP.md) — Tema 4: cloud computing y licencias de software
+- [DanielMadridMerida-Cloud-y-licencias-ERP](Tema%202/Tareas/DanielMadridMerida-Cloud-y-licencias-ERP.md) — Tema 4: cloud computing y licencias de software
+- [DanielMadridMerida-KPI-y-toma-de-decisiones](Tema%202/Tareas/DanielMadridMerida-KPI-y-toma-de-decisiones.md) — Tema 5: datos y KPI para tomar decisiones (escenarios 1-3: ayuntamiento, universidad y hospital; en grupo)
 
 ### Temas
 
@@ -43,6 +43,7 @@
 	4. [1.4 - Historia](Tema%201/1.4%20-%20Historia.md)
 	5. [1.5 - La fidelización del cliente. Concepto CRM](Tema%201/1.5%20-%20La%20fidelizaci%C3%B3n%20del%20cliente.%20Concepto%20CRM.md)
 
+- [Tema 2 - ERP (Enterprise Resource Planning)](Tema%202/Tema%202%20-%20ERP%20%28Enterprise%20Resource%20Planning%29.md) ✅ — apuntes completos del tema en una sola nota
 - [2.1 - Análisis de casos reales e investigación de herramientas CRM](Tema%202/Tareas/2.1%20-%20An%C3%A1lisis%20de%20casos%20reales%20e%20investigaci%C3%B3n%20de%20herramientas%20CRM.md) ✅
 
 ### Material de apoyo

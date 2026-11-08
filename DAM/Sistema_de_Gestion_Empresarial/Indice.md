@@ -20,7 +20,8 @@ tags:
 - [[Tema 2/Tareas/Ejercicio 1]] — Tema 2: departamentos y flujo de información en un proceso de venta con ERP
 - [[Tema 2/Tareas/DanielMadridMerida-Definicion-y-modulos-ERP]] — Tema 2: definición de ERP y sus módulos
 - [[Tema 2/Tareas/DanielMadridMerida-SergioCasadoSanchez - Infraestructura-ERP]] — Tema 2: infraestructura de un ERP (en grupo, en curso)
-- [[Tema 4/Tareas/DanielMadridMerida-Cloud-y-licencias-ERP]] — Tema 4: cloud computing y licencias de software
+- [[DanielMadridMerida-Cloud-y-licencias-ERP]] — Tema 4: cloud computing y licencias de software
+- [[DanielMadridMerida-KPI-y-toma-de-decisiones]] — Tema 5: datos y KPI para tomar decisiones (escenarios 1-3: ayuntamiento, universidad y hospital; en grupo)
 
 ## Temas
 
@@ -31,6 +32,7 @@ tags:
 	4. [[1.4 - Historia]]
 	5. [[1.5 - La fidelización del cliente. Concepto CRM]]
 
+- [[Tema 2 - ERP (Enterprise Resource Planning)]] ✅ — apuntes completos del tema en una sola nota
 - [[Tema 2/Tareas/2.1 - Análisis de casos reales e investigación de herramientas CRM]] ✅
 
 ## Material de apoyo
