@@ -18,6 +18,8 @@ tags:
 
 > [!note] Sobre la solución
 > Solución desarrollada con lo visto en los temas de Android hasta la fecha de la práctica, siguiendo el estilo del proyecto `HelloWorld` de los apuntes: paquete `es.iessaladillo.pedrojoya.<app>`, *layout* `main_activity.xml`, ViewBinding con `by lazy`, `setupViews()` y recursos con prefijo `main_`. Compilada (AGP 9.5, `compileSdk = 37`, `minSdk = 27`) y probada en el emulador *Medium Phone* con Android 13 (API 33).
+>
+> El Kotlin de esta nota lleva la explicación en comentarios y las funciones en orden de uso (primero se declaran las que se usan y después las que las llaman; `onCreate()` cierra la clase). Es el mismo código que el proyecto, con otro orden y más comentarios.
 
 ---
 
@@ -323,7 +325,7 @@ private fun validate(field: TextInputEditText, layout: TextInputLayout, errorRes
 }
 ```
 
-Y `calculate()`, que valida los dos campos y, si alguno falla, lleva el foco a él (la versión completa también cierra el teclado y oculta el resultado):
+Y, **debajo** de las dos (porque las usa), `calculate()`, que valida los dos campos y, si alguno falla, lleva el foco a él (la versión completa también cierra el teclado y oculta el resultado):
 
 ```kotlin
 private fun calculate() {
@@ -360,7 +362,7 @@ Engánchalo en `setupViews()` con `binding.btnCalculate.setOnClickListener { cal
 > No guarda nada: cada vez que se lee, pregunta al `RadioGroup` qué radio está marcado (`checkedRadioButtonId`) y lo compara con el id de *Metric*. Así nunca se queda desfasada.
 
 > [!tip] Mientras no tengas `showResult()`
-> Para probar este paso, puedes escribir provisionalmente `showResult()` con una sola línea: `binding.lblResult.text = getString(R.string.main_bmi, bmi)` y `binding.lblResult.isVisible = true`. En el paso siguiente la completas.
+> Para probar este paso, puedes escribir provisionalmente `showResult()`, **encima** de `calculate()`, con dos líneas: `binding.lblResult.text = getString(R.string.main_bmi, bmi)` y `binding.lblResult.isVisible = true`. En el paso siguiente la completas.
 
 > [!success] ✅ Comprueba
 > - Altura `0` → «Invalid height» en rojo y el `0` seleccionado.
@@ -425,7 +427,7 @@ En `setupViews()`:
 binding.rdgUnitSystem.setOnCheckedChangeListener { _, _ -> changeUnitSystem() }
 ```
 
-`changeUnitSystem()` cambia los sufijos con `til.suffixText = getString(…)` y, si `binding.swtConvert.isChecked`, convierte los valores con `convert()`. Al final oculta el resultado, que ya no corresponde a las unidades.
+`changeUnitSystem()` cambia los sufijos con `til.suffixText = getString(…)` y, si `binding.swtConvert.isChecked`, convierte los valores con `convert()`. Al final oculta el resultado, que ya no corresponde a las unidades. Escribe primero `convert()` y debajo `changeUnitSystem()`, que la usa; las dos van encima de `setupViews()`.
 
 > [!abstract] 🆕 El *listener* del `RadioGroup`
 > Se pone en el **grupo**, no en cada radio: salta una sola vez por cambio, sea cual sea el radio pulsado. Dentro, `isMetric` dice cuál ha quedado marcado. [[05 - Vistas básicas II#4. RadioButton y RadioGroup|Ver 5 · 4. RadioButton y RadioGroup]]
@@ -696,11 +698,16 @@ Proyecto *Empty Views Activity* con el paquete `es.iessaladillo.pedrojoya.bmi`, 
 ```kotlin
 package es.iessaladillo.pedrojoya.bmi
 
-// Factores de conversión del enunciado
+// Lógica que NO es pantalla: va suelta en el archivo (top-level), sin clase,
+// y se usa desde cualquier sitio del paquete sin crear objetos.
+
+// Factores de conversión del enunciado. "const val" = constante conocida al compilar
+// (como "static final" en Java)
 const val KG_TO_LB = 2.20462
 const val M_TO_IN = 39.3701
 
-// Fórmulas del enunciado (allí pone "width", pero es el peso)
+// Fórmulas del enunciado (allí pone "width", pero es el peso).
+// Es una función pura: no guarda estado, solo recibe datos y devuelve el BMI
 fun calculateBmi(weight: Double, height: Double, metric: Boolean): Double =
     if (metric) {
         weight / (height * height)
@@ -714,7 +721,10 @@ fun calculateBmi(weight: Double, height: Double, metric: Boolean): Double =
 ```kotlin
 package es.iessaladillo.pedrojoya.bmi
 
-// Cada clasificación sabe su nombre, su color y su imagen
+// Cada clasificación sabe su nombre, su color y su imagen.
+// Los tres son Int porque R.string.x, R.color.x y R.drawable.x son ids de recursos
+// (la referencia del almacén), no el recurso en sí. Así no hacen falta tres "when"
+// repartidos por la actividad: si cambia un color, se toca solo esta línea
 enum class BmiClassification(
     val labelResId: Int,
     val colorResId: Int,
@@ -727,8 +737,13 @@ enum class BmiClassification(
     OBESITY_GRADE_2(R.string.bmi_obesity2, R.color.bmi_obesity2, R.drawable.obesity2),
     OBESITY_GRADE_3(R.string.bmi_obesity3, R.color.bmi_obesity3, R.drawable.obesity3);
 
+    // Lo del companion object pertenece al tipo, no a cada valor:
+    // se llama como BmiClassification.from(34.6), sin crear nada
     companion object {
-        // Límites del enunciado: cada clase llega hasta el valor indicado, sin incluirlo
+        // Límites del enunciado: cada clase llega hasta el valor indicado, sin incluirlo.
+        // "when" sin sujeto: las ramas se comprueban en orden y solo se llega a una si
+        // las anteriores han fallado, así que "bmi < 25.0" ya significa "entre 18.5 y 25".
+        // El else recoge "a partir de 40"
         fun from(bmi: Double): BmiClassification = when {
             bmi < 18.5 -> UNDERWEIGHT
             bmi < 25.0 -> NORMAL_WEIGHT
@@ -750,10 +765,14 @@ import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 
-// Copiada de los apuntes del Tema 8 (solo la función que se usa)
+// Copiada de los apuntes del Tema 8 (solo la función que se usa).
+// Es una extension function de Activity: dentro de MainActivity se llama
+// sin nada delante, como si fuera un método suyo
 fun Activity.hideSoftKeyboard() {
+    // El teclado se cierra desde la vista que tiene el foco; si no hay ninguna, no hay teclado
     val view = currentFocus
     if (view != null) {
+        // El InputMethodManager es el servicio del sistema que controla el teclado
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
@@ -780,92 +799,30 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
+    // ViewBinding: una propiedad por cada vista con id del layout. "by lazy" lo crea la
+    // primera vez que se usa, en onCreate()
     private val binding: MainActivityBinding by lazy {
         MainActivityBinding.inflate(layoutInflater)
     }
 
-    // Último BMI calculado; null mientras no hay resultado en pantalla
+    // ESTADO: último BMI calculado; null mientras no hay resultado en pantalla.
+    // Sirve para repintar el resultado (con o sin clasificación) sin recalcular
     private var lastBmi: Double? = null
 
-    // Propiedad calculada: se consulta el RadioGroup cada vez que se lee
+    // Propiedad calculada: no guarda nada; cada vez que se lee, pregunta al RadioGroup
+    // qué radio está marcado y lo compara con el id de "Metric". Nunca se queda desfasada
     private val isMetric: Boolean
         get() = binding.rdgUnitSystem.checkedRadioButtonId == R.id.rdbMetric
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        setupViews()
-    }
-
-    private fun setupViews() {
-        binding.rdgUnitSystem.setOnCheckedChangeListener { _, _ -> changeUnitSystem() }
-        binding.chkClassification.setOnCheckedChangeListener { _, _ ->
-            // Si ya hay un resultado, se repinta con o sin clasificación
-            lastBmi?.let { showResult(it) }
-        }
-        // Al escribir en un campo desaparece su error
-        binding.txtWeight.doAfterTextChanged { binding.tilWeight.error = null }
-        binding.txtHeight.doAfterTextChanged { binding.tilHeight.error = null }
-        // Done del teclado en pantalla o Enter físico: igual que pulsar "Calculate BMI"
-        binding.txtHeight.setOnEditorActionListener { _, actionId, keyEvent ->
-            when (actionId) {
-                EditorInfo.IME_ACTION_DONE -> {
-                    calculate()
-                    true
-                }
-                EditorInfo.IME_NULL -> {
-                    if (keyEvent?.action == KeyEvent.ACTION_DOWN) {
-                        calculate()
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
-        binding.btnCalculate.setOnClickListener { calculate() }
-        binding.btnReset.setOnClickListener { reset() }
-    }
-
-    private fun changeUnitSystem() {
-        val metric = isMetric
-        binding.tilWeight.suffixText = getString(if (metric) R.string.main_kg else R.string.main_lb)
-        binding.tilHeight.suffixText = getString(if (metric) R.string.main_m else R.string.main_in)
-        if (binding.swtConvert.isChecked) {
-            convert(binding.txtWeight, if (metric) 1 / KG_TO_LB else KG_TO_LB)
-            convert(binding.txtHeight, if (metric) 1 / M_TO_IN else M_TO_IN)
-        }
-        // El resultado que hubiera ya no corresponde a lo que hay en pantalla
-        hideResult()
-    }
-
-    private fun convert(field: TextInputEditText, factor: Double) {
-        // Campo vacío o no numérico: se deja como está
-        val value = readValue(field) ?: return
-        field.setText(String.format(Locale.US, "%.2f", value * factor))
-    }
-
-    // Admite coma o punto decimal; devuelve null si no es un número
+    // Lee un campo como número. Cambia la coma por punto porque un móvil en español
+    // escribe "1,70" y Kotlin solo entiende "1.70". toDoubleOrNull() devuelve null si el
+    // texto está vacío o no es un número (toDouble() lanzaría una excepción y cerraría la app)
     private fun readValue(field: TextInputEditText): Double? =
         field.text.toString().replace(',', '.').toDoubleOrNull()
 
-    private fun calculate() {
-        hideSoftKeyboard()
-        val weight = validate(binding.txtWeight, binding.tilWeight, R.string.main_invalid_weight)
-        val height = validate(binding.txtHeight, binding.tilHeight, R.string.main_invalid_height)
-        if (weight == null || height == null) {
-            // El foco va al primer campo erróneo, con su texto seleccionado (como en bmi2.png)
-            val wrongField = if (weight == null) binding.txtWeight else binding.txtHeight
-            wrongField.requestFocus()
-            wrongField.selectAll()
-            hideResult()
-            return
-        }
-        val bmi = calculateBmi(weight, height, isMetric)
-        lastBmi = bmi
-        showResult(bmi)
-    }
-
-    // Devuelve el valor si es un número mayor que 0; si no, pone el error en su TextInputLayout
+    // Devuelve el valor si es un número mayor que 0; si no, pone el error en su TextInputLayout.
+    // El error se pone en el MARCO (til…), no en el cuadro (txt…): "layout.error = texto" pinta
+    // el borde rojo, el icono y el mensaje (como en bmi2.png); "layout.error = null" lo quita
     private fun validate(field: TextInputEditText, layout: TextInputLayout, errorResId: Int): Double? {
         val value = readValue(field)
         return if (value == null || value <= 0.0) {
@@ -877,19 +834,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Oculta el resultado y olvida el último BMI, porque ya no corresponde a la pantalla
+    private fun hideResult() {
+        lastBmi = null
+        // isVisible es una extension property de androidx.core: false = View.GONE (no se ve
+        // ni ocupa sitio), true = View.VISIBLE
+        binding.lblResult.isVisible = false
+        binding.prgBmi.isVisible = false
+        binding.imgClassification.isVisible = false
+    }
+
+    // Pinta el resultado, con o sin clasificación según el CheckBox
     private fun showResult(bmi: Double) {
         val withClassification = binding.chkClassification.isChecked
         if (withClassification) {
+            // El enum guarda ids de recursos (Int); cada vista pide el valor a su manera
             val classification = BmiClassification.from(bmi)
+            // Del id al color real. Ojo: setBackgroundColor(R.color.x) compila (los dos son Int)
+            // pero pinta un color sin sentido; hay que pasar por ContextCompat.getColor
             val color = ContextCompat.getColor(this, classification.colorResId)
+            // Cadena con parámetros "BMI: %1$.2f %2$s": %1$.2f = BMI con 2 decimales,
+            // %2$s = nombre de la clase (getString del id que guarda el enum)
             binding.lblResult.text = getString(
                 R.string.main_bmi_classification, bmi, getString(classification.labelResId)
             )
             binding.lblResult.setBackgroundColor(color)
             binding.prgBmi.setIndicatorColor(color)
+            // progress es un Int, así que el BMI (Double) se redondea: 34.6 → 35 de 45
             binding.prgBmi.progress = bmi.roundToInt()
+            // La ImageView ya acepta el id del drawable directamente
             binding.imgClassification.setImageResource(classification.imageResId)
         } else {
+            // Sin clasificación: solo el número, con un fondo neutro
             binding.lblResult.text = getString(R.string.main_bmi, bmi)
             binding.lblResult.setBackgroundColor(ContextCompat.getColor(this, R.color.main_result_neutral))
         }
@@ -898,13 +874,55 @@ class MainActivity : AppCompatActivity() {
         binding.imgClassification.isVisible = withClassification
     }
 
-    private fun hideResult() {
-        lastBmi = null
-        binding.lblResult.isVisible = false
-        binding.prgBmi.isVisible = false
-        binding.imgClassification.isVisible = false
+    // Acción de "Calculate BMI" y de la tecla Done de la altura
+    private fun calculate() {
+        // Extension function de SoftInputUtils.kt: cierra el teclado
+        hideSoftKeyboard()
+        // Se validan LOS DOS campos siempre, para que si ambos están mal se vean los dos errores
+        val weight = validate(binding.txtWeight, binding.tilWeight, R.string.main_invalid_weight)
+        val height = validate(binding.txtHeight, binding.tilHeight, R.string.main_invalid_height)
+        if (weight == null || height == null) {
+            // El foco va al primer campo erróneo, con su texto seleccionado (como en bmi2.png):
+            // requestFocus() pone el cursor y selectAll() hace que lo que se escriba lo sustituya
+            val wrongField = if (weight == null) binding.txtWeight else binding.txtHeight
+            wrongField.requestFocus()
+            wrongField.selectAll()
+            hideResult()
+            return
+        }
+        // Fórmula de Bmi.kt (top-level function), según el sistema marcado
+        val bmi = calculateBmi(weight, height, isMetric)
+        lastBmi = bmi
+        showResult(bmi)
     }
 
+    // Multiplica el valor de un campo por un factor y lo vuelve a escribir con 2 decimales
+    private fun convert(field: TextInputEditText, factor: Double) {
+        // Campo vacío o no numérico: se deja como está ("?: return" sale de la función si es null)
+        val value = readValue(field) ?: return
+        // Locale.US para que salga con punto (220.46) aunque el móvil esté en español,
+        // y así el número escrito se pueda volver a leer con readValue()
+        field.setText(String.format(Locale.US, "%.2f", value * factor))
+    }
+
+    // Se ejecuta al cambiar de radio en el RadioGroup
+    private fun changeUnitSystem() {
+        val metric = isMetric
+        // Cambia la unidad que se ve a la derecha de cada campo (app:suffixText)
+        binding.tilWeight.suffixText = getString(if (metric) R.string.main_kg else R.string.main_lb)
+        binding.tilHeight.suffixText = getString(if (metric) R.string.main_m else R.string.main_in)
+        // Con "Convert" activado se convierten los valores; al volver a métrico se divide
+        // (multiplicar por 1 / factor)
+        if (binding.swtConvert.isChecked) {
+            convert(binding.txtWeight, if (metric) 1 / KG_TO_LB else KG_TO_LB)
+            convert(binding.txtHeight, if (metric) 1 / M_TO_IN else M_TO_IN)
+        }
+        // El resultado que hubiera ya no corresponde a lo que hay en pantalla
+        hideResult()
+    }
+
+    // Acción de "Reset": vacía los campos, quita los errores, oculta el resultado y devuelve
+    // el foco al peso. No toca el sistema de unidades ni las opciones
     private fun reset() {
         binding.txtWeight.setText("")
         binding.txtHeight.setText("")
@@ -913,29 +931,60 @@ class MainActivity : AppCompatActivity() {
         hideResult()
         binding.txtWeight.requestFocus()
     }
+
+    // Engancha cada vista con su acción. Va después de todas las funciones que usa
+    private fun setupViews() {
+        // El listener va en el GRUPO, no en cada radio: salta una vez por cambio.
+        // Sus dos parámetros (grupo e id marcado) no hacen falta, por eso "_, _"
+        binding.rdgUnitSystem.setOnCheckedChangeListener { _, _ -> changeUnitSystem() }
+        binding.chkClassification.setOnCheckedChangeListener { _, _ ->
+            // Si ya hay un resultado, se repinta con o sin clasificación.
+            // ?.let: solo se ejecuta si lastBmi no es null, e "it" es ese valor sin null
+            lastBmi?.let { showResult(it) }
+        }
+        // Al escribir en un campo desaparece su error. doAfterTextChanged es el atajo de
+        // androidx.core para no implementar un TextWatcher entero
+        binding.txtWeight.doAfterTextChanged { binding.tilWeight.error = null }
+        binding.txtHeight.doAfterTextChanged { binding.tilHeight.error = null }
+        // Done del teclado en pantalla o Enter físico: igual que pulsar "Calculate BMI"
+        binding.txtHeight.setOnEditorActionListener { _, actionId, keyEvent ->
+            when (actionId) {
+                // Tecla ✓ del teclado en pantalla
+                EditorInfo.IME_ACTION_DONE -> {
+                    calculate()
+                    true
+                }
+                // Enter de un teclado físico: llega dos veces (pulsar y soltar), así que
+                // solo se calcula al pulsar (ACTION_DOWN)
+                EditorInfo.IME_NULL -> {
+                    if (keyEvent?.action == KeyEvent.ACTION_DOWN) {
+                        calculate()
+                    }
+                    true
+                }
+                // true = evento consumido; false = que Android haga lo de siempre
+                else -> false
+            }
+        }
+        binding.btnCalculate.setOnClickListener { calculate() }
+        binding.btnReset.setOnClickListener { reset() }
+    }
+
+    // Punto de entrada: Android lo llama al crear la pantalla
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        setupViews()
+    }
 }
 ```
 
 ### Explicación paso a paso
-1. **Organización del código.** La lógica está separada de la interfaz:
-   - `Bmi.kt` solo calcula (fórmulas y constantes del enunciado, como *top-level*).
-   - `BmiClassification.kt` solo clasifica (un `enum` que guarda el nombre, el color y la imagen de cada clase).
-   - `MainActivity` solo lee la pantalla y la pinta.
-
-   Si mañana cambia un límite o un color, se toca un único sitio.
-2. **El *layout*.** Calca la captura con lo visto hasta ahora: un `LinearLayout` vertical, con dos `LinearLayout` horizontales para la fila de unidades y la de botones. Los campos son `TextInputLayout` con borde (`OutlinedBox`) y la unidad como sufijo (`app:suffixText`). El resultado, la barra y la imagen empiezan con `android:visibility="gone"`, porque no hay nada que mostrar hasta calcular. `gone` hace que tampoco ocupen espacio.
-3. **`BmiClassification.from(bmi)`.** Es un `when` sin sujeto que compara de menor a mayor. Como cada rama solo se evalúa si las anteriores han fallado, `bmi < 25.0` ya significa «entre 18.5 y 25». El `else` recoge «a partir de 40». Al estar en el `companion object` se llama sobre la clase, sin crear nada: `BmiClassification.from(34.6)` devuelve `OBESITY_GRADE_1`.
-4. **Leer los campos: `readValue()`.** `toDoubleOrNull()` devuelve `null` si el texto está vacío o no es un número, en lugar de lanzar una excepción como `toDouble()`. Antes se cambia la coma por punto, por si el teclado del móvil está en español y escribe «1,70».
-5. **Validar: `validate()` y `calculate()`.** Un valor nulo o menor o igual que 0 pone el error en su `TextInputLayout`: `layout.error = getString(...)` dibuja el borde rojo, el icono y el texto, como en `bmi2.png`. Se validan **los dos** campos siempre, para que si ambos están mal se vean los dos errores a la vez. Después, el foco va al primero que falle y se selecciona su texto (`selectAll()`), para que el usuario lo sobrescriba directamente, como en la captura del error. El teclado se cierra al empezar con `hideSoftKeyboard()`.
-6. **Borrar el error al escribir.** `doAfterTextChanged { … }` es el atajo de los apuntes del Tema 8 para `TextWatcher`: en cuanto el usuario cambia el texto, `error = null` quita el aviso rojo.
-7. **Mostrar el resultado: `showResult()`.**
-   - **Con clasificación:** el texto es «BMI: 34.60 Obesity class I», gracias a la cadena con parámetros `%1$.2f` (dos decimales) y `%2$s`. El fondo y la barra toman el color de la clase (`ContextCompat.getColor`), la barra avanza hasta el BMI redondeado y se pone la imagen de la clase.
-   - **Sin clasificación:** solo el número, con un fondo neutro, y la barra y la imagen ocultas.
-
-   `isVisible = true/false` es la *extension property* de `androidx.core` equivalente a `visibility = View.VISIBLE/View.GONE`.
-8. **`lastBmi` y el `CheckBox`.** Se guarda el último BMI para que, si el usuario marca o desmarca «With classification» con un resultado en pantalla, se repinte sin recalcular. `lastBmi?.let { showResult(it) }` solo actúa si no es `null`.
-9. **Cambiar de unidades: `changeUnitSystem()`.** `isMetric` es una propiedad calculada que pregunta al `RadioGroup` cada vez que se lee. Al cambiar de sistema se actualizan los sufijos. Si «Convert» está activado, `convert()` multiplica por el factor (o divide, al volver a métrico) y escribe el valor con dos decimales. Se usa `Locale.US` para que siempre lleve punto decimal. El resultado anterior se oculta, porque ya no corresponde a las unidades de la pantalla.
-10. **Teclas y botones.** «Calculate BMI» y la tecla Done de la altura llaman a `calculate()`. La tecla Done se trata igual que en el [[08.1 - Ejercicios 8 Gestión de la entrada de texto|proyecto Login]], para que también funcione el Enter de un teclado físico. «Reset» vacía los campos, quita los errores, oculta el resultado y devuelve el foco al peso.
+La explicación de cada función está en los **comentarios del código**. Aquí solo queda el resumen:
+1. **Organización.** La lógica está separada de la interfaz: `Bmi.kt` calcula, `BmiClassification.kt` clasifica y `MainActivity` lee la pantalla y la pinta. Si mañana cambia un límite o un color, se toca un único sitio.
+2. **El *layout*.** Un `LinearLayout` vertical con dos filas horizontales (unidades y botones). El resultado, la barra y la imagen empiezan en `gone` porque no hay nada que mostrar hasta calcular.
+3. **Orden de `MainActivity`.** Cada función va **después** de las que usa: `readValue()` → `validate()` → `hideResult()` y `showResult()` → `calculate()`; `convert()` → `changeUnitSystem()`; `reset()`; y al final `setupViews()`, que engancha todas, y `onCreate()`, por donde empieza Android.
+4. **Teclas.** La tecla Done se trata igual que en el [[08.1 - Ejercicios 8 Gestión de la entrada de texto|proyecto Login]].
 
 > [!tip] Prueba
 > 1. Peso `100`, altura `1.70` y «Calculate BMI»: «BMI: 34.60 Obesity class I» en naranja, la barra en naranja y la imagen con la flecha en «Obese class I» (como la captura del enunciado).

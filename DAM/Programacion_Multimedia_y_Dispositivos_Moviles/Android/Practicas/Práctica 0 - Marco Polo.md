@@ -18,6 +18,8 @@ tags:
 
 > [!note] Sobre la solución
 > Solución desarrollada con lo visto en los temas de Android hasta la fecha de la práctica, siguiendo el estilo del proyecto `HelloWorld` de los apuntes: paquete `es.iessaladillo.pedrojoya.<app>`, *layout* `main_activity.xml`, ViewBinding con `by lazy`, `setupViews()` y recursos con prefijo `main_`. Compilada (AGP 9.5, `compileSdk = 37`, `minSdk = 27`) y probada en el emulador *Medium Phone* con Android 13 (API 33).
+>
+> El Kotlin de esta nota lleva la explicación en comentarios y las funciones en orden de uso (primero se declaran las que se usan y después las que las llaman; `onCreate()` cierra la clase). Es el mismo código que el proyecto, con otro orden y más comentarios.
 
 ---
 
@@ -139,18 +141,20 @@ Dentro del `LinearLayout`, primero el `TextView` y después el `Button` (el orde
 
 #### Paso 6 · El estado y el *listener*
 
-En `MainActivity`, debajo de `binding`, declara el estado, y en `setupViews()` engancha el botón:
+En `MainActivity`, debajo de `binding`, declara el estado. Después escribe `toggle()` **encima** de `setupViews()` (primero se crea la función y luego se usa) y engancha el botón:
 
 ```kotlin
 // true mientras la etiqueta muestra "Marco" (y el botón "Polo")
 private var showingMarco: Boolean = true
 
-private fun setupViews() {
-    binding.btnToggle.setOnClickListener { toggle() }
-}
-
+// Se ejecuta en cada click: invierte el estado
 private fun toggle() {
     showingMarco = !showingMarco
+}
+
+private fun setupViews() {
+    // Lambda que se ejecuta en cada pulsación
+    binding.btnToggle.setOnClickListener { toggle() }
 }
 ```
 
@@ -164,9 +168,10 @@ private fun toggle() {
 
 #### Paso 7 · Pintar la pantalla según el estado
 
-Añade `showWords()`, que es la **única** función que toca las vistas, y llámala desde `toggle()` y desde el final de `setupViews()`:
+Añade `showWords()`, que es la **única** función que toca las vistas, **encima** de `toggle()` (porque `toggle()` la va a usar), y llámala desde `toggle()` y desde el final de `setupViews()`:
 
 ```kotlin
+// Pinta la pantalla según el estado: etiqueta y botón con palabras opuestas
 private fun showWords() {
     if (showingMarco) {
         binding.lblMessage.setText(R.string.main_marco)
@@ -250,32 +255,22 @@ import es.iessaladillo.pedrojoya.marcopolo.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
 
+    // ViewBinding: una propiedad por cada vista con id del layout (binding.lblMessage,
+    // binding.btnToggle). "by lazy" lo crea la primera vez que se usa, en onCreate()
     private val binding: MainActivityBinding by lazy {
         MainActivityBinding.inflate(layoutInflater)
     }
 
-    // true mientras la etiqueta muestra "Marco" (y el botón "Polo")
+    // ESTADO de la pantalla: true mientras la etiqueta muestra "Marco" (y el botón "Polo").
+    // Se consulta este Boolean en vez de comparar textos, que fallaría si la app se tradujera
     private var showingMarco: Boolean = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        setupViews()
-    }
-
-    private fun setupViews() {
-        binding.btnToggle.setOnClickListener { toggle() }
-        showWords()
-    }
-
-    private fun toggle() {
-        showingMarco = !showingMarco
-        showWords()
-    }
-
+    // Única función que toca la interfaz: pinta la pantalla según el estado.
+    // La etiqueta y el botón siempre muestran palabras opuestas
     private fun showWords() {
-        // La etiqueta y el botón siempre muestran palabras opuestas
         if (showingMarco) {
+            // setText(resId) es el MÉTODO que recibe el id del recurso;
+            // la propiedad "text = R.string.x" no compila, porque espera un texto y no un Int
             binding.lblMessage.setText(R.string.main_marco)
             binding.btnToggle.setText(R.string.main_polo)
         } else {
@@ -283,16 +278,38 @@ class MainActivity : AppCompatActivity() {
             binding.btnToggle.setText(R.string.main_marco)
         }
     }
+
+    // Se ejecuta en cada click: invierte el estado con ! (true → false → true…) y repinta.
+    // Así la alternancia sigue "y así sucesivamente" sin contar los clicks
+    private fun toggle() {
+        showingMarco = !showingMarco
+        showWords()
+    }
+
+    // Configura las vistas una sola vez, al crear la actividad
+    private fun setupViews() {
+        // OnClickListener tiene un solo método, así que se pasa una lambda (conversión SAM).
+        // Lo que va entre llaves se ejecuta en cada pulsación
+        binding.btnToggle.setOnClickListener { toggle() }
+        // Pinta la pantalla según el estado inicial
+        showWords()
+    }
+
+    // Punto de entrada: Android lo llama al crear la pantalla
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Muestra el layout (la raíz del binding) en la pantalla
+        setContentView(binding.root)
+        setupViews()
+    }
 }
 ```
 
 ### Explicación paso a paso
-1. **Recursos.** «Marco» y «Polo» son recursos de cadena (`main_marco` y `main_polo`), y el relleno y el margen son recursos de dimensión. Así el *layout* y el código no llevan ningún literal, como se practicó en el [[03.1 - Ejercicios 3 Recursos|ejercicio 3.1]].
-2. **El *layout*.** Es lo que pide el enunciado: un `LinearLayout` vertical con un `TextView` (`lblMessage`) y debajo un `Button` (`btnToggle`). Los textos iniciales ya están puestos en el XML («Marco» en la etiqueta y «Polo» en el botón), así que la pantalla sale bien incluso antes de ejecutar código.
-3. **El estado: `showingMarco`.** En vez de mirar qué texto tiene la etiqueta para decidir el siguiente, la actividad guarda en un `Boolean` qué palabra está mostrando. Es más seguro: comparar textos fallaría si mañana la app se tradujera (por ejemplo, con «Marco» en otro idioma), mientras que el `Boolean` no depende de cómo se escriba la palabra.
-4. **`setupViews()`.** Asigna el *listener* del botón como lambda, porque `View.OnClickListener` tiene un solo método (conversión SAM). Además llama a `showWords()` para que la pantalla quede pintada según el estado inicial.
-5. **`toggle()`.** Invierte el estado con `!` (si era `true` pasa a `false` y al revés) y repinta. Es lo que hace que la alternancia siga «y así sucesivamente» sin contar los clicks.
-6. **`showWords()`.** Es la única función que toca la interfaz: según `showingMarco`, pone en la etiqueta una palabra y en el botón la contraria. Usa `setText(R.string.…)`, el **método** que recibe el `resId`. La propiedad `text = R.string…` no compila en Kotlin, como se explica en el [[03 - Recursos#1. La clase Resources|Tema 3]].
+La explicación de cada parte del Kotlin está en los **comentarios del código**. Aquí solo queda el resumen:
+1. **Recursos y *layout*.** «Marco» y «Polo» son recursos de cadena, como en el [[03.1 - Ejercicios 3 Recursos|ejercicio 3.1]]. El XML ya trae los textos iniciales, así que la pantalla sale bien antes de ejecutar código.
+2. **Orden del código.** Las funciones van en el orden en que se necesitan: primero `showWords()`, después `toggle()` (que la usa), después `setupViews()` (que usa las dos) y al final `onCreate()`, que es por donde empieza Android.
+3. **Idea clave.** Un estado (`showingMarco`) y una única función que pinta la pantalla a partir de él. Sobre `setText(resId)`, ver el [[03 - Recursos#1. La clase Resources|Tema 3]].
 
 > [!tip] Prueba
 > 1. Al abrir la app: la etiqueta dice «Marco» y el botón «Polo».

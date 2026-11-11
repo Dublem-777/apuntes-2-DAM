@@ -101,7 +101,24 @@ android {
 
 Después pulsa **Sync Now** (aparece arriba, en una barra amarilla).
 
+> [!note]- ¿Por qué activar ViewBinding?
+> El Kotlin necesita acceder a las vistas del XML. La forma antigua, `findViewById(R.id.…)`, obliga a buscar cada vista a mano, y si te equivocas de id o de tipo **compila, pero la app se cierra al ejecutarla**.
+> Con `viewBinding = true`, Gradle genera **por cada layout una clase** (`main_activity.xml` → `MainActivityBinding`) con una propiedad por cada vista que tenga id, y del tipo correcto. Accedes con `binding.lblMessage` y, si te equivocas, **no compila**: el error sale en rojo en el editor y no al ejecutar.
+> **Sync Now** hace falta para que Gradle vuelva a leer la configuración; sin sincronizar, la clase `…Binding` no existe.
+> Más detalle: [[02 - Creación de un proyecto#14. ViewBinding|Tema 2 → 14. ViewBinding]].
+
 **b) Renombrar el layout.** Clic derecho en `res/layout/activity_main.xml` → `Refactor -> Rename` → `main_activity.xml`. Así la clase de ViewBinding se llamará `MainActivityBinding`, igual que la actividad.
+
+> [!note]- ¿Por qué se renombra?
+> ViewBinding nombra la clase a partir del **archivo del layout**, no de la actividad. El nombre del archivo pasa a PascalCase y se le añade `Binding`: `activity_main.xml` → `ActivityMainBinding`.
+> Por eso se pone al layout el nombre de la **clase de la actividad** (lo que va detrás de `class`), con las palabras en minúsculas y separadas por `_`. Así actividad, layout y binding quedan emparejados:
+>
+> | Actividad | Layout | Binding |
+> | --- | --- | --- |
+> | `MainActivity` | `main_activity.xml` | `MainActivityBinding` |
+> | `LoginActivity` | `login_activity.xml` | `LoginActivityBinding` |
+>
+> No es obligatorio (con `activity_main.xml` funciona igual): se hace por orden y por la convención del curso. Usa `Refactor → Rename` para que Android Studio también cambie las referencias a `R.layout.activity_main`.
 
 **c) Sustituir el código de la plantilla** de `MainActivity.kt` por el esqueleto del curso:
 
@@ -113,17 +130,38 @@ class MainActivity : AppCompatActivity() {
         MainActivityBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        setupViews()
-    }
+    // Aquí, encima, irán las funciones que use setupViews() (paso 6)
 
     private fun setupViews() {
         // Aquí se configuran las vistas y se asignan los listeners
     }
+
+    // Punto de entrada: Android lo llama al abrir la pantalla. Va al final porque
+    // usa setupViews(), que ya está declarada arriba
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Muestra el layout en la pantalla (aquí se ejecuta el lazy del binding)
+        setContentView(binding.root)
+        setupViews()
+    }
 }
 ```
+
+> [!tip] Orden del código: primero se crea, después se usa
+> En Kotlin (como en Java) los métodos de una clase se pueden escribir en cualquier orden y compila igual. Aun así, en el curso cada función va **después de las que usa**, para leer el código de arriba abajo sin toparse con nada que aún no has visto: propiedades → funciones pequeñas → las que las llaman → `setupViews()` → `onCreate()`, al final.
+
+> [!note]- ¿Qué hace cada línea?
+> | Línea | Qué hace y por qué |
+> | --- | --- |
+> | `class MainActivity : AppCompatActivity()` | Hereda de `AppCompatActivity` (como `extends` en Java), que ya sabe todo lo que hace una pantalla. Tú solo añades lo propio. |
+> | `private val binding … by lazy { … }` | `inflate(layoutInflater)` lee el XML y crea las vistas. `lazy` lo retrasa hasta el primer uso, porque al construirse la actividad `layoutInflater` aún no está listo. |
+> | `override fun onCreate(savedInstanceState: Bundle?)` | Tú nunca haces `MainActivity()`: Android crea la actividad y llama a `onCreate` al abrirla (es su «`main`»). El `Bundle?` trae datos guardados y es `null` la primera vez. |
+> | `super.onCreate(savedInstanceState)` | El padre hace su parte de la preparación. Es obligatorio y va el primero; si falta, la app se cierra. |
+> | `setContentView(binding.root)` | Muestra en pantalla la vista raíz del layout. Es el primer uso de `binding`, así que aquí se ejecuta el `lazy`. |
+> | `private fun setupViews()` | Método propio, para organizar: `onCreate` queda corto y la preparación de vistas y *listeners* va aquí (paso 6). Se declara **antes** de `onCreate`, que lo llama. |
+>
+> **Lo que se quita de la plantilla:** `setContentView(R.layout.activity_main)`, porque si lo dejas junto al de `binding.root` el layout se infla dos veces y el binding apunta a una copia invisible. También se quitan `enableEdgeToEdge()` y el bloque `ViewCompat…`: ver el aviso de abajo.
+> **Al pegarlo**, `MainActivityBinding` sale en rojo: ponte encima y pulsa **Alt + Enter → Import**.
 
 > [!warning] El código «edge-to-edge» de la plantilla
 > La plantilla trae `enableEdgeToEdge()` y un bloque `ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { … }`. Ese bloque busca una vista con id `main`. Si cambias el *layout* y esa vista ya no existe, **no compila** (`Unresolved reference 'main'`).
@@ -151,14 +189,19 @@ Nombres: `main_` (la pantalla) + lo que es (`btnLogin`, `padding`…). Medidas e
 3. Textos y medidas con `@string/…` y `@dimen/…`, nunca escritos a mano.
 4. Mira la pestaña **Design** o **Split** del editor: verás la pantalla mientras escribes el XML.
 
+5. Para centrar, separar o cambiar el aspecto de las vistas, mira la [[#Atributos del layout (XML)|chuleta de atributos del layout]].
+
 ### Paso 6 · El Kotlin (la lógica)
 
-Dentro de la actividad, el orden es siempre el mismo:
+Dentro de la actividad, el orden es siempre el mismo: **primero se crea lo que se usa y después lo que lo usa**.
 
 1. **Estado**: variables `private var` con lo que la app tiene que recordar.
-2. **`setupViews()`**: asigna los *listeners* («cuando pulsen este botón, llama a esta función»).
-3. **Una función por acción**: `login()`, `toggle()`, `calculate()`… Cada una hace algo concreto.
-4. **Una función que pinta la pantalla** a partir del estado (`showWords()`, `showResult()`…).
+2. **Una función que pinta la pantalla** a partir del estado (`showWords()`, `showResult()`…).
+3. **Una función por acción**: `login()`, `toggle()`, `calculate()`… Cada una hace algo concreto y suele llamar a la de pintar, así que va debajo de ella.
+4. **`setupViews()`**: asigna los *listeners* («cuando pulsen este botón, llama a esta función»). Usa las acciones, así que va después.
+5. **`onCreate()`**, al final: es por donde empieza Android y llama a `setupViews()`.
+
+Cada propiedad y cada función lleva encima un **comentario** que explica qué hace y por qué: así la explicación está en el propio código.
 
 > [!tip] Separa «cambiar el dato» de «mostrar el dato»
 > Es el truco que más simplifica:
@@ -218,24 +261,14 @@ Dentro de la actividad, el orden es siempre el mismo:
 </LinearLayout>
 ```
 
-**Paso 6 · Kotlin** (dentro del esqueleto del paso 3):
+**Paso 6 · Kotlin** (dentro del esqueleto del paso 3, en orden: cada función va después de las que usa y `onCreate()` sigue al final):
 
 ```kotlin
-// Estado: ¿se está mostrando "Marco"?
+// Estado: ¿se está mostrando "Marco"? Se consulta este Boolean en vez de comparar textos
 private var showingMarco: Boolean = true
 
-private fun setupViews() {
-    // Listener: al pulsar el botón, llama a toggle()
-    binding.btnToggle.setOnClickListener { toggle() }
-}
-
-// Acción: cambia el estado y repinta
-private fun toggle() {
-    showingMarco = !showingMarco
-    showWords()
-}
-
-// Pintar: la pantalla refleja el estado
+// Pintar: la pantalla refleja el estado (etiqueta y botón con palabras opuestas).
+// setText(resId) es el método que recibe el id del recurso
 private fun showWords() {
     if (showingMarco) {
         binding.lblMessage.setText(R.string.main_marco)
@@ -244,6 +277,19 @@ private fun showWords() {
         binding.lblMessage.setText(R.string.main_polo)
         binding.btnToggle.setText(R.string.main_marco)
     }
+}
+
+// Acción: invierte el estado con ! y repinta (usa showWords(), que ya está arriba)
+private fun toggle() {
+    showingMarco = !showingMarco
+    showWords()
+}
+
+private fun setupViews() {
+    // Listener: al pulsar el botón, llama a toggle()
+    binding.btnToggle.setOnClickListener { toggle() }
+    // Pinta la pantalla según el estado inicial
+    showWords()
 }
 ```
 
@@ -280,41 +326,66 @@ Los ejercicios más difíciles **no tienen otra receta**: tienen más filas en l
 
 ## 5. Chuleta: «quiero hacer X» → «uso Y»
 
-| Quiero… | Vista / herramienta | En Kotlin | Tema |
-| --- | --- | --- | --- |
-| Mostrar un texto | `TextView` | `binding.lbl.setText(R.string.x)` o `binding.lbl.text = "…"` | [[04 - Vistas básicas I#1. TextView\|4.1]] |
-| Un botón que haga algo | `Button` | `binding.btn.setOnClickListener { hacerAlgo() }` | [[04 - Vistas básicas I#3. Listeners\|4.3]] |
-| Que el usuario escriba | `TextInputLayout` + `TextInputEditText` | leer: `binding.txt.text.toString()` · escribir: `binding.txt.setText("…")` | [[04 - Vistas básicas I#7. TextInputLayout\|4.7]] |
-| Leer un número escrito | (el campo anterior) | `binding.txt.text.toString().toDoubleOrNull()` → `null` si no es número | [[Práctica 1 - BMI\|Práctica 1]] |
-| Marcar un error en un campo | `TextInputLayout` | `binding.til.error = getString(R.string.x)` · quitarlo: `= null` | [[04 - Vistas básicas I#7. TextInputLayout\|4.7]] |
-| Un mensaje rápido | `Toast` | `Toast.makeText(this, "…", Toast.LENGTH_SHORT).show()` | [[07 - Mensajes emergentes#1. Toast\|7.1]] |
-| Un mensaje con botón (deshacer, ver…) | `Snackbar` | `Snackbar.make(binding.root, R.string.x, Snackbar.LENGTH_LONG).setAction(R.string.y) { … }.show()` | [[07 - Mensajes emergentes#2. Snackbar\|7.2]] |
-| Preguntar o informar con una ventana | Diálogo | `MaterialAlertDialogBuilder(this).setTitle(…).setMessage(…).setPositiveButton(…, null).create().show()` | [[07 - Mensajes emergentes#3. Diálogos\|7.3]] |
-| Elegir una opción entre varias | `RadioGroup` + `RadioButton` | `binding.rdg.checkedRadioButtonId == R.id.rdbX` | [[05 - Vistas básicas II#4. RadioButton y RadioGroup\|5.4]] |
-| Un sí / no | `CheckBox` o `MaterialSwitch` | `binding.chk.isChecked` | [[05 - Vistas básicas II#1. CheckBox\|5.1]] |
-| Mostrar u ocultar algo | cualquier vista | `binding.vista.isVisible = true / false` | [[02 - Creación de un proyecto#8. Propiedades, métodos y atributos XML principales de View\|2.8]] |
-| Una imagen | `ImageView` | `binding.img.setImageResource(R.drawable.x)` | [[04 - Vistas básicas I#4. ImageView\|4.4]] |
-| Una barra de progreso | `LinearProgressIndicator` | `binding.prg.progress = 30` | [[06 - Vistas básicas III#1. Indicadores de progreso\|6.1]] |
-| Que la tecla «hecho» del teclado haga algo | `android:imeOptions="actionDone"` | `setOnEditorActionListener { … }` | [[08 - Gestión de la entrada de texto#3. ImeOptions\|8.3]] |
-| Reaccionar mientras escribe | (cualquier campo) | `binding.txt.doAfterTextChanged { … }` | [[08 - Gestión de la entrada de texto#4. Gestión de la escritura\|8.4]] |
-| Cerrar el teclado | `SoftInputUtils.kt` de los apuntes | `hideSoftKeyboard()` | [[08 - Gestión de la entrada de texto#2. Gestión del teclado virtual\|8.2]] |
+| Quiero…                                    | Vista / herramienta                     | En Kotlin                                                                                               | Tema                                                                                              |
+| ------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Mostrar un texto                           | `TextView`                              | `binding.lbl.setText(R.string.x)` o `binding.lbl.text = "…"`                                            | [[04 - Vistas básicas I#1. TextView\|4.1]]                                                        |
+| Un botón que haga algo                     | `Button`                                | `binding.btn.setOnClickListener { hacerAlgo() }`                                                        | [[04 - Vistas básicas I#3. Listeners\|4.3]]                                                       |
+| Que el usuario escriba                     | `TextInputLayout` + `TextInputEditText` | leer: `binding.txt.text.toString()` · escribir: `binding.txt.setText("…")`                              | [[04 - Vistas básicas I#7. TextInputLayout\|4.7]]                                                 |
+| Leer un número escrito                     | (el campo anterior)                     | `binding.txt.text.toString().toDoubleOrNull()` → `null` si no es número                                 | [[Práctica 1 - BMI\|Práctica 1]]                                                                  |
+| Marcar un error en un campo                | `TextInputLayout`                       | `binding.til.error = getString(R.string.x)` · quitarlo: `= null`                                        | [[04 - Vistas básicas I#7. TextInputLayout\|4.7]]                                                 |
+| Un mensaje rápido                          | `Toast`                                 | `Toast.makeText(this, "…", Toast.LENGTH_SHORT).show()`                                                  | [[07 - Mensajes emergentes#1. Toast\|7.1]]                                                        |
+| Un mensaje con botón (deshacer, ver…)      | `Snackbar`                              | `Snackbar.make(binding.root, R.string.x, Snackbar.LENGTH_LONG).setAction(R.string.y) { … }.show()`      | [[07 - Mensajes emergentes#2. Snackbar\|7.2]]                                                     |
+| Preguntar o informar con una ventana       | Diálogo                                 | `MaterialAlertDialogBuilder(this).setTitle(…).setMessage(…).setPositiveButton(…, null).create().show()` | [[07 - Mensajes emergentes#3. Diálogos\|7.3]]                                                     |
+| Elegir una opción entre varias             | `RadioGroup` + `RadioButton`            | `binding.rdg.checkedRadioButtonId == R.id.rdbX`                                                         | [[05 - Vistas básicas II#4. RadioButton y RadioGroup\|5.4]]                                       |
+| Un sí / no                                 | `CheckBox` o `MaterialSwitch`           | `binding.chk.isChecked`                                                                                 | [[05 - Vistas básicas II#1. CheckBox\|5.1]]                                                       |
+| Mostrar u ocultar algo                     | cualquier vista                         | `binding.vista.isVisible = true / false`                                                                | [[02 - Creación de un proyecto#8. Propiedades, métodos y atributos XML principales de View\|2.8]] |
+| Una imagen                                 | `ImageView`                             | `binding.img.setImageResource(R.drawable.x)`                                                            | [[04 - Vistas básicas I#4. ImageView\|4.4]]                                                       |
+| Una barra de progreso                      | `LinearProgressIndicator`               | `binding.prg.progress = 30`                                                                             | [[06 - Vistas básicas III#1. Indicadores de progreso\|6.1]]                                       |
+| Que la tecla «hecho» del teclado haga algo | `android:imeOptions="actionDone"`       | `setOnEditorActionListener { … }`                                                                       | [[08 - Gestión de la entrada de texto#3. ImeOptions\|8.3]]                                        |
+| Reaccionar mientras escribe                | (cualquier campo)                       | `binding.txt.doAfterTextChanged { … }`                                                                  | [[08 - Gestión de la entrada de texto#4. Gestión de la escritura\|8.4]]                           |
+| Cerrar el teclado                          | `SoftInputUtils.kt` de los apuntes      | `hideSoftKeyboard()`                                                                                    | [[08 - Gestión de la entrada de texto#2. Gestión del teclado virtual\|8.2]]                       |
+|                                            |                                         |                                                                                                         |                                                                                                   |
+
+### Atributos del layout (XML)
+
+«Quiero que se vea así» → «pongo esto en el XML».
+
+| Quiero… | Atributo | Ejemplo |
+| --- | --- | --- |
+| Centrar el **texto dentro** de su vista | `android:gravity` (en la vista) | `android:gravity="center"` |
+| Mover la **vista entera** dentro del padre | `android:layout_gravity` (en la vista) | `android:layout_gravity="center_horizontal"` (solo si la vista es `wrap_content`) |
+| Centrar **todo** el contenido de la pantalla | `android:gravity` (en el `LinearLayout`) | `android:gravity="center"` |
+| Espacio **por dentro** (entre el borde y el contenido) | `android:padding` | `android:padding="@dimen/main_padding"` |
+| Espacio **por fuera** (separarla de otras vistas) | `android:layout_margin` / `…Top` / `…Bottom`… | `android:layout_marginTop="@dimen/main_margin"` |
+| Que una vista **reparta** el espacio sobrante | `android:layout_weight` (con el tamaño a `0dp`) | `android:layout_width="0dp"` + `android:layout_weight="1"` |
+| Letra más grande | `android:textSize` (en `sp`) | `android:textSize="24sp"` |
+| Negrita o cursiva | `android:textStyle` | `android:textStyle="bold"` |
+| Que el botón **no** salga en MAYÚSCULAS | `android:textAllCaps` | `android:textAllCaps="false"` |
+| Texto de ayuda en un campo vacío | `android:hint` | `android:hint="@string/main_name"` |
+| Que el teclado sea numérico o de contraseña | `android:inputType` | `android:inputType="numberDecimal"` / `"textPassword"` |
+| Que empiece oculta | `android:visibility` | `android:visibility="gone"` (no ocupa sitio) o `"invisible"` (sí ocupa) |
+
+> [!warning] `gravity` y `layout_gravity` no son lo mismo
+> `gravity` coloca el **contenido dentro** de la vista; `layout_gravity` coloca la **vista dentro** de su padre. Una vista `match_parent` ya ocupa todo el ancho, así que `layout_gravity` no la mueve: para centrar su texto, usa `gravity`.
+
+Más detalle: [[04 - Vistas básicas I#1. TextView|Tema 4 → 1. TextView]] y [[02 - Creación de un proyecto#8. Propiedades, métodos y atributos XML principales de View|Tema 2 → 8. Atributos de View]].
 
 ---
 
 ## 6. Errores típicos y qué significan
 
-| Lo que ves | Por qué pasa | Solución |
-| --- | --- | --- |
-| `Unresolved reference 'MainActivityBinding'` | ViewBinding no está activado, o no has pulsado *Sync Now*. | Paso 3a y `File -> Sync Project with Gradle Files`. |
-| `Unresolved reference 'lblMessage'` en `binding.lblMessage` | Esa vista no tiene `android:id`, o el id está escrito distinto. | Revisa el id en el XML (mayúsculas incluidas). |
-| `Unresolved reference 'main'` | Queda el bloque edge-to-edge de la plantilla. | Quítalo o pon `android:id="@+id/main"` a la raíz (paso 3c). |
-| `Assignment type mismatch: actual type is 'Int', but 'CharSequence!' was expected` | Has escrito `vista.text = R.string.x`. | Usa el método: `vista.setText(R.string.x)`. |
-| `Assignment type mismatch` con `'Editable!'` al hacer `txt.text = "…"` | En un `EditText`, `text` es un `Editable`. | Usa `txt.setText("…")`. |
-| No compila `strings.xml` con un apóstrofo | En recursos, `'` es especial. | Escríbelo como `\'` (`Can\'t`). |
-| La app se cierra al pulsar un botón | Una excepción en tiempo de ejecución (por ejemplo, `toDouble()` de un texto vacío). | Mira el Logcat (sección 7); usa `toDoubleOrNull()`. |
-| El Toast no aparece | Falta `.show()`. | `Toast.makeText(…).show()`. |
-| Al girar el móvil se pierde lo que había | La actividad se destruye y se crea de nuevo (cambio de configuración). | Es normal por ahora; se arregla con ViewModel en temas posteriores. |
-| Lo de arriba queda tapado por la barra de estado | Android 15 o superior dibuja *edge-to-edge*. | Paso 3c, aviso de edge-to-edge. |
+| Lo que ves                                                                         | Por qué pasa                                                                        | Solución                                                            |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `Unresolved reference 'MainActivityBinding'`                                       | ViewBinding no está activado, o no has pulsado *Sync Now*.                          | Paso 3a y `File -> Sync Project with Gradle Files`.                 |
+| `Unresolved reference 'lblMessage'` en `binding.lblMessage`                        | Esa vista no tiene `android:id`, o el id está escrito distinto.                     | Revisa el id en el XML (mayúsculas incluidas).                      |
+| `Unresolved reference 'main'`                                                      | Queda el bloque edge-to-edge de la plantilla.                                       | Quítalo o pon `android:id="@+id/main"` a la raíz (paso 3c).         |
+| `Assignment type mismatch: actual type is 'Int', but 'CharSequence!' was expected` | Has escrito `vista.text = R.string.x`.                                              | Usa el método: `vista.setText(R.string.x)`.                         |
+| `Assignment type mismatch` con `'Editable!'` al hacer `txt.text = "…"`             | En un `EditText`, `text` es un `Editable`.                                          | Usa `txt.setText("…")`.                                             |
+| No compila `strings.xml` con un apóstrofo                                          | En recursos, `'` es especial.                                                       | Escríbelo como `\'` (`Can\'t`).                                     |
+| La app se cierra al pulsar un botón                                                | Una excepción en tiempo de ejecución (por ejemplo, `toDouble()` de un texto vacío). | Mira el Logcat (sección 7); usa `toDoubleOrNull()`.                 |
+| El Toast no aparece                                                                | Falta `.show()`.                                                                    | `Toast.makeText(…).show()`.                                         |
+| Al girar el móvil se pierde lo que había                                           | La actividad se destruye y se crea de nuevo (cambio de configuración).              | Es normal por ahora; se arregla con ViewModel en temas posteriores. |
+| Lo de arriba queda tapado por la barra de estado                                   | Android 15 o superior dibuja *edge-to-edge*.                                        | Paso 3c, aviso de edge-to-edge.                                     |
 
 ---
 
@@ -336,6 +407,7 @@ Los ejercicios más difíciles **no tienen otra receta**: tienen más filas en l
 - [ ] Todas las vistas tienen `android:id` con su prefijo (`lbl`, `btn`, `txt`, `til`…).
 - [ ] La actividad sigue el esqueleto: `binding` con `by lazy`, `onCreate()` → `setupViews()`.
 - [ ] Cada acción del usuario es una función con un nombre que dice lo que hace.
+- [ ] Cada función va después de las que usa (`onCreate()` al final) y lleva un comentario que explica qué hace.
 - [ ] He probado cada caso del enunciado y también los «malos» (vacío, cero, pulsar dos veces…).
 - [ ] Si me han dado capturas, mi app se parece a ellas (textos, mayúsculas, orden de las vistas).
 - [ ] No hay avisos amarillos importantes en el código (pasa el ratón por encima para leerlos).
