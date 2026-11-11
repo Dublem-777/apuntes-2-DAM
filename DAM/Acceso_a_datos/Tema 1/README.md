@@ -16,3 +16,4 @@
 - [01.3 · Ejercicios 1: Ficheros binarios](Ejercicios/01.3%20-%20Ejercicios%201%20Ficheros%20binarios.md) ✅
 - [01.4 · Ejercicios 1: Ficheros binarios de objetos](Ejercicios/01.4%20-%20Ejercicios%201%20Ficheros%20binarios%20de%20objetos.md) ✅
 - [01.5 · Ejercicios 1: Ficheros de acceso aleatorio](Ejercicios/01.5%20-%20Ejercicios%201%20Ficheros%20de%20acceso%20aleatorio.md) ✅
+- [01.6 · Ejercicios 1: Ficheros JSON y XML](Ejercicios/01.6%20-%20Ejercicios%201%20Ficheros%20JSON%20y%20XML.md) ✅

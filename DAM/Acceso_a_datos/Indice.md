@@ -45,6 +45,7 @@ tags:
 - [[01.3 - Ejercicios 1 Ficheros binarios]] ✅ boletín 1 (ejercicio 1)
 - [[01.4 - Ejercicios 1 Ficheros binarios de objetos]] ✅ boletín 1 (ejercicio 1)
 - [[01.5 - Ejercicios 1 Ficheros de acceso aleatorio]] ✅ boletín 1 (ejercicio 1)
+- [[01.6 - Ejercicios 1 Ficheros JSON y XML]] ✅ boletín 1 (ejercicios 1–2)
 - 02 - Bases de datos relacionales _(pendiente)_
 
 ## Normas

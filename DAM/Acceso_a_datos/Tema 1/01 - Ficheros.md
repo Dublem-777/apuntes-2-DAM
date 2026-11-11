@@ -2912,6 +2912,9 @@ El fichero `xml` generado es el siguiente:
 > [!tip] Resumen Jackson
 > `ObjectMapper` (JSON) y `XmlMapper` (XML) funcionan igual: `writeValueAsString(objeto)` serializa y `readValue(texto, new TypeReference<List<Vehicle>>() {})` deserializa. La clase necesita un **constructor sin parámetros**, y las fechas `LocalDate` necesitan registrar `JavaTimeModule` (y `@JsonFormat` para fijar el patrón).
 
+> [!example] Ejercicios
+> [[01.6 - Ejercicios 1 Ficheros JSON y XML]] — agenda telefónica guardada y leída en JSON (`ObjectMapper`) y en XML (`XmlMapper`).
+
 ---
 
 ## Esquema
@@ -2949,6 +2952,7 @@ El fichero `xml` generado es el siguiente:
 - Boletín 1 · Ficheros binarios: [[01.3 - Ejercicios 1 Ficheros binarios]]
 - Boletín 1 · Ficheros binarios de objetos: [[01.4 - Ejercicios 1 Ficheros binarios de objetos]]
 - Boletín 1 · Ficheros de acceso aleatorio: [[01.5 - Ejercicios 1 Ficheros de acceso aleatorio]]
+- Boletín 1 · Ficheros JSON y XML: [[01.6 - Ejercicios 1 Ficheros JSON y XML]]
 - Normas de paquetes y clases: [[04 - Reglas de nomenclatura en los ejercicios]]
 - Excepciones en Java (curso anterior): [[Programación basica/Tema 6/Excepciones|Programación básica → Excepciones]]
 - Índice de la asignatura: [[DAM/Acceso_a_datos/Indice|Índice de Acceso a Datos]]

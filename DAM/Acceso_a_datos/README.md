@@ -7,7 +7,7 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Tema 1](Tema%201/README.md) | 6 |
+| [Tema 1](Tema%201/README.md) | 7 |
 
 ## 📄 Notas generales
 
@@ -60,6 +60,7 @@
 - [01.3 - Ejercicios 1 Ficheros binarios](Tema%201/Ejercicios/01.3%20-%20Ejercicios%201%20Ficheros%20binarios.md) ✅ boletín 1 (ejercicio 1)
 - [01.4 - Ejercicios 1 Ficheros binarios de objetos](Tema%201/Ejercicios/01.4%20-%20Ejercicios%201%20Ficheros%20binarios%20de%20objetos.md) ✅ boletín 1 (ejercicio 1)
 - [01.5 - Ejercicios 1 Ficheros de acceso aleatorio](Tema%201/Ejercicios/01.5%20-%20Ejercicios%201%20Ficheros%20de%20acceso%20aleatorio.md) ✅ boletín 1 (ejercicio 1)
+- [01.6 - Ejercicios 1 Ficheros JSON y XML](Tema%201/Ejercicios/01.6%20-%20Ejercicios%201%20Ficheros%20JSON%20y%20XML.md) ✅ boletín 1 (ejercicios 1–2)
 - 02 - Bases de datos relacionales _(pendiente)_
 
 ### Normas
