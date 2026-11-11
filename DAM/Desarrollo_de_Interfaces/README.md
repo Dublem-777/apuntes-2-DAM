@@ -7,7 +7,7 @@
 
 | Carpeta | Notas |
 | --- | --- |
-| [Tema 1](Tema%201/README.md) | 2 |
+| [Tema 1](Tema%201/README.md) | 4 |
 | [Tema 2](Tema%202/README.md) | 2 |
 | [Tema 3](Tema%203/README.md) | 2 |
 | [Tema 4](Tema%204/README.md) | 1 |
@@ -33,6 +33,8 @@
 ### Actividades evaluables
 
 - [01.1 - Actividades evaluables 01](Tema%201/01.1%20-%20Actividades%20evaluables%2001.md) ✅ 6 ejercicios resueltos (unidades 01–06) — solo faltan las capturas
+- [01.2 - Actividades evaluables 02](Tema%201/01.2%20-%20Actividades%20evaluables%2002.md) ✅ 2 pantallas de EcoVida Explorer en móvil y escritorio — falta publicarlo en el foro
+- [01.3 - Actividades evaluables 02 - Version B](Tema%201/01.3%20-%20Actividades%20evaluables%2002%20-%20Version%20B.md) ✅ las mismas pantallas con otra disposición
 - [02.1 - Actividad evaluable - Rediseño accesible de Lens para Amazon](Tema%202/02.1%20-%20Actividad%20evaluable%20-%20Redise%C3%B1o%20accesible%20de%20Lens%20para%20Amazon.md) · Rediseño accesible de una búsqueda visual
 - [03.1 - Customer Journey Map - App de guardias](Tema%203/03.1%20-%20Customer%20Journey%20Map%20-%20App%20de%20guardias.md) ✅ dos perfiles: receptiva y menos receptiva
 - [04.1 - Formulario de registro movil](Tema%204/04.1%20-%20Formulario%20de%20registro%20movil.md) ✅ formulario de registro en 4 pantallas con validación (HTML + PDF)

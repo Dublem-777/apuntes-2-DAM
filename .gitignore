@@ -52,6 +52,14 @@ resources/*
 !resources/android-practica2-logged-in.png
 !resources/android-practica2-not-found.png
 !resources/distribuida.jpg
+!resources/ecovida_b_catalogo_escritorio.png
+!resources/ecovida_b_catalogo_movil.png
+!resources/ecovida_b_detalle_escritorio.png
+!resources/ecovida_b_detalle_movil.png
+!resources/ecovida_catalogo_escritorio.png
+!resources/ecovida_catalogo_movil.png
+!resources/ecovida_detalle_escritorio.png
+!resources/ecovida_detalle_movil.png
 !resources/estados_proceso.png
 !resources/gantt_concurrent.svg
 !resources/gantt_sequential.svg

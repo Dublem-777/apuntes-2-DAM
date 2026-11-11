@@ -10,3 +10,10 @@
 ## 💻 Ejercicios y actividades
 
 - [01.1 · Actividades evaluables 01 — Unidades 01 a 06](01.1%20-%20Actividades%20evaluables%2001.md) ✅
+- [01.2 · Actividades evaluables 02 — Unidades 01 a 06](01.2%20-%20Actividades%20evaluables%2002.md) ✅
+- [01.3 · Actividades evaluables 02 (versión B) — Unidades 01 a 06](01.3%20-%20Actividades%20evaluables%2002%20-%20Version%20B.md) ✅
+
+## 📎 Adjuntos
+
+- [EcoVida_Explorer.html](EcoVida_Explorer.html)
+- [EcoVida_Explorer_B.html](EcoVida_Explorer_B.html)
